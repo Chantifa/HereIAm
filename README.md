@@ -25,6 +25,10 @@ Die Infos und die Karte werden durch verschiedene APIs geladen.
 ## Version Android
 * 
 
+## UX Prototyp
+* [Protoyp auf Figma](https://www.figma.com/file/kk7H5Raohw7Poz1LbycVk8/HereIAm?node-id=0%3A1)
+* Prototyp in PDF-Form: 
+
 
 ## Stand
 * in Entwicklung
