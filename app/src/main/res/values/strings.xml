@@ -1,4 +1,10 @@
 <resources>
-    <string name="app_name">HereIAm</string>
-    <string name="text">HereIAm</string>
+    <string name="app_name" translatable="false">HereIAm</string>
+    <string name="text" translatable="false">HereIAm</string>
+    <string name="inputTitle" translatable="false">Beitrag Titel</string>
+    <string name="img" translatable="false">Beitrag Inhalt/ Foto</string>
+    <string name="inputLocation" translatable="false">Beitrag Ort</string>
+    <string name="inputText" translatable="false">Beschreibung Beitrag</string>
+    <string name="yourLocation" translatable="false">Dein Standort</string>
+    <string name="hereiam" translatable="false">HereIam</string>
 </resources>
