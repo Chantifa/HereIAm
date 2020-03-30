@@ -4,7 +4,12 @@
     <string name="inputTitle" translatable="false">Beitrag Titel</string>
     <string name="img" translatable="false">Beitrag Inhalt/ Foto</string>
     <string name="inputLocation" translatable="false">Beitrag Ort</string>
-    <string name="inputText" translatable="false">Beschreibung Beitrag</string>
     <string name="yourLocation" translatable="false">Dein Standort</string>
     <string name="hereiam" translatable="false">HereIam</string>
+    <string name="allInputs" translatable="false">alle Beiträge</string>
+    <string name="inputText" translatable="false">Beschreibung Beitrag</string>
+    <string name="homepage" translatable="false">Startseite</string>
+    <string name="googleMaps" translatable="false">Google Maps</string>
+    <string name="input" translatable="false">Beitrag</string>
+    <string name="profile" translatable="false">profil</string>
 </resources>
