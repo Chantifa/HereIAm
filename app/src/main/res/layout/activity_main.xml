@@ -8,6 +8,7 @@
     android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".MainActivity">
+
     <TextView
         android:id="@+id/yourLocation"
         android:layout_width="100dp"
@@ -27,20 +28,22 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        app:chipIcon="@drawable/ic_mode_edit_black_24dp"
-        app:chipBackgroundColor="#FFFFFF"/>
-            <Spinner
-                android:id="@+id/locationSearch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="100dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginBottom="8dp"
-                android:background="#FFFFFF"
-                android:entries="@android:array/postalAddressTypes"
-                android:fontFamily="@font/roboto"
-                android:spinnerMode="dropdown"
-                android:textAlignment="textStart" />
+        app:chipBackgroundColor="#FFFFFF"
+        app:chipIcon="@drawable/ic_mode_edit_black_24dp" />
+
+    <Spinner
+        android:id="@+id/locationSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="8dp"
+        android:background="#FFFFFF"
+        android:entries="@android:array/postalAddressTypes"
+        android:fontFamily="@font/roboto"
+        android:spinnerMode="dropdown"
+        android:textAlignment="textStart" />
+
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
@@ -48,7 +51,8 @@
         android:layout_marginTop="0dp"
         android:background="@android:color/holo_green_dark"
         android:textAlignment="center"
-        tools:layout_editor_absoluteY="76dp"/>
+        tools:layout_editor_absoluteY="76dp" />
+
     <TextView
         android:id="@+id/InputLocation"
         android:layout_width="150dp"
@@ -57,14 +61,15 @@
         android:layout_marginTop="8dp"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
-        android:text="@string/inputLocation"
         android:fontFamily="@font/roboto"
+        android:text="@string/inputLocation"
         android:textAlignment="viewStart"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapView" />
+
     <ImageView
         android:id="@+id/picture"
         android:layout_width="150dp"
@@ -78,7 +83,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/InputLocation"
-        tools:srcCompat="drawable/ic_photo_black_24dp"/>
+        tools:srcCompat="drawable/ic_photo_black_24dp" />
+
     <TextView
         android:id="@+id/inputTitle"
         android:layout_width="99dp"
@@ -87,9 +93,9 @@
         android:layout_marginTop="0dp"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/roboto"
         android:text="@string/inputTitle"
         android:textColor="#000000"
-        android:fontFamily="@font/roboto"
         app:layout_constraintBottom_toTopOf="@+id/inputText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -124,16 +130,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:visibility="visible">
+
         <com.google.android.material.chip.Chip
             android:id="@+id/startPin"
-            android:text="@string/homepage"
             style="@style/Widget.MaterialComponents.Chip.Action"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            app:chipIcon="@drawable/ic_pin_drop_white_24dp"
-            app:chipBackgroundColor="#4F4F4F"/>
+            android:text="@string/homepage"
+            app:chipBackgroundColor="#4F4F4F"
+            app:chipIcon="@drawable/ic_pin_drop_white_24dp" />
+
         <com.google.android.material.chip.Chip
             android:id="@+id/inputEditor"
             style="@style/Widget.MaterialComponents.Chip.Action"
@@ -145,16 +153,19 @@
             android:text="@string/input"
             app:chipBackgroundColor="#4F4F4F"
             app:chipIcon="@drawable/ic_mode_edit_white_24dp" />
+
         <com.google.android.material.chip.Chip
             android:id="@+id/profile"
-            android:text="@string/profile"
             style="@style/Widget.MaterialComponents.Chip.Action"
-            android:layout_marginStart="290dp"
-            android:layout_marginEnd="16dp"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="290dp"
             android:layout_marginTop="8dp"
-            app:chipIcon="@drawable/ic_person_white_24dp"
-            app:chipBackgroundColor="#4F4F4F"/>
+            android:layout_marginEnd="16dp"
+            android:text="@string/profile"
+            app:chipBackgroundColor="#4F4F4F"
+            app:chipIcon="@drawable/ic_person_white_24dp" />
+
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 </LinearLayout>
