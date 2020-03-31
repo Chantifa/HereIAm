@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linearLayout"
@@ -8,122 +8,69 @@
     android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/topNavigation"
-        android:layout_width="match_parent"
-        android:layout_height="44dp"
-        android:background="#4F4F4F"
-        app:layout_constraintBottom_toTopOf="@+id/yourLocation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.384">
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/menu"
-            style="@style/Widget.MaterialComponents.Chip.Entry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            app:chipBackgroundColor="#4F4F4F"
-            app:chipIcon="@drawable/ic_menu_white_24dp" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="72dp"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/roboto"
-            android:text="@string/hereiam"
-            android:textColor="#FFFFFF"
-            android:textSize="12sp"
-            tools:layout_editor_absoluteX="101dp" />
-
-    </com.google.android.material.navigation.NavigationView>
-
     <TextView
         android:id="@+id/yourLocation"
         android:layout_width="100dp"
         android:layout_height="25dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="8dp"
         android:text="@string/yourLocation"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/mapView"
         app:layout_constraintEnd_toEndOf="@id/mapView"
-        app:layout_constraintStart_toStartOf="@id/topNavigation" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.chip.Chip
         android:id="@+id/editor"
-        style="@style/Widget.MaterialComponents.Chip.Entry"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginBottom="16dp"
-        app:chipIcon="@drawable/ic_mode_edit_black_24dp"
-        app:chipBackgroundColor="#FFFFFF"/>
-
-    <Spinner
-        android:id="@+id/locationSearch"
-        android:layout_width="100dp"
-        android:layout_height="25dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="72dp"
-        android:background="#FFFFFF"
-        android:entries="@android:array/postalAddressTypes"
-        android:spinnerMode="dropdown"
-        android:textAlignment="textStart" />
-
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="100dp"
-        android:background="@android:color/holo_green_dark"
-        android:textAlignment="center"
-        tools:layout_editor_absoluteY="76dp" />
-
-    <com.google.android.material.chip.Chip
-        android:id="@+id/mapPin"
         style="@style/Widget.MaterialComponents.Chip.Action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="180dp"
-        android:layout_marginTop="170dp"
-        android:text="@string/googleMaps"
-        app:chipBackgroundColor="@color/design_default_color_secondary"
-        app:chipIcon="@drawable/ic_pin_drop_black_24dp" />
-
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:chipIcon="@drawable/ic_mode_edit_black_24dp"
+        app:chipBackgroundColor="#FFFFFF"/>
+            <Spinner
+                android:id="@+id/locationSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginBottom="8dp"
+                android:background="#FFFFFF"
+                android:entries="@android:array/postalAddressTypes"
+                android:fontFamily="@font/roboto"
+                android:spinnerMode="dropdown"
+                android:textAlignment="textStart" />
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="0dp"
+        android:background="@android:color/holo_green_dark"
+        android:textAlignment="center"
+        tools:layout_editor_absoluteY="76dp"/>
     <TextView
         android:id="@+id/InputLocation"
         android:layout_width="150dp"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="320dp"
+        android:layout_marginTop="8dp"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
         android:text="@string/inputLocation"
+        android:fontFamily="@font/roboto"
         android:textAlignment="viewStart"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mapView" />
-
     <ImageView
         android:id="@+id/picture"
-        android:layout_width="400dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="350dp"
-        android:layout_marginEnd="115dp"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/inputText"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/inputTitle"
@@ -131,20 +78,18 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/InputLocation"
-        tools:srcCompat="@android:drawable/ic_menu_gallery" />
-
-
+        tools:srcCompat="drawable/ic_photo_black_24dp"/>
     <TextView
         android:id="@+id/inputTitle"
         android:layout_width="99dp"
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="470dp"
-        android:layout_marginEnd="165dp"
+        android:layout_marginTop="0dp"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
         android:text="@string/inputTitle"
         android:textColor="#000000"
+        android:fontFamily="@font/roboto"
         app:layout_constraintBottom_toTopOf="@+id/inputText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -156,7 +101,6 @@
         android:layout_width="wrap_content"
         android:layout_height="120dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="470dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/inputText"
@@ -167,11 +111,7 @@
         android:id="@+id/allInputs"
         android:layout_width="172dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="117dp"
-        android:layout_marginBottom="81dp"
+        android:layout_marginStart="120dp"
         android:background="@color/design_default_color_secondary"
         android:text="@string/allInputs" />
 
@@ -179,13 +119,10 @@
         android:id="@+id/bottomNavigationView2"
         android:layout_width="match_parent"
         android:layout_height="44dp"
-        android:layout_marginTop="690dp"
-        android:layout_marginBottom="0dp"
         android:background="#4F4F4F"
         app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         tools:visibility="visible">
         <com.google.android.material.chip.Chip
             android:id="@+id/startPin"
@@ -197,14 +134,13 @@
             android:layout_marginTop="8dp"
             app:chipIcon="@drawable/ic_pin_drop_white_24dp"
             app:chipBackgroundColor="#4F4F4F"/>
-
         <com.google.android.material.chip.Chip
             android:id="@+id/inputEditor"
             style="@style/Widget.MaterialComponents.Chip.Action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginStart="170dp"
+            android:layout_marginStart="160dp"
             android:layout_marginTop="8dp"
             android:text="@string/input"
             app:chipBackgroundColor="#4F4F4F"
@@ -213,14 +149,12 @@
             android:id="@+id/profile"
             android:text="@string/profile"
             style="@style/Widget.MaterialComponents.Chip.Action"
-            android:layout_marginStart="300dp"
+            android:layout_marginStart="290dp"
             android:layout_marginEnd="16dp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:layout_marginTop="8dp"
             app:chipIcon="@drawable/ic_person_white_24dp"
             app:chipBackgroundColor="#4F4F4F"/>
-
     </com.google.android.material.bottomnavigation.BottomNavigationView>
-
-</RelativeLayout>
+</LinearLayout>
