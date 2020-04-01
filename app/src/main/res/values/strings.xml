@@ -11,5 +11,21 @@
     <string name="homepage" translatable="false">Startseite</string>
     <string name="googleMaps" translatable="false">Google Maps</string>
     <string name="input" translatable="false">Beitrag</string>
-    <string name="profile" translatable="false">profil</string>
+    <string name="profile" translatable="false">Profil</string>
+    <string name="your_position">Dein Standort</string>
+    <string name="test2">Bern</string>
+    <string name="test1">Bern</string>
+    <string name="de">Deutsch</string>
+    <string name="your_location">Dein Standort</string>
+    <string name="button_edit_location">Standort editieren</string>
+    <string name="google_maps">Google Maps</string>
+    <string name="title_activity_bottom_navigation">bottom_navigation</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="header_image">Headerimage</string>
+    <string name="placeholder">Platzhalter</string>
+    <string name="entry_text">It is a long established fact that a reader will be distracted by the readable content of a page...</string>
+    <string name="all_entries">Alle Beiträge</string>
+    <string name="entry_heading">Beitragstitel</string>
 </resources>
