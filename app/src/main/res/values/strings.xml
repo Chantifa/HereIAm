@@ -12,20 +12,32 @@
     <string name="googleMaps" translatable="false">Google Maps</string>
     <string name="input" translatable="false">Beitrag</string>
     <string name="profile" translatable="false">Profil</string>
-    <string name="your_position">Dein Standort</string>
-    <string name="test2">Bern</string>
-    <string name="test1">Bern</string>
-    <string name="de">Deutsch</string>
-    <string name="your_location">Dein Standort</string>
-    <string name="button_edit_location">Standort editieren</string>
-    <string name="google_maps">Google Maps</string>
-    <string name="title_activity_bottom_navigation">bottom_navigation</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
+    <string name="your_position" translatable="false">Dein Standort</string>
+    <string name="test2" translatable="false">Bern</string>
+    <string name="test1" translatable="false">Bern</string>
+    <string name="de" translatable="false">Deutsch</string>
+    <string name="your_location" translatable="false">Dein Standort</string>
+    <string name="button_edit_location" translatable="false">Standort editieren</string>
+    <string name="google_maps" translatable="false">Google Maps</string>
+    <string name="title_activity_bottom_navigation" translatable="false">bottom_navigation</string>
+    <string name="title_home" translatable="false">Home</string>
+    <string name="title_dashboard" translatable="false">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="header_image">Headerimage</string>
     <string name="placeholder">Platzhalter</string>
     <string name="entry_text">It is a long established fact that a reader will be distracted by the readable content of a page...</string>
     <string name="all_entries">Alle Beiträge</string>
     <string name="entry_heading">Beitragstitel</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="save">Speichern</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password sollte >5 Charakter haben</string>
+    <string name="login_failed">"Login ist fehlgeschlagen"</string>
+    <string name="action_save">Speichern</string>
+    <string name="profilePicture">Profilfoto</string>
 </resources>
