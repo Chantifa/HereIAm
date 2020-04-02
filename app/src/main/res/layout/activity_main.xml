@@ -6,8 +6,6 @@
     android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
-    <include layout="@layout/activity_bottom_navigation" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -102,4 +100,11 @@
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+
+    <include
+        layout="@layout/activity_bottom_navigation"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
 </RelativeLayout>
