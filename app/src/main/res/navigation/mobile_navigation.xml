@@ -15,11 +15,11 @@
         android:id="@+id/nav_editor"
         android:name="ch.ffhs.esa.hereiam.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_editor" />
 
     <fragment
         android:id="@+id/nav_profile"
         android:name="ch.ffhs.esa.hereiam.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_profile" />
 </navigation>
