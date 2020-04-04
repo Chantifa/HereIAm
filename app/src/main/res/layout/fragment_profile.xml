@@ -23,16 +23,16 @@
     <ImageView
         android:id="@+id/profile_avatar"
         android:layout_width="wrap_content"
-        android:adjustViewBounds="true"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/gap_large"
         android:layout_marginTop="@dimen/gap_default"
+        android:adjustViewBounds="true"
         android:contentDescription="@string/desc_profile_avatar"
         android:maxWidth="150dp"
         android:maxHeight="150dp"
+        android:src="@drawable/avatar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heading_profile"
-        tools:srcCompat="@drawable/avatar" />
+        app:layout_constraintTop_toBottomOf="@+id/heading_profile" />
 
     <EditText
         android:id="@+id/username"
