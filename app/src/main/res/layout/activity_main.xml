@@ -3,109 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <ScrollView
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/bottom_navigation_menu" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:nestedScrollingEnabled="false"
-        tools:ignore="ScrollViewCount">
-
-        <LinearLayout
-            android:id="@+id/location"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <GridLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:columnCount="2"
-                android:rowCount="2">
-
-                <ImageButton
-                    style="@android:style/Widget.Material.Button.Borderless.Small"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_row="0"
-                    android:layout_rowSpan="2"
-                    android:layout_column="0"
-                    android:layout_gravity="bottom"
-                    android:contentDescription="@string/button_edit_location"
-                    android:src="@drawable/ic_mode_edit_white_24dp" />
-
-                <TextView
-                    android:layout_row="0"
-                    android:layout_column="1"
-                    android:text="@string/your_location" />
-
-                <TextView
-                    android:layout_row="1"
-                    android:layout_column="1"
-                    android:text="@string/test2"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
-
-            </GridLayout>
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginVertical="16dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/google_maps"
-                app:srcCompat="@drawable/google_maps_screenshot" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/allInputs"
-                android:textStyle="bold" />
-
-            <ImageView
-                android:id="@+id/placeholder"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginVertical="16dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="@string/placeholder"
-                app:srcCompat="@drawable/placeholder" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/entry_heading"
-                android:textSize="24sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/entry_text" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/allEntriesButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_margin="32dp"
-                    android:text="@string/all_entries" />
-
-            </RelativeLayout>
-        </LinearLayout>
-    </ScrollView>
-
-    <include
-        layout="@layout/activity_bottom_navigation"
         android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent" />
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_navigation_menu" />
 
 </RelativeLayout>

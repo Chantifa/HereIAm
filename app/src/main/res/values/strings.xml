@@ -1,43 +1,21 @@
 <resources>
-    <string name="app_name" translatable="false">HereIAm</string>
-    <string name="text" translatable="false">HereIAm</string>
-    <string name="inputTitle" translatable="false">Beitrag Titel</string>
-    <string name="img" translatable="false">Beitrag Inhalt/ Foto</string>
-    <string name="inputLocation" translatable="false">Beitrag Ort</string>
-    <string name="yourLocation" translatable="false">Dein Standort</string>
-    <string name="hereiam" translatable="false">HereIam</string>
-    <string name="allInputs" translatable="false">alle Beiträge</string>
-    <string name="inputText" translatable="false">Beschreibung Beitrag</string>
-    <string name="homepage" translatable="false">Startseite</string>
-    <string name="googleMaps" translatable="false">Google Maps</string>
-    <string name="input" translatable="false">Beitrag</string>
-    <string name="profile" translatable="false">Profil</string>
-    <string name="your_position" translatable="false">Dein Standort</string>
-    <string name="test2" translatable="false">Bern</string>
-    <string name="test1" translatable="false">Bern</string>
-    <string name="de" translatable="false">Deutsch</string>
-    <string name="your_location" translatable="false">Dein Standort</string>
-    <string name="button_edit_location" translatable="false">Standort editieren</string>
-    <string name="google_maps" translatable="false">Google Maps</string>
-    <string name="title_activity_bottom_navigation" translatable="false">bottom_navigation</string>
-    <string name="title_home" translatable="false">Home</string>
-    <string name="title_dashboard" translatable="false">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
-    <string name="header_image">Headerimage</string>
-    <string name="placeholder">Platzhalter</string>
-    <string name="entry_text">It is a long established fact that a reader will be distracted by the readable content of a page…</string>
-    <string name="all_entries">Alle Beiträge</string>
-    <string name="entry_heading">Beitragstitel</string>
-    <string name="title_activity_login">Sign in</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Passwort</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="save">Speichern</string>
-    <string name="welcome">"Wilkommen!"</string>
-    <string name="invalid_username">Kein gültiger Benutzername</string>
-    <string name="invalid_password">Passwort sollte mehr als 5 Charakter haben</string>
-    <string name="login_failed">"Login ist fehlgeschlagen"</string>
-    <string name="action_save">Speichern</string>
-    <string name="profilePicture">Profilfoto</string>
+    <string name="app_name">Here I Am</string>
+    <string name="label_home">Startseite</string>
+    <string name="label_entry">Beitrag</string>
+    <string name="label_profile">Profil</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_your_location">Dein Standort</string>
+    <string name="text_your_location">Bern</string>
+    <string name="desc_edit_your_location">Standort editieren</string>
+    <string name="desc_google_maps">Google Maps</string>
+    <string name="label_all_entries">Alle Beiträge</string>
+    <string name="desc_placeholder">Platzhalter</string>
+    <string name="heading_placeholder">Beitragstitel</string>
+    <string name="text_placeholder">It is a long established fact that a reader will be distracted by the readable content of a page…</string>
+    <string name="text_last_entries">Letzte Beiträge</string>
+    <string name="label_email">E-Mail</string>
+    <string name="password">Passwort</string>
+    <string name="label_sign_in">Anmelden</string>
 </resources>

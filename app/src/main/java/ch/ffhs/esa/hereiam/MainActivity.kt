@@ -1,19 +1,51 @@
 package ch.ffhs.esa.hereiam
 
-import android.content.Intent
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import ch.ffhs.esa.hereiam.ui.login.LoginActivity
+import android.os.Bundle
+import android.view.MenuItem
+import androidx.fragment.app.Fragment
+import ch.ffhs.esa.hereiam.ui.EntryFragment
+import ch.ffhs.esa.hereiam.ui.HomeFragment
+import ch.ffhs.esa.hereiam.ui.ProfileFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+    private val navListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item: MenuItem ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    replaceFragment(HomeFragment())
+                    true
+                }
+                R.id.nav_edit -> {
+                    replaceFragment(EntryFragment())
+                    true
+                }
+                R.id.nav_profile -> {
+                    replaceFragment(ProfileFragment())
+                    true
+                }
+                else -> false
+            }
+        }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        allEntriesButton.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
+        // listen to clicks on the bottom navigation menu
+        bottom_navigation_menu.setOnNavigationItemSelectedListener(navListener)
+
+        // set home as default fragment
+        replaceFragment(HomeFragment())
+    }
+
+    /**
+     * Helper class to exchange fragments in the fragment container
+     */
+    private fun replaceFragment(fragment: Fragment) {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container, fragment)
+        fragmentTransaction.commit()
     }
 }
