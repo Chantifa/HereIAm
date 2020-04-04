@@ -3,9 +3,6 @@
     <string name="label_home">Startseite</string>
     <string name="label_entry">Beitrag</string>
     <string name="label_profile">Profil</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_your_location">Dein Standort</string>
     <string name="text_your_location">Bern</string>
     <string name="desc_edit_your_location">Standort editieren</string>
@@ -27,4 +24,5 @@
     <string name="desc_profile_avatar">Profilbild</string>
     <string name="label_profile_save">Änderungen speichern</string>
     <string name="heading_your_profile">Dein Profil</string>
+    <string name="label_comment_entry">Kommentieren</string>
 </resources>

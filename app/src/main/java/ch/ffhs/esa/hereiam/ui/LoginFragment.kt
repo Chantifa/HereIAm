@@ -17,11 +17,11 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view : View = inflater.inflate(R.layout.fragment_login, container, false)
-        val btnLogin : Button = view.findViewById(R.id.btn_login)
+        val view: View = inflater.inflate(R.layout.fragment_login, container, false)
+        val btnLogin: Button = view.findViewById(R.id.btn_login)
 
         btnLogin.setOnClickListener {
-            val mainActivity : MainActivity  = activity as MainActivity
+            val mainActivity: MainActivity = activity as MainActivity
             mainActivity.replaceFragment(ProfileFragment())
         }
 

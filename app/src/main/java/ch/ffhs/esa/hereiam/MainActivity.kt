@@ -1,13 +1,12 @@
 package ch.ffhs.esa.hereiam
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import ch.ffhs.esa.hereiam.ui.EntryFragment
 import ch.ffhs.esa.hereiam.ui.HomeFragment
 import ch.ffhs.esa.hereiam.ui.LoginFragment
-import ch.ffhs.esa.hereiam.ui.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 

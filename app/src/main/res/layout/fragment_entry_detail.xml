@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/gap_default"
+    tools:context=".ui.EntryDetailFragment">
+
+    <ImageView
+        android:id="@+id/img_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/gap_default"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/desc_placeholder"
+        android:maxHeight="200dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/placeholder" />
+
+    <TextView
+        android:id="@+id/heading_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/gap_default"
+        android:layout_marginTop="@dimen/gap_default"
+        android:layout_marginEnd="@dimen/gap_default"
+        android:text="@string/heading_placeholder"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img_placeholder" />
+
+    <TextView
+        android:id="@+id/text_placeholder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/gap_default"
+        android:layout_marginTop="@dimen/gap_default"
+        android:layout_marginEnd="@dimen/gap_default"
+        android:text="@string/text_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heading_placeholder" />
+
+    <Button
+        android:id="@+id/allEntriesButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="@dimen/gap_default"
+        android:layout_marginTop="@dimen/gap_large"
+        android:layout_marginEnd="@dimen/gap_default"
+        android:text="@string/label_comment_entry"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_placeholder" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
