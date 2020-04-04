@@ -2,51 +2,40 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/gap_default"
-    tools:context=".ui.ProfileFragment">
+    tools:context=".ui.LoginFragment">
 
     <TextView
-        android:id="@+id/heading_profile"
+        android:id="@+id/heading_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/gap_large"
+        android:layout_marginStart="@dimen/gap_large"
         android:layout_marginTop="@dimen/gap_default"
-        android:text="@string/heading_your_profile"
+        android:layout_marginEnd="@dimen/gap_large"
+        android:text="@string/heading_login"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/profile_avatar"
-        android:layout_width="wrap_content"
-        android:adjustViewBounds="true"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/gap_large"
-        android:layout_marginTop="@dimen/gap_default"
-        android:contentDescription="@string/desc_profile_avatar"
-        android:maxWidth="150dp"
-        android:maxHeight="150dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heading_profile"
-        tools:srcCompat="@drawable/avatar" />
-
     <EditText
         android:id="@+id/username"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/gap_large"
-        android:layout_marginTop="@dimen/gap_default"
-        android:autofillHints=""
+        android:layout_marginStart="@dimen/gap_large"
+        android:layout_marginTop="@dimen/gap_xxlarge"
+        android:layout_marginEnd="@dimen/gap_large"
+        android:autofillHints="E-Mail"
         android:hint="@string/label_email"
         android:inputType="textEmailAddress"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_avatar" />
+        app:layout_constraintTop_toBottomOf="@+id/heading_login" />
 
     <EditText
         android:id="@+id/password"
@@ -56,7 +45,6 @@
         android:layout_marginTop="@dimen/gap_default"
         android:autofillHints="******"
         android:hint="@string/password"
-        android:imeOptions="actionDone"
         android:inputType="textPassword"
         android:selectAllOnFocus="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,19 +52,17 @@
         app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <Button
-        android:id="@+id/btn_profile_save"
+        android:id="@+id/btn_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
         android:layout_marginHorizontal="@dimen/gap_large"
         android:layout_marginTop="@dimen/gap_default"
         android:layout_marginBottom="@dimen/gap_xlarge"
-        android:text="@string/label_profile_save"
+        android:text="@string/label_sign_in"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password"
         app:layout_constraintVertical_bias="0.2" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

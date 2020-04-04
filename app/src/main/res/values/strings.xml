@@ -24,4 +24,7 @@
     <string name="heading_login">Login</string>
     <string name="label_save_entry">Beitrag erstellen</string>
     <string name="hint_your_entry">Dein Beitrag</string>
+    <string name="desc_profile_avatar">Profilbild</string>
+    <string name="label_profile_save">Änderungen speichern</string>
+    <string name="heading_your_profile">Dein Profil</string>
 </resources>

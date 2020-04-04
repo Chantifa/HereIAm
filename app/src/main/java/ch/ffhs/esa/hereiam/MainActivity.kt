@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import ch.ffhs.esa.hereiam.ui.EntryFragment
 import ch.ffhs.esa.hereiam.ui.HomeFragment
+import ch.ffhs.esa.hereiam.ui.LoginFragment
 import ch.ffhs.esa.hereiam.ui.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_profile -> {
-                    replaceFragment(ProfileFragment())
+                    replaceFragment(LoginFragment())
                     true
                 }
                 else -> false
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * Helper class to exchange fragments in the fragment container
      */
-    private fun replaceFragment(fragment: Fragment) {
+    fun replaceFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragment_container, fragment)
         fragmentTransaction.commit()
