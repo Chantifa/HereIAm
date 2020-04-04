@@ -18,4 +18,10 @@
     <string name="label_email">E-Mail</string>
     <string name="password">Passwort</string>
     <string name="label_sign_in">Anmelden</string>
+    <string name="hint_heading_entry">Beitragstitel</string>
+    <string name="heading_new_entry">Neuen Beitrag erfassen</string>
+    <string name="hint_text_entry">Beitrag</string>
+    <string name="heading_login">Login</string>
+    <string name="label_save_entry">Beitrag erstellen</string>
+    <string name="hint_your_entry">Dein Beitrag</string>
 </resources>

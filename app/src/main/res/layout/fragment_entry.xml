@@ -1,14 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/gap_default"
     tools:context=".ui.EntryFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/heading_new_entry"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/gap_large"
+        android:layout_marginTop="@dimen/gap_default"
+        android:layout_marginEnd="@dimen/gap_large"
+        android:text="@string/heading_new_entry"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <EditText
+        android:id="@+id/input_heading_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/gap_large"
+        android:layout_marginTop="@dimen/gap_xxlarge"
+        android:layout_marginEnd="@dimen/gap_large"
+        android:autofillHints="@string/hint_heading_entry"
+        android:hint="@string/hint_heading_entry"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/heading_new_entry"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/input_text_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/gap_large"
+        android:layout_marginTop="@dimen/gap_default"
+        android:layout_marginEnd="@dimen/gap_large"
+        android:autofillHints="@string/hint_text_entry"
+        android:hint="@string/hint_your_entry"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_heading_entry"
+        tools:ignore="LabelFor" />
+
+    <Button
+        android:id="@+id/btn_add_entry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="@dimen/gap_xlarge"
+        android:layout_marginTop="@dimen/gap_default"
+        android:layout_marginEnd="@dimen/gap_xlarge"
+        android:layout_marginBottom="@dimen/gap_xlarge"
+        android:text="@string/label_save_entry"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_text_entry"
+        app:layout_constraintVertical_bias="0.2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
