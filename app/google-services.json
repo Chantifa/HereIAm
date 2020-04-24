@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1088490069705",
+    "firebase_url": "https://here-i-am-ffhs.firebaseio.com",
+    "project_id": "here-i-am-ffhs",
+    "storage_bucket": "here-i-am-ffhs.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1088490069705:android:8c87ff19a716408a6e7718",
+        "android_client_info": {
+          "package_name": "ch.ffhs.esa.hereiam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1088490069705-bbobs639it4tc00gfmmomuotp7a5srpd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8Tivd_wsViQYAbo-egnNSwRXApIQsh2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1088490069705-bbobs639it4tc00gfmmomuotp7a5srpd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
