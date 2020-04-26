@@ -31,10 +31,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
     override fun onMapReady(map: GoogleMap?){
         map?.let{
             googleMap = it
-            googleMap.isMyLocationEnabled = true
-            val location = LatLng(46.948162, 7.436944)
-            googleMap.addMarker(MarkerOptions().position(location).title("FFHS Bern Welle 7"))
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location,10f))
         }
     }
 
@@ -43,7 +39,22 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_home, container, false)
+
+        val listOfListeners: List<View> = listOf(
+            view.findViewById(R.id.img_placeholder),
+            view.findViewById(R.id.heading_placeholder),
+            view.findViewById(R.id.text_placeholder)
+        )
+        val mainActivity: MainActivity = activity as MainActivity
+        listOfListeners.forEach { elem ->
+            elem.setOnClickListener {
+                mainActivity.replaceFragment(EntryDetailFragment())
+            }
+        }
+        return view
     }
+
 }
+
 
