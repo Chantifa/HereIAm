@@ -1,4 +1,4 @@
-package ch.ffhs.esa.hereiam.ui
+package ch.ffhs.esa.hereiam.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,12 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import ch.ffhs.esa.hereiam.MainActivity
 import ch.ffhs.esa.hereiam.R
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
@@ -48,6 +44,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         )
         val mainActivity: MainActivity = activity as MainActivity
         listOfListeners.forEach { elem ->
+
             elem.setOnClickListener {
                 mainActivity.replaceFragment(EntryDetailFragment())
             }

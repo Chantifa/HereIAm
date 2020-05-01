@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
-import ch.ffhs.esa.hereiam.ui.EntryFragment
-import ch.ffhs.esa.hereiam.ui.HomeFragment
-import ch.ffhs.esa.hereiam.ui.LoginFragment
+import ch.ffhs.esa.hereiam.ui.fragments.EntryFragment
+import ch.ffhs.esa.hereiam.ui.fragments.HomeFragment
+import ch.ffhs.esa.hereiam.ui.fragments.LoginFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -51,7 +49,7 @@ class MainActivity : AppCompatActivity() {
      */
     fun replaceFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, fragment)
+        fragmentTransaction.replace(R.id.nav_host_fragment_container, fragment)
         fragmentTransaction.commit()
     }
 }

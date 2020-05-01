@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.HomeFragment">
+    android:hardwareAccelerated="false"
+    tools:context=".ui.fragments.HomeFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/refreshLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="@dimen/gap_default">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/nav_home"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/gap_default">
 
         <GridLayout
             android:id="@+id/gridLayout"
@@ -33,108 +41,96 @@
                 android:src="@drawable/ic_edit_location_black_24dp" />
 
             <TextView
+                android:id="@+id/position"
                 android:layout_row="0"
                 android:layout_column="1"
                 android:text="@string/label_your_location" />
 
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/map_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            </GridLayout>
             <TextView
+                android:id="@+id/lastComments"
+                android:layout_height="wrap_content"
                 android:layout_row="1"
                 android:layout_column="1"
                 android:text="@string/text_your_location"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:layout_width="wrap_content" />
 
-        </GridLayout>
-        <FrameLayout
-            android:id="@+id/frameLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="@dimen/gap_default"
-            android:layout_marginTop="@dimen/gap_default"
-            android:adjustViewBounds="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/gridLayout">
+            <TextView
+                android:id="@+id/label_all_entries"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_default"
+                android:layout_marginTop="@dimen/gap_large"
+                android:layout_marginEnd="@dimen/gap_default"
+                android:text="@string/text_last_entries"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/map_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
-                <com.google.android.gms.maps.MapView
-                     android:id="@+id/map_view"
-                     android:layout_width="match_parent"
-                     android:layout_height="match_parent"
-                     app:layout_constraintEnd_toEndOf="parent"
-                     app:layout_constraintStart_toStartOf="@id/img_placeholder"
-                     app:layout_constraintTop_toBottomOf="@+id/gridLayout"/>
-        </FrameLayout>
+            <ImageView
+                android:id="@+id/img_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginVertical="@dimen/gap_default"
+                android:layout_marginStart="@dimen/gap_default"
+                android:layout_marginTop="@dimen/gap_default"
+                android:layout_marginEnd="@dimen/gap_default"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/desc_placeholder"
+                android:maxHeight="200dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/label_all_entries"
+                app:srcCompat="@drawable/placeholder" />
 
-        <TextView
-            android:id="@+id/label_all_entries"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_default"
-            android:layout_marginTop="@dimen/gap_large"
-            android:layout_marginEnd="@dimen/gap_default"
-            android:text="@string/text_last_entries"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@id/frameLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/img_placeholder" />
+            <TextView
+                android:id="@+id/heading_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_default"
+                android:layout_marginTop="@dimen/gap_default"
+                android:layout_marginEnd="@dimen/gap_default"
+                android:text="@string/heading_placeholder"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/img_placeholder" />
 
-        <ImageView
-            android:id="@+id/img_placeholder"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginVertical="@dimen/gap_default"
-            android:layout_marginStart="@dimen/gap_default"
-            android:layout_marginTop="@dimen/gap_default"
-            android:layout_marginEnd="@dimen/gap_default"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/desc_placeholder"
-            android:maxHeight="200dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_all_entries"
-            app:srcCompat="@drawable/placeholder" />
+            <TextView
+                android:id="@+id/text_placeholder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_default"
+                android:layout_marginTop="@dimen/gap_default"
+                android:layout_marginEnd="@dimen/gap_default"
+                android:text="@string/text_placeholder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/heading_placeholder" />
 
-        <TextView
-            android:id="@+id/heading_placeholder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_default"
-            android:layout_marginTop="@dimen/gap_default"
-            android:layout_marginEnd="@dimen/gap_default"
-            android:text="@string/heading_placeholder"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/img_placeholder" />
+            <Button
+                android:id="@+id/btn_all_entries"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/gap_default"
+                android:layout_marginTop="@dimen/gap_large"
+                android:layout_marginEnd="@dimen/gap_default"
+                android:text="@string/label_all_entries"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_placeholder" />
 
-        <TextView
-            android:id="@+id/text_placeholder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_default"
-            android:layout_marginTop="@dimen/gap_default"
-            android:layout_marginEnd="@dimen/gap_default"
-            android:text="@string/text_placeholder"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/heading_placeholder" />
-
-        <Button
-            android:id="@+id/btn_all_entries"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="@dimen/gap_default"
-            android:layout_marginTop="@dimen/gap_large"
-            android:layout_marginEnd="@dimen/gap_default"
-            android:text="@string/label_all_entries"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_placeholder" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</RelativeLayout>
