@@ -1,5 +1,6 @@
 package ch.ffhs.esa.hereiam.ui.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +16,10 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
-class HomeFragment : Fragment(), OnMapReadyCallback{
-    private lateinit var googleMap : GoogleMap
+class HomeFragment : Fragment(), OnMapReadyCallback {
+    private lateinit var googleMap: GoogleMap
 
-    override fun onActivityCreated(savedInstanceState: Bundle?){
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         map_view.onCreate(savedInstanceState)
         map_view.onResume()
@@ -29,7 +30,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
         val btnViewList: Button = view.findViewById(R.id.btn_all_entries)
 
@@ -41,12 +41,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
     }
 
     override fun onMapReady(map: GoogleMap?) {
-        map?.let{
-        googleMap = it
+        map?.let {
+            googleMap = it
 
-        val location = com.google.android.gms.maps.model.LatLng(46.948162, 7.436944)
-        googleMap.addMarker(MarkerOptions().position(location).title("FFHS Bern Welle 7"))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
+            val location = com.google.android.gms.maps.model.LatLng(46.948162, 7.436944)
+            googleMap.addMarker(MarkerOptions().position(location).title("FFHS Bern Welle 7"))
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
         }
     }
 }

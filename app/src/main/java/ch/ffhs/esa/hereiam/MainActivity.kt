@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_edit -> {
-                    replaceFragment(EntryFormFragment.newInstance(FIRESTORE_COLLECTION_PATH))
+                    replaceFragment(EntryFormFragment())
                     true
                 }
                 R.id.nav_profile -> {
@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-    private val FIRESTORE_COLLECTION_PATH = "entriesV1"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

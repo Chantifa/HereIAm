@@ -10,19 +10,9 @@ import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.model.Entry
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_entry_form.view.*
+import java.sql.Timestamp
 
 class EntryFormFragment : Fragment() {
-
-    private lateinit var firestoreCollectionPath: String
-
-    companion object {
-        @JvmStatic
-        fun newInstance(firestoreCollectionPath: String) = EntryFormFragment().apply {
-            arguments = Bundle().apply {
-                putString("FIRESTORE_COLLECTION_PATH", firestoreCollectionPath)
-            }
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,8 +28,9 @@ class EntryFormFragment : Fragment() {
             val headingValue = heading.text.toString()
             val textValue = text.text.toString()
             if (headingValue.isNotEmpty() && textValue.isNotEmpty()) {
-                FirebaseFirestore.getInstance().collection(firestoreCollectionPath)
-                    .add(Entry(heading.text.toString(), text.text.toString()))
+                val timestamp = com.google.firebase.Timestamp.now()
+                FirebaseFirestore.getInstance().collection(getString(R.string.firestore_collection_path))
+                    .add(Entry(heading.text.toString(), text.text.toString(), timestamp))
                 heading.text.clear()
                 text.text.clear()
             }
@@ -47,13 +38,4 @@ class EntryFormFragment : Fragment() {
 
         return view
     }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        arguments?.getString("FIRESTORE_COLLECTION_PATH")?.let {
-            firestoreCollectionPath = it
-        }
-    }
-
-
 }
