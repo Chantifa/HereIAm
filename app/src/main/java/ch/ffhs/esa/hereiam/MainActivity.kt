@@ -2,13 +2,12 @@ package ch.ffhs.esa.hereiam
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.navigation.ui.NavigationUI
-import ch.ffhs.esa.hereiam.ui.EntryFragment
-import ch.ffhs.esa.hereiam.ui.HomeFragment
-import ch.ffhs.esa.hereiam.ui.LoginFragment
+import ch.ffhs.esa.hereiam.ui.fragments.EntryFragment
+import ch.ffhs.esa.hereiam.ui.fragments.HomeFragment
+import ch.ffhs.esa.hereiam.ui.fragments.LoginFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -23,7 +22,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_edit -> {
-                    replaceFragment(EntryFragment())
+                    replaceFragment(EntryFragment.newInstance(FIRESTORE_COLLECTION_PATH))
                     true
                 }
                 R.id.nav_profile -> {
@@ -33,15 +32,13 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
+    private val FIRESTORE_COLLECTION_PATH = "entriesV1"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // listen to clicks on the bottom navigation menu
         bottom_navigation_menu.setOnNavigationItemSelectedListener(navListener)
-
-        // set home as default fragment
         replaceFragment(HomeFragment())
     }
 
@@ -54,4 +51,6 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.fragment_container, fragment)
         fragmentTransaction.commit()
     }
+
+    fun createEntry(view: View) {}
 }
