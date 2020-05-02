@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import ch.ffhs.esa.hereiam.MainActivity
@@ -44,7 +45,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
             mainActivity.replaceFragment(EntryListFragment())
         }
 
-        locationText = view.findViewById(R.id.locationEditText) as EditText
+        locationText = view.findViewById(R.id.location_edit_text) as EditText
         setOnKeyListenerOnLocationEditText(requireContext())
         return view
     }
