@@ -8,6 +8,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import ch.ffhs.esa.hereiam.MainActivity
@@ -36,21 +37,15 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
+        val btnViewList: Button = view.findViewById(R.id.btn_all_entries)
 
-        val listOfListeners: List<View> = listOf(
-            view.findViewById(R.id.map_view)
-        )
-        val mainActivity: MainActivity = activity as MainActivity
-        listOfListeners.forEach { elem ->
-
-            elem.setOnClickListener {
-                mainActivity.replaceFragment(EntryDetailFragment())
-            }
+        btnViewList.setOnClickListener {
+            val mainActivity: MainActivity = activity as MainActivity
+            mainActivity.replaceFragment(EntryListFragment())
         }
 
-        locationText = view.findViewById(R.id.locationEditText) as EditText
+        locationText = view.findViewById(R.id.location_edit_text) as EditText
         setOnKeyListenerOnLocationEditText(requireContext())
         return view
     }
