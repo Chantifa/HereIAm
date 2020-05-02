@@ -32,10 +32,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
 
         val listOfListeners: List<View> = listOf(
-            view.findViewById(R.id.map_view),
-            view.findViewById(R.id.img_placeholder),
-            view.findViewById(R.id.heading_placeholder),
-            view.findViewById(R.id.text_placeholder)
+            view.findViewById(R.id.map_view)
         )
         val mainActivity: MainActivity = activity as MainActivity
         listOfListeners.forEach { elem ->
