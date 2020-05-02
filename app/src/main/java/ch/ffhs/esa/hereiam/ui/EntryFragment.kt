@@ -36,10 +36,14 @@ class EntryFragment : Fragment() {
         val text = view.input_text_entry
 
         view.btn_add_entry.setOnClickListener {
-            FirebaseFirestore.getInstance().collection(FIRESTORE_COLLECTION_PATH)
-                .add(Entry(heading.text.toString(), text.text.toString()))
-            heading.text.clear()
-            text.text.clear()
+            val headingValue = heading.text.toString()
+            val textValue = text.text.toString()
+            if (headingValue.isNotEmpty() && textValue.isNotEmpty()) {
+                FirebaseFirestore.getInstance().collection(FIRESTORE_COLLECTION_PATH)
+                    .add(Entry(heading.text.toString(), text.text.toString()))
+                heading.text.clear()
+                text.text.clear()
+            }
         }
 
         return view
