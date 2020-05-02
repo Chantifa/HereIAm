@@ -36,18 +36,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
+        val btnViewList: Button = view.findViewById(R.id.btn_all_entries)
 
-        val listOfListeners: List<View> = listOf(
-            view.findViewById(R.id.map_view)
-        )
-        val mainActivity: MainActivity = activity as MainActivity
-        listOfListeners.forEach { elem ->
-
-            elem.setOnClickListener {
-                mainActivity.replaceFragment(EntryDetailFragment())
-            }
+        btnViewList.setOnClickListener {
+            val mainActivity: MainActivity = activity as MainActivity
+            mainActivity.replaceFragment(EntryListFragment())
         }
 
         locationText = view.findViewById(R.id.locationEditText) as EditText
