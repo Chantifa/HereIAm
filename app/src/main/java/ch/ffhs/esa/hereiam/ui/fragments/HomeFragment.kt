@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import ch.ffhs.esa.hereiam.MainActivity
 import ch.ffhs.esa.hereiam.R
@@ -30,16 +31,11 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
     ): View? {
         // Inflate the layout for this fragment
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
+        val btnViewList: Button = view.findViewById(R.id.btn_all_entries)
 
-        val listOfListeners: List<View> = listOf(
-            view.findViewById(R.id.map_view)
-        )
-        val mainActivity: MainActivity = activity as MainActivity
-        listOfListeners.forEach { elem ->
-
-            elem.setOnClickListener {
-                mainActivity.replaceFragment(EntryDetailFragment())
-            }
+        btnViewList.setOnClickListener {
+            val mainActivity: MainActivity = activity as MainActivity
+            mainActivity.replaceFragment(EntryListFragment())
         }
         return view
     }

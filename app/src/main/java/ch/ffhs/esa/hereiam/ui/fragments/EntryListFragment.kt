@@ -8,7 +8,7 @@ import android.view.ViewGroup
 
 import ch.ffhs.esa.hereiam.R
 
-class EntryListView : Fragment() {
+class EntryListFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

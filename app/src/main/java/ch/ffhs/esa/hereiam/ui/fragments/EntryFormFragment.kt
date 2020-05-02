@@ -9,16 +9,16 @@ import androidx.fragment.app.Fragment
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.model.Entry
 import com.google.firebase.firestore.FirebaseFirestore
-import kotlinx.android.synthetic.main.fragment_entry.view.*
+import kotlinx.android.synthetic.main.fragment_entry_form.view.*
 
-class EntryFragment : Fragment() {
+class EntryFormFragment : Fragment() {
 
     private lateinit var FIRESTORE_COLLECTION_PATH: String
 
 
     companion object {
         @JvmStatic
-        fun newInstance(FIRESTORE_COLLECTION_PATH: String) = EntryFragment().apply {
+        fun newInstance(FIRESTORE_COLLECTION_PATH: String) = EntryFormFragment().apply {
             arguments = Bundle().apply {
                 putString("FIRESTORE_COLLECTION_PATH", FIRESTORE_COLLECTION_PATH)
             }
@@ -30,7 +30,7 @@ class EntryFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view: View = inflater.inflate(R.layout.fragment_entry, container, false)
+        val view: View = inflater.inflate(R.layout.fragment_entry_form, container, false)
 
         val heading = view.input_heading_entry
         val text = view.input_text_entry

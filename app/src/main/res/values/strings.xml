@@ -6,8 +6,6 @@
     <string name="label_your_location">Dein Standort</string>
     <string name="text_your_location">Bern</string>
     <string name="desc_edit_your_location">Standort editieren</string>
-    <string name="desc_google_maps">Google Maps</string>
-    <string name="label_all_entries">Alle Beiträge</string>
     <string name="desc_placeholder">Platzhalter</string>
     <string name="heading_placeholder">Beitragstitel</string>
     <string name="text_placeholder">It is a long established fact that a reader will be distracted by the readable content of a page…</string>
@@ -27,5 +25,4 @@
     <string name="label_comment_entry">Kommentieren</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
