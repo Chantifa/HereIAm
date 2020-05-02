@@ -1,4 +1,4 @@
-package ch.ffhs.esa.hereiam.ui
+package ch.ffhs.esa.hereiam.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
