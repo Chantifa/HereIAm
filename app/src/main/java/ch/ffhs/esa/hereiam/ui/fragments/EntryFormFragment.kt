@@ -13,14 +13,13 @@ import kotlinx.android.synthetic.main.fragment_entry_form.view.*
 
 class EntryFormFragment : Fragment() {
 
-    private lateinit var FIRESTORE_COLLECTION_PATH: String
-
+    private lateinit var firestoreCollectionPath: String
 
     companion object {
         @JvmStatic
-        fun newInstance(FIRESTORE_COLLECTION_PATH: String) = EntryFormFragment().apply {
+        fun newInstance(firestoreCollectionPath: String) = EntryFormFragment().apply {
             arguments = Bundle().apply {
-                putString("FIRESTORE_COLLECTION_PATH", FIRESTORE_COLLECTION_PATH)
+                putString("FIRESTORE_COLLECTION_PATH", firestoreCollectionPath)
             }
         }
     }
@@ -39,7 +38,7 @@ class EntryFormFragment : Fragment() {
             val headingValue = heading.text.toString()
             val textValue = text.text.toString()
             if (headingValue.isNotEmpty() && textValue.isNotEmpty()) {
-                FirebaseFirestore.getInstance().collection(FIRESTORE_COLLECTION_PATH)
+                FirebaseFirestore.getInstance().collection(firestoreCollectionPath)
                     .add(Entry(heading.text.toString(), text.text.toString()))
                 heading.text.clear()
                 text.text.clear()
@@ -52,7 +51,7 @@ class EntryFormFragment : Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         arguments?.getString("FIRESTORE_COLLECTION_PATH")?.let {
-            FIRESTORE_COLLECTION_PATH = it
+            firestoreCollectionPath = it
         }
     }
 
