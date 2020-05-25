@@ -1,13 +1,14 @@
 package ch.ffhs.esa.hereiam
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import ch.ffhs.esa.hereiam.ui.fragments.EntryFormFragment
-import ch.ffhs.esa.hereiam.ui.fragments.HomeFragment
-import ch.ffhs.esa.hereiam.ui.fragments.LoginFragment
+import ch.ffhs.esa.hereiam.fragments.EntryFormFragment
+import ch.ffhs.esa.hereiam.fragments.HomeFragment
+import ch.ffhs.esa.hereiam.fragments.LoginFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -36,7 +37,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         bottom_navigation_menu.setOnNavigationItemSelectedListener(navListener)
         replaceFragment(HomeFragment())
     }

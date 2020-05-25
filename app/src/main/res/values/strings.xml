@@ -23,10 +23,13 @@
     <string name="label_profile_save">Änderungen speichern</string>
     <string name="heading_your_profile">Dein Profil</string>
     <string name="label_comment_entry">Kommentieren</string>
-    <string name="label_all_entries">Alle Einträge</string>
     <string name="firestore_collection_path">entriesV2</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="heading_all_entries">Alle Einträge</string>
+    <string name="welcome">Herzlichwillkommen zu unsere HereIam App</string>
+    <string name="what">Unsere App bringt dir die Möglichkeit mehr über deinen Standort oder über einen gewählten Standort zu erfahren
+    </string>
+    <string name="what_else">Du kannst Beiträge auch selber zu dem Standort erfassen und auch Fotos zu deinem Standort hochladen</string>
+    <string name="dummy_button">Los geht es!</string>
+
+    <string name="title_activity_welcome_splash_screen">WelcomeSplashScreen</string>
 </resources>

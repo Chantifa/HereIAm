@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#78253446"
+    tools:context=".WelcomeSplashScreen">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="87dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="top"
+        android:src="@drawable/hereiam_logo" />
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <TextView
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="right"
+        android:keepScreenOn="true"
+        android:text="@string/welcome"
+        android:textColor="#000000"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <LinearLayout
+            android:id="@+id/fullscreen_content_controls"
+            style="?metaButtonBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="@color/black_overlay"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+
+            <TextView
+                android:id="@+id/what_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@+id/welcome"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:gravity="left"
+                android:keepScreenOn="true"
+                android:text="@string/what"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/what_else"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@+id/what"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="200dp"
+                android:layout_marginRight="16dp"
+                android:gravity="left"
+                android:keepScreenOn="true"
+                android:text="@string/what_else"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+            <Button
+                android:id="@+id/dummy_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@id/what_else"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="350dp"
+                android:background="@color/black_overlay"
+                android:text="@string/dummy_button" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+</FrameLayout>
