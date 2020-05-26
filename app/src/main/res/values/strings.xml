@@ -30,6 +30,6 @@
     </string>
     <string name="what_else">Du kannst Beiträge auch selber zu dem Standort erfassen und auch Fotos zu deinem Standort hochladen</string>
     <string name="dummy_button">Los geht es!</string>
-
-    <string name="title_activity_welcome_splash_screen">WelcomeSplashScreen</string>
+    <string name="title_activity_welcome_splash_screen">welcomeScreen</string>
+    <string name="logo">HereIam Logo</string>
 </resources>

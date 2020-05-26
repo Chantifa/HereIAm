@@ -1,6 +1,5 @@
 package ch.ffhs.esa.hereiam
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -37,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         bottom_navigation_menu.setOnNavigationItemSelectedListener(navListener)
         replaceFragment(HomeFragment())
     }
