@@ -1,6 +1,5 @@
 package ch.ffhs.esa.hereiam.ui.fragments
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,6 @@ import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.model.Entry
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.fragment_entry_form.view.*
-import java.sql.Timestamp
 
 class EntryFormFragment : Fragment() {
 

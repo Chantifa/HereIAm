@@ -8,10 +8,9 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import ch.ffhs.esa.hereiam.MainActivity
+import androidx.navigation.Navigation
 import ch.ffhs.esa.hereiam.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -41,10 +40,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         val btnViewList = view.btn_all_entries
 
-        btnViewList.setOnClickListener {
-            val mainActivity = activity as MainActivity
-            mainActivity.replaceFragment(EntryListFragment())
-        }
+        btnViewList.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_entryListFragment))
 
         locationText = view.location_edit_text as EditText
         setOnKeyListenerOnLocationEditText(requireContext())
@@ -55,7 +51,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         locationText.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 // If the event is a key-down event on the "enter" button
-                if (event.getAction() === KeyEvent.ACTION_DOWN &&
+                if (event.getAction() == KeyEvent.ACTION_DOWN &&
                     keyCode == KeyEvent.KEYCODE_ENTER
                 ) {
                     val latitudeLongitude =
