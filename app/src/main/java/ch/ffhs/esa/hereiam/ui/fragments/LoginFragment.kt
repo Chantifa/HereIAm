@@ -9,6 +9,7 @@ import android.widget.Button
 import ch.ffhs.esa.hereiam.MainActivity
 
 import ch.ffhs.esa.hereiam.R
+import kotlinx.android.synthetic.main.fragment_login.view.*
 
 class LoginFragment : Fragment() {
 
@@ -17,11 +18,11 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view: View = inflater.inflate(R.layout.fragment_login, container, false)
-        val btnLogin: Button = view.findViewById(R.id.btn_login)
+        val view = inflater.inflate(R.layout.fragment_login, container, false)
+        val btnLogin = view.btn_login
 
         btnLogin.setOnClickListener {
-            val mainActivity: MainActivity = activity as MainActivity
+            val mainActivity = activity as MainActivity
             mainActivity.replaceFragment(ProfileFragment())
         }
 

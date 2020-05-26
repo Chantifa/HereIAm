@@ -19,14 +19,15 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_home.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
 
 
-class HomeFragment : Fragment(), OnMapReadyCallback{
+class HomeFragment : Fragment(), OnMapReadyCallback {
     private lateinit var locationText: EditText
-    private lateinit var googleMap : GoogleMap
+    private lateinit var googleMap: GoogleMap
 
 
-    override fun onActivityCreated(savedInstanceState: Bundle?){
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         map_view.onCreate(savedInstanceState)
         map_view.onResume()
@@ -37,15 +38,15 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view: View = inflater.inflate(R.layout.fragment_home, container, false)
-        val btnViewList: Button = view.findViewById(R.id.btn_all_entries)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val btnViewList = view.btn_all_entries
 
         btnViewList.setOnClickListener {
-            val mainActivity: MainActivity = activity as MainActivity
+            val mainActivity = activity as MainActivity
             mainActivity.replaceFragment(EntryListFragment())
         }
 
-        locationText = view.findViewById(R.id.location_edit_text) as EditText
+        locationText = view.location_edit_text as EditText
         setOnKeyListenerOnLocationEditText(requireContext())
         return view
     }
@@ -74,7 +75,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
     }
 
     override fun onMapReady(map: GoogleMap?) {
-        map?.let{
+        map?.let {
             googleMap = it
             //location of Bern
             setLocationOnGoogleMaps(46.948162, 7.436944, "FFHS Bern Welle 7")

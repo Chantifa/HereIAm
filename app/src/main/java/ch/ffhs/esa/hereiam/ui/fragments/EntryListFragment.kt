@@ -23,7 +23,7 @@ class EntryListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view: View = inflater.inflate(R.layout.fragment_entry_list_all, container, false)
+        val view = inflater.inflate(R.layout.fragment_entry_list_all, container, false)
         listView = view.findViewById<ListView>(R.id.entry_list)
 
         FirebaseFirestore.getInstance()

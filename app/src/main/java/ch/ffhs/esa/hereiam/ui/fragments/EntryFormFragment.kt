@@ -19,7 +19,7 @@ class EntryFormFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val view: View = inflater.inflate(R.layout.fragment_entry_form, container, false)
+        val view = inflater.inflate(R.layout.fragment_entry_form, container, false)
 
         val heading = view.input_heading_entry
         val text = view.input_text_entry
