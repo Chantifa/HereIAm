@@ -1,7 +1,6 @@
 package ch.ffhs.esa.hereiam.screens.home
 
 import android.content.Context
-import android.location.Address
 import android.location.Geocoder
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -13,31 +12,43 @@ class HomeViewModel : ViewModel() {
 
     lateinit var googleMap: GoogleMap
 
-    fun getLocationFromAddress(
+    private fun getLocationFromAddress(
         context: Context?,
-        strAddress: String?
+        locationName: String?
     ): LatLng? {
         val coder = Geocoder(context)
-        val address: List<Address>?
-        var p1: LatLng? = null
         try {
-            address = coder.getFromLocationName(strAddress, 5)
-            if (address == null) {
-                return null
+            val address = coder.getFromLocationName(locationName, 5)
+            return address?.let {
+                val location = it[0]
+                LatLng(location.latitude, location.longitude)
             }
-            val location: Address = address[0]
-            location.latitude
-            location.longitude
-            p1 = LatLng(location.getLatitude(), location.getLongitude())
         } catch (ex: Exception) {
             ex.printStackTrace()
         }
-        return p1
+        return null
     }
 
-    fun setLocationOnGoogleMaps(latitude: Double, longitude: Double, marker: String) {
-        val location = LatLng(latitude, longitude)
-        googleMap.addMarker(MarkerOptions().position(location).title(marker))
+    private fun setLocationOnGoogleMaps(location: LatLng, locationName: String) {
+        googleMap.addMarker(MarkerOptions().position(location).title(locationName))
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
+    }
+
+    fun loadDefaultLocation() {
+        // Location of Bern
+        val latitude = 46.948162
+        val longitude = 7.436944
+        val locationName = "FFHS Bern Welle 7"
+
+        setLocationOnGoogleMaps(LatLng(latitude, longitude), locationName)
+    }
+
+    fun changeMapBasedOnUserInput(ctx: Context?, locationName: String) {
+        val location =
+            getLocationFromAddress(ctx, locationName)
+
+        location?.let {
+            setLocationOnGoogleMaps(it, locationName)
+        }
     }
 }

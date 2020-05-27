@@ -1,11 +1,11 @@
 package ch.ffhs.esa.hereiam.screens.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -34,46 +34,26 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        val btnViewList = view.btn_all_entries
 
+        val btnViewList = view.btn_all_entries as Button
         btnViewList.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_entryListFragment))
 
-        var locationText = view.location_edit_text as EditText
-        setOnKeyListenerOnLocationEditText(requireContext(), locationText)
-        return view
-    }
-
-    private fun setOnKeyListenerOnLocationEditText(
-        context: Context,
-        locationText: EditText
-    ) {
-        locationText.setOnKeyListener(object : View.OnKeyListener {
-            override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
-                // If the event is a key-down event on the "enter" button
-                if (event.getAction() == KeyEvent.ACTION_DOWN &&
-                    keyCode == KeyEvent.KEYCODE_ENTER
-                ) {
-                    val latitudeLongitude =
-                        viewModel.getLocationFromAddress(context, locationText.text.toString())
-                    if (latitudeLongitude != null) {
-                        viewModel.setLocationOnGoogleMaps(
-                            latitudeLongitude.latitude,
-                            latitudeLongitude.longitude,
-                            locationText.text.toString()
-                        )
-                    }
-                    return true
-                }
-                return false
+        val locationText = view.location_edit_text as EditText
+        locationText.setOnKeyListener { _, keyCode, event ->                  // If the event is a key-down event on the "enter" button
+            if (event.action == KeyEvent.ACTION_DOWN &&
+                keyCode == KeyEvent.KEYCODE_ENTER
+            ) {
+                viewModel.changeMapBasedOnUserInput(context, locationText.text.toString())
             }
-        })
+            false
+        }
+        return view
     }
 
     override fun onMapReady(map: GoogleMap?) {
         map?.let {
             viewModel.googleMap = it
-            //location of Bern
-            viewModel.setLocationOnGoogleMaps(46.948162, 7.436944, "FFHS Bern Welle 7")
+            viewModel.loadDefaultLocation()
         }
     }
 }
