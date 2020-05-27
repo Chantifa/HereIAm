@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         replaceFragment(HomeFragment())
     }
 
-
     /**
      * Helper class to exchange fragments in the fragment container
      */
