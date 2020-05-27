@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModel
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 class HomeViewModel : ViewModel() {
 
     lateinit var googleMap: GoogleMap
+    lateinit var currentMarker: Marker
 
     private fun getLocationFromAddress(
         context: Context?,
@@ -30,7 +32,10 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun setLocationOnGoogleMaps(location: LatLng, locationName: String) {
-        googleMap.addMarker(MarkerOptions().position(location).title(locationName))
+        if (this::currentMarker.isInitialized) {
+            currentMarker.remove()
+        }
+        currentMarker = googleMap.addMarker(MarkerOptions().position(location).title(locationName))
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
     }
 
