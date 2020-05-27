@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="ch.ffhs.esa.hereiam.ui.fragments.HomeFragment"
+        android:name="ch.ffhs.esa.hereiam.screens.home.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_entryListFragment"
@@ -16,16 +16,16 @@
     </fragment>
     <fragment
         android:id="@+id/nav_edit"
-        android:name="ch.ffhs.esa.hereiam.ui.fragments.EntryFormFragment"
+        android:name="ch.ffhs.esa.hereiam.screens.entry.form.EntryFormFragment"
         android:label="fragment_entry_form"
         tools:layout="@layout/fragment_entry_form" />
     <fragment
         android:id="@+id/entryListFragment"
-        android:name="ch.ffhs.esa.hereiam.ui.fragments.EntryListFragment"
+        android:name="ch.ffhs.esa.hereiam.screens.entry.list.EntryListFragment"
         android:label="EntryListFragment" />
     <fragment
         android:id="@+id/nav_profile"
-        android:name="ch.ffhs.esa.hereiam.ui.fragments.LoginFragment"
+        android:name="ch.ffhs.esa.hereiam.screens.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
-        android:name="ch.ffhs.esa.hereiam.ui.fragments.ProfileFragment"
+        android:name="ch.ffhs.esa.hereiam.screens.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

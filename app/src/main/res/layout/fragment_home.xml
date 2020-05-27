@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/gap_large"
-    tools:context=".ui.fragments.LoginFragment">
+    tools:context=".screens.login.LoginFragment">
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/map_view"

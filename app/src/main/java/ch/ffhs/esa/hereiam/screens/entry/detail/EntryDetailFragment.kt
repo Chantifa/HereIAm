@@ -1,4 +1,4 @@
-package ch.ffhs.esa.hereiam.ui.fragments
+package ch.ffhs.esa.hereiam.screens.entry.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater

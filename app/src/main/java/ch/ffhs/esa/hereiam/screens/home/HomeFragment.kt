@@ -1,8 +1,6 @@
-package ch.ffhs.esa.hereiam.ui.fragments
+package ch.ffhs.esa.hereiam.screens.home
 
 import android.content.Context
-import android.location.Address
-import android.location.Geocoder
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -10,21 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import ch.ffhs.esa.hereiam.R
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
-    private lateinit var locationText: EditText
-    private lateinit var googleMap: GoogleMap
-
+    private lateinit var viewModel: HomeViewModel
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -37,17 +31,22 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         val btnViewList = view.btn_all_entries
 
         btnViewList.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_entryListFragment))
 
-        locationText = view.location_edit_text as EditText
-        setOnKeyListenerOnLocationEditText(requireContext())
+        var locationText = view.location_edit_text as EditText
+        setOnKeyListenerOnLocationEditText(requireContext(), locationText)
         return view
     }
 
-    private fun setOnKeyListenerOnLocationEditText(context: Context) {
+    private fun setOnKeyListenerOnLocationEditText(
+        context: Context,
+        locationText: EditText
+    ) {
         locationText.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 // If the event is a key-down event on the "enter" button
@@ -55,9 +54,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     keyCode == KeyEvent.KEYCODE_ENTER
                 ) {
                     val latitudeLongitude =
-                        getLocationFromAddress(context, locationText.text.toString())
+                        viewModel.getLocationFromAddress(context, locationText.text.toString())
                     if (latitudeLongitude != null) {
-                        setLocationOnGoogleMaps(
+                        viewModel.setLocationOnGoogleMaps(
                             latitudeLongitude.latitude,
                             latitudeLongitude.longitude,
                             locationText.text.toString()
@@ -72,38 +71,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap?) {
         map?.let {
-            googleMap = it
+            viewModel.googleMap = it
             //location of Bern
-            setLocationOnGoogleMaps(46.948162, 7.436944, "FFHS Bern Welle 7")
+            viewModel.setLocationOnGoogleMaps(46.948162, 7.436944, "FFHS Bern Welle 7")
         }
-    }
-
-    private fun setLocationOnGoogleMaps(latitude: Double, longitude: Double, marker: String) {
-        val location = LatLng(latitude, longitude)
-        googleMap.addMarker(MarkerOptions().position(location).title(marker))
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
-    }
-
-    fun getLocationFromAddress(
-        context: Context?,
-        strAddress: String?
-    ): LatLng? {
-        val coder = Geocoder(context)
-        val address: List<Address>?
-        var p1: LatLng? = null
-        try {
-            address = coder.getFromLocationName(strAddress, 5)
-            if (address == null) {
-                return null
-            }
-            val location: Address = address[0]
-            location.latitude
-            location.longitude
-            p1 = LatLng(location.getLatitude(), location.getLongitude())
-        } catch (ex: Exception) {
-            ex.printStackTrace()
-        }
-        return p1
     }
 }
 
