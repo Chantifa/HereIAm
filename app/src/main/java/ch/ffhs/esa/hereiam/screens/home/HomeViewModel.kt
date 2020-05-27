@@ -19,16 +19,11 @@ class HomeViewModel : ViewModel() {
         locationName: String?
     ): LatLng? {
         val coder = Geocoder(context)
-        try {
-            val address = coder.getFromLocationName(locationName, 5)
-            return address?.let {
-                val location = it[0]
-                LatLng(location.latitude, location.longitude)
-            }
-        } catch (ex: Exception) {
-            ex.printStackTrace()
+        val address = coder.getFromLocationName(locationName, 5)
+        return if (address.isNullOrEmpty()) null else address.let {
+            val location = it[0]
+            LatLng(location.latitude, location.longitude)
         }
-        return null
     }
 
     private fun setLocationOnGoogleMaps(location: LatLng, locationName: String) {
