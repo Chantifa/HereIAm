@@ -1,9 +1,10 @@
-package ch.ffhs.esa.hereiam
+package ch.ffhs.esa.hereiam.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import ch.ffhs.esa.hereiam.R
 
 class WelcomeScreen : AppCompatActivity() {
 

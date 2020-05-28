@@ -1,4 +1,4 @@
-package ch.ffhs.esa.hereiam
+package ch.ffhs.esa.hereiam.activities
 
 import android.os.Bundle
 import android.view.Menu
@@ -6,12 +6,11 @@ import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import androidx.navigation.navOptions
-import androidx.navigation.ui.NavigationUI
+import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.fragments.EntryFormFragment
 import ch.ffhs.esa.hereiam.fragments.HomeFragment
 import ch.ffhs.esa.hereiam.fragments.ProfileFragment
+import ch.ffhs.esa.hereiam.logic.logout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*

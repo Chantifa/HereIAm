@@ -1,19 +1,21 @@
 package ch.ffhs.esa.hereiam.fragments
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.app.Activity.RESULT_OK
+import androidx.fragment.app.Fragment
+import ch.ffhs.esa.hereiam.activities.LoginActivity
 import ch.ffhs.esa.hereiam.R
-import ch.ffhs.esa.hereiam.toast
+import ch.ffhs.esa.hereiam.logic.toast
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.fragment_profile.*
@@ -22,7 +24,7 @@ import java.io.ByteArrayOutputStream
 class ProfileFragment : Fragment() {
 
 
-    private val DEFAULT_IMAGE_URL = "https://picsum.photos/200"
+    private val DEFAULT_IMAGE_URL = "@drawable/avatar"
 
     private lateinit var imageUri: Uri
     private val REQUEST_IMAGE_CAPTURE = 100
@@ -40,24 +42,39 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        currentUser?.let { user ->
-            Glide.with(this)
-                .load(user.photoUrl)
-                .into(image_view)
-            edit_text_name.setText(user.displayName)
-            text_email.text = user.email
+        if (currentUser == null) {
+            val loginActivity = Intent(activity, LoginActivity::class.java)
+            startActivity(loginActivity)
+            requireActivity().finish()
+        } else {
+            loadUser()
 
-            if (user.isEmailVerified) {
-                text_not_verified.visibility = View.INVISIBLE
-            } else {
-                text_not_verified.visibility = View.VISIBLE
-            }
+            setOnClickListenerForImage()
+
+            setOnClickListenerForSaveButton(currentUser)
+
+            setOnClickListenerForTextNotVerified()
         }
 
-        image_view.setOnClickListener {
-            takePictureIntent()
-        }
 
+    }
+
+    private fun setOnClickListenerForTextNotVerified() {
+        text_not_verified.setOnClickListener {
+
+            currentUser?.sendEmailVerification()
+                ?.addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        context?.toast("Verification Email Sent")
+                    } else {
+                        context?.toast(it.exception?.message!!)
+                    }
+                }
+
+        }
+    }
+
+    private fun setOnClickListenerForSaveButton(currentUser: FirebaseUser) {
         button_save.setOnClickListener {
 
             val photo = when {
@@ -92,21 +109,28 @@ class ProfileFragment : Fragment() {
                 }
 
         }
+    }
 
-
-        text_not_verified.setOnClickListener {
-
-            currentUser?.sendEmailVerification()
-                ?.addOnCompleteListener {
-                    if(it.isSuccessful){
-                        context?.toast("Verification Email Sent")
-                    }else{
-                        context?.toast(it.exception?.message!!)
-                    }
-                }
-
+    private fun setOnClickListenerForImage() {
+        image_view.setOnClickListener {
+            takePictureIntent()
         }
+    }
 
+    private fun loadUser() {
+        currentUser?.let { user ->
+            Glide.with(this)
+                .load(user.photoUrl)
+                .into(image_view)
+            edit_text_name.setText(user.displayName)
+            text_email.text = user.email
+
+            if (user.isEmailVerified) {
+                text_not_verified.visibility = View.INVISIBLE
+            } else {
+                text_not_verified.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun takePictureIntent() {
@@ -138,20 +162,24 @@ class ProfileFragment : Fragment() {
         progressbar_pic.visibility = View.VISIBLE
         upload.addOnCompleteListener { uploadTask ->
             progressbar_pic.visibility = View.INVISIBLE
-
-            if (uploadTask.isSuccessful) {
-                storageRef.downloadUrl.addOnCompleteListener { urlTask ->
-                    urlTask.result?.let {
-                        imageUri = it
-                        activity?.toast(imageUri.toString())
-                        image_view.setImageBitmap(bitmap)
+            try {
+                if (uploadTask.isSuccessful) {
+                    storageRef.downloadUrl.addOnCompleteListener { urlTask ->
+                        urlTask.result?.let {
+                            imageUri = it
+                            activity?.toast(imageUri.toString())
+                            image_view.setImageBitmap(bitmap)
+                        }
+                    }
+                } else {
+                    uploadTask.exception?.let {
+                        activity?.toast(it.message!!)
                     }
                 }
-            } else {
-                uploadTask.exception?.let {
-                    activity?.toast(it.message!!)
-                }
+            } catch (e: Exception) {
+                activity?.toast(e.message!!)
             }
+
         }
 
     }

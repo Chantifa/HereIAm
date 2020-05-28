@@ -1,26 +1,29 @@
-package ch.ffhs.esa.hereiam
+package ch.ffhs.esa.hereiam.activities
+
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.activity_register.*
+import android.view.View
+import ch.ffhs.esa.hereiam.R
+import ch.ffhs.esa.hereiam.logic.login
+import ch.ffhs.esa.hereiam.logic.toast
+import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.fragment_profile.progressbar
+import kotlinx.android.synthetic.main.fragment_profile.text_email
 
-
-class RegisterActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_login)
 
         mAuth = FirebaseAuth.getInstance()
 
-
-        button_register.setOnClickListener {
+        button_sign_in.setOnClickListener {
             val email = text_email.text.toString().trim()
             val password = edit_text_password.text.toString().trim()
 
@@ -42,18 +45,21 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            registerUser(email, password)
-
+            loginUser(email, password)
         }
 
-        text_view_login.setOnClickListener {
-            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+        text_view_register.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
+        }
+
+        text_view_forget_password.setOnClickListener {
+            startActivity(Intent(this@LoginActivity, ResetPasswordActivity::class.java))
         }
     }
 
-    private fun registerUser(email: String, password: String) {
+    private fun loginUser(email: String, password: String) {
         progressbar.visibility = View.VISIBLE
-        mAuth.createUserWithEmailAndPassword(email, password)
+        mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 progressbar.visibility = View.GONE
                 if (task.isSuccessful) {
@@ -64,7 +70,6 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
             }
-
     }
 
     override fun onStart() {

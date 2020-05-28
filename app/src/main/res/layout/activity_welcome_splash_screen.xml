@@ -8,7 +8,7 @@
     android:columnCount="2"
     android:orientation="horizontal"
     android:rowCount="6"
-    tools:context=".WelcomeScreen">
+    tools:context=".activities.WelcomeScreen">
 
     <ImageView
         android:id="@+id/logo"

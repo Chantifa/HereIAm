@@ -7,6 +7,7 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.model.Entry
@@ -35,6 +36,7 @@ class EntryFormFragment : Fragment() {
         view.btn_add_entry.setOnClickListener {
             val headingValue = heading.text.toString()
             val textValue = text.text.toString()
+            //val viewImage = entry_photo.imageAlpha.toDrawable()
             if (headingValue.isNotEmpty() && textValue.isNotEmpty()) {
                 val timestamp = com.google.firebase.Timestamp.now()
                 FirebaseFirestore.getInstance().collection(getString(R.string.firestore_collection_path))

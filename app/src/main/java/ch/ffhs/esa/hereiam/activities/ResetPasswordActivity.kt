@@ -1,9 +1,11 @@
-package ch.ffhs.esa.hereiam
+package ch.ffhs.esa.hereiam.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Patterns
 import android.view.View
+import ch.ffhs.esa.hereiam.R
+import ch.ffhs.esa.hereiam.logic.toast
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_reset_password.*
 

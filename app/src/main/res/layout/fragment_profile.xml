@@ -14,7 +14,7 @@
             android:id="@+id/layoutHead"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="#0097A7">
+            android:background="@color/quantum_grey">
 
             <ImageView
                 android:id="@+id/image_view"

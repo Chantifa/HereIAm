@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#008577"
     android:orientation="vertical"
-    tools:context=".RegisterActivity"
+    android:background="@color/quantum_grey"
+    tools:context=".activities.RegisterActivity"
     android:scrollbarAlwaysDrawVerticalTrack="true">
 
     <RelativeLayout
@@ -85,7 +85,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="22dp"
-                    android:background="#d67601"
+                    android:background="@color/quantum_grey"
                     android:text="Sign Up"
                     android:textAllCaps="false"
                     android:textColor="#fff"
