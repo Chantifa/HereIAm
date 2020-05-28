@@ -35,11 +35,14 @@
     <string name="label_sign_out">sign out</string>
     <string name="login_button_text">login</string>
     <string name="welcome_message_authed">Hi %1$s!</string>
-    <string name="enter_name">Enter Name</string>
+    <string name="enter_name">Dein Name</string>
     <string name="Update">Save Changes</string>
-    <string name="Überprüfen">Not Verified (Click to Verify)</string>
-    <string name="change_password">Change Password</string>
+    <string name="change_password">Change password</string>
     <string name="profilbild">Profilbild</string>
     <string name="foto_zum_beitrag">Foto zum Beitrag</string>
+    <string name="email">email</string>
+    <string name="muster_email">hans.muster@muster.com</string>
+    <string name="forgot_password">Passwort vergessen?</string>
+    <string name="password_login">Password</string>
 
 </resources>

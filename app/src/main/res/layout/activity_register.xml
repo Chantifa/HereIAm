@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:gravity="center_horizontal"
-            android:text="New User Registration"
+            android:text="Neuer Benutzer"
             android:textColor="#fff"
             android:textSize="26sp"
             android:textStyle="bold"/>
@@ -59,7 +59,7 @@
                     android:drawablePadding="10dp"
                     android:singleLine="true"
                     android:layout_marginBottom="10dp"
-                    android:hint="john@gmail.com"
+                    android:hint="hans.muster@muster.com"
                     android:inputType="textEmailAddress"/>
 
                 <TextView
@@ -96,7 +96,7 @@
                     android:layout_gravity="center_horizontal"
                     android:textAppearance="@style/TextAppearance.AppCompat.Headline"
                     android:textAlignment="center"
-                    android:text="Already have an account.\nLogin Here"
+                    android:text="Schon ein Konto.\nLogin hier"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"/>
             </LinearLayout>

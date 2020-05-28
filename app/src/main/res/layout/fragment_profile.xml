@@ -67,29 +67,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/text_not_verified"
-                android:visibility="invisible"
-                android:textColor="@android:color/holo_red_dark"
-                android:layout_gravity="right"
-                android:layout_marginBottom="9dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:text="@string/Überprüfen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
 
             <TextView
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:layout_gravity="top"
-                android:drawablePadding="16dp"
-                android:drawableStart="@drawable/ic_password"
-                android:text="@string/change_password"
-                android:enabled="true"
                 android:id="@+id/text_password"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top"
                 android:layout_marginBottom="20dp"
-                android:layout_height="wrap_content"/>
-
+                android:drawableStart="@drawable/ic_password"
+                android:drawablePadding="16dp"
+                android:enabled="true"
+                android:text="@string/change_password"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
 
             <ProgressBar
                 android:id="@+id/progressbar"

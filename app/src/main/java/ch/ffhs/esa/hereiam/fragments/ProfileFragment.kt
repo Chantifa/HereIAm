@@ -53,26 +53,11 @@ class ProfileFragment : Fragment() {
 
             setOnClickListenerForSaveButton(currentUser)
 
-            setOnClickListenerForTextNotVerified()
         }
 
 
     }
 
-    private fun setOnClickListenerForTextNotVerified() {
-        text_not_verified.setOnClickListener {
-
-            currentUser?.sendEmailVerification()
-                ?.addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        context?.toast("Verification Email Sent")
-                    } else {
-                        context?.toast(it.exception?.message!!)
-                    }
-                }
-
-        }
-    }
 
     private fun setOnClickListenerForSaveButton(currentUser: FirebaseUser) {
         button_save.setOnClickListener {
@@ -124,12 +109,6 @@ class ProfileFragment : Fragment() {
                 .into(image_view)
             edit_text_name.setText(user.displayName)
             text_email.text = user.email
-
-            if (user.isEmailVerified) {
-                text_not_verified.visibility = View.INVISIBLE
-            } else {
-                text_not_verified.visibility = View.VISIBLE
-            }
         }
     }
 

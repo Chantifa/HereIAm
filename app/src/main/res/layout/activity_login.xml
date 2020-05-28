@@ -3,16 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#008577"
+    android:background="@color/places_ui_default_primary_dark"
     android:orientation="vertical"
-    tools:context=".activities.LoginActivity"
-    android:scrollbarAlwaysDrawVerticalTrack="true">
+    android:scrollbarAlwaysDrawVerticalTrack="true"
+    tools:context=".activities.LoginActivity">
 
     <RelativeLayout
         android:id="@+id/loginLayout"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
 
         <TextView
             android:id="@+id/login_title"
@@ -20,18 +20,18 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:gravity="center_horizontal"
-            android:text="Account Login"
+            android:text="Konto Login"
             android:textColor="#fff"
             android:textSize="26sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/login_title"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
             android:layout_marginTop="70dp"
+            android:layout_marginRight="30dp"
             android:background="#fff"
             android:elevation="4dp"
             android:orientation="vertical"
@@ -45,39 +45,39 @@
 
 
                 <TextView
-                    android:labelFor="@id/text_email"
-                    android:text="email"
-                    android:fontFamily="sans-serif-light"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:labelFor="@id/text_email"
+                    android:text="@string/email" />
 
                 <EditText
                     android:id="@+id/text_email"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:drawableLeft="@drawable/ic_email"
-                    android:drawablePadding="10dp"
-                    android:singleLine="true"
                     android:layout_marginBottom="10dp"
-                    android:hint="john@gmail.com"
-                    android:inputType="textEmailAddress"/>
+                    android:drawableStart="@drawable/ic_email"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/muster_email"
+                    android:inputType="textEmailAddress"
+                    android:singleLine="true" />
 
                 <TextView
-                    android:labelFor="@id/edit_text_password"
-                    android:text="password"
-                    android:fontFamily="sans-serif-light"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-light"
+                    android:labelFor="@id/edit_text_password"
+                    android:text="password" />
 
                 <EditText
-                    android:drawablePadding="10dp"
+                    android:id="@+id/edit_text_password"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:singleLine="true"
-                    android:id="@+id/edit_text_password"
-                    android:drawableLeft="@drawable/ic_password"
-                    android:hint="Password"
-                    android:inputType="textPassword"/>
+                    android:drawableStart="@drawable/ic_password"
+                    android:drawablePadding="10dp"
+                    android:hint="@string/password_login"
+                    android:inputType="textPassword"
+                    android:singleLine="true" />
 
 
                 <TextView
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:paddingTop="5dp"
-                    android:text="Forgot Password?"/>
+                    android:text="@string/forgot_password" />
 
 
                 <Button
@@ -94,20 +94,20 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="22dp"
-                    android:background="#d67601"
+                    android:background="@color/quantum_grey"
                     android:text="Log in"
                     android:textAllCaps="false"
                     android:textColor="#fff"
-                    android:textSize="18sp"/>
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/text_view_register"
-                    android:layout_gravity="center_horizontal"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                    android:textAlignment="center"
-                    android:text="Don't have an account.\nRegister Here"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Noch kein Konto.\nRegistriere hier"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
             </LinearLayout>
 
         </RelativeLayout>
@@ -121,15 +121,15 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/avatar"
             android:elevation="4dp"
-            android:src="@drawable/ic_person_black_24dp"/>
+            android:src="@drawable/ic_person_black_24dp" />
 
     </RelativeLayout>
 
     <ProgressBar
         android:id="@+id/progressbar"
-        android:visibility="gone"
-        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 
 </RelativeLayout>

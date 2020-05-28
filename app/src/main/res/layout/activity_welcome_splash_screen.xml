@@ -4,7 +4,7 @@
     android:id="@+id/gridLayout_welcome"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/quantum_googred100"
+    android:background="#FFF"
     android:columnCount="2"
     android:orientation="horizontal"
     android:rowCount="6"
@@ -67,5 +67,5 @@
         android:backgroundTint="#000000"
         android:padding="8dp"
         android:text="@string/dummy_button"
-        android:textColor="#FFFFFF" />
+        android:textColor="#000" />
 </GridLayout>
