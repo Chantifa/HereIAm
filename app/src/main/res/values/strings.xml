@@ -40,5 +40,6 @@
     <string name="Überprüfen">Not Verified (Click to Verify)</string>
     <string name="change_password">Change Password</string>
     <string name="profilbild">Profilbild</string>
+    <string name="foto_zum_beitrag">Foto zum Beitrag</string>
 
 </resources>
