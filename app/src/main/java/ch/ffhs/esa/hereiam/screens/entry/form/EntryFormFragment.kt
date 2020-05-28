@@ -5,20 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import ch.ffhs.esa.hereiam.R
 import kotlinx.android.synthetic.main.fragment_entry_form.view.*
 
 class EntryFormFragment : Fragment() {
 
-    private lateinit var viewModel: EntryFormViewModel
+    private val viewModel: EntryFormViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel = ViewModelProvider(this).get(EntryFormViewModel::class.java)
-
         val view = inflater.inflate(R.layout.fragment_entry_form, container, false)
 
         val heading = view.input_heading_entry
