@@ -1,82 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/gap_default"
     tools:context=".fragments.ProfileFragment">
 
-    <TextView
-        android:id="@+id/heading_profile"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/gap_large"
-        android:layout_marginTop="@dimen/gap_default"
-        android:text="@string/heading_your_profile"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/profile_avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/gap_large"
-        android:layout_marginTop="@dimen/gap_default"
-        android:adjustViewBounds="true"
-        android:contentDescription="@string/desc_profile_avatar"
-        android:maxWidth="150dp"
-        android:maxHeight="150dp"
-        android:src="@drawable/avatar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/heading_profile" />
+        <RelativeLayout
+            android:id="@+id/layoutHead"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#0097A7">
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/gap_large"
-        android:layout_marginTop="@dimen/gap_default"
-        android:autofillHints=""
-        android:hint="@string/label_email"
-        android:inputType="textEmailAddress"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profile_avatar" />
+            <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/avatar"
+                android:contentDescription="@string/profilbild" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/gap_large"
-        android:layout_marginTop="@dimen/gap_default"
-        android:autofillHints="******"
-        android:hint="@string/password"
-        android:imeOptions="actionDone"
-        android:inputType="textPassword"
-        android:selectAllOnFocus="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username" />
+            <EditText
+                android:id="@+id/edit_text_name"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/image_view"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:autofillHints=""
+                android:enabled="true"
+                android:hint="@string/enter_name"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:textColor="@android:color/white"
+                tools:text="Hans Muster" />
 
-    <Button
-        android:id="@+id/btn_profile_save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="start"
-        android:layout_marginHorizontal="@dimen/gap_large"
-        android:layout_marginTop="@dimen/gap_default"
-        android:layout_marginBottom="@dimen/gap_xlarge"
-        android:text="@string/label_profile_save"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.2" />
+            <ProgressBar
+                android:id="@+id/progressbar_pic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:padding="16dp"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:layout_below="@id/layoutHead"
+            android:layout_width="360dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:layout_gravity="top"
+                android:drawablePadding="16dp"
+                android:drawableStart="@drawable/ic_email"
+                tools:text="muster@beispiel.com"
+                android:id="@+id/text_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/text_not_verified"
+                android:visibility="invisible"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_gravity="right"
+                android:layout_marginBottom="9dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:text="@string/Überprüfen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                android:layout_gravity="top"
+                android:drawablePadding="16dp"
+                android:drawableStart="@drawable/ic_password"
+                android:text="@string/change_password"
+                android:enabled="true"
+                android:id="@+id/text_password"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_height="wrap_content"/>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <ProgressBar
+                android:id="@+id/progressbar"
+                android:visibility="invisible"
+                android:layout_margin="10dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:id="@+id/button_save"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/white"
+                android:background="?colorPrimary"
+                android:textAllCaps="false"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/Update"
+                android:layout_width="140dp"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</FrameLayout>

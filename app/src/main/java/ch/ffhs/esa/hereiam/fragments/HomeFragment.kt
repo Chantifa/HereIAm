@@ -1,5 +1,6 @@
 package ch.ffhs.esa.hereiam.fragments
 
+
 import android.content.Context
 import android.location.Geocoder
 import android.os.Bundle
@@ -57,7 +58,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
                     keyCode == KeyEvent.KEYCODE_ENTER
                 ) {
                     val latitudeLongitude =
-                         getLocationFromAddress(context, locationText.text.toString())
+                        getLocationFromAddress(context, locationText.text.toString())
                     if (latitudeLongitude != null) {
                         setLocationOnGoogleMaps(
                             latitudeLongitude.latitude,

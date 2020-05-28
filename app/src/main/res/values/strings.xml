@@ -33,4 +33,14 @@
     <string name="title_activity_welcome_splash_screen">welcomeScreen</string>
     <string name="logo">HereIam Logo</string>
     <string name="label_sign_out">sign out</string>
+    <string name="login_button_text">login</string>
+    <string name="welcome_message_authed">Hi %1$s!</string>
+    <string name="enter_name">Enter Name</string>
+    <string name="Update">Save Changes</string>
+    <string name="Überprüfen">Not Verified (Click to Verify)</string>
+    <string name="change_password">Change Password</string>
+    <string name="profilbild">Profilbild</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

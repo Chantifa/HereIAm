@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/gap_large"
 
-        android:layout_marginTop="@dimen/gap_default"
+        android:layout_marginTop="36dp"
         android:text="@string/heading_new_entry"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/gap_large"
-        android:layout_marginTop="@dimen/gap_xxlarge"
+        android:layout_marginTop="32dp"
         android:autofillHints="@string/hint_heading_entry"
         android:hint="@string/hint_heading_entry"
         android:inputType="text"
@@ -61,8 +61,20 @@
         android:text="@string/label_save_entry"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.593"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_text_entry"
-        app:layout_constraintVertical_bias="0.2" />
+        app:layout_constraintTop_toBottomOf="@+id/entry_photo"
+        app:layout_constraintVertical_bias="0.793" />
+
+    <ImageView
+        android:id="@+id/entry_photo"
+        android:layout_width="224dp"
+        android:layout_height="160dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/ic_image_grey_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/input_text_entry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
