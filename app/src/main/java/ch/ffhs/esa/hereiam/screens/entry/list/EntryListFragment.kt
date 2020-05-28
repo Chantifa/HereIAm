@@ -13,7 +13,6 @@ import kotlinx.android.synthetic.main.fragment_entry_list_all.view.*
 class EntryListFragment : Fragment() {
     private val viewModel: EntryListViewModel by viewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,7 +30,5 @@ class EntryListFragment : Fragment() {
         val ctx = requireContext()
         viewModel.addAdadpter(ctx)
     }
-
-
 }
 
