@@ -1,14 +1,18 @@
-package ch.ffhs.esa.hereiam
+package ch.ffhs.esa.hereiam.activities
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
-import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.fragments.EntryFormFragment
 import ch.ffhs.esa.hereiam.fragments.HomeFragment
-import ch.ffhs.esa.hereiam.fragments.LoginFragment
+import ch.ffhs.esa.hereiam.fragments.ProfileFragment
+import ch.ffhs.esa.hereiam.logic.logout
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_profile -> {
-                    replaceFragment(LoginFragment())
+                    replaceFragment(ProfileFragment())
                     true
                 }
                 else -> false
@@ -50,5 +54,29 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
-    fun createEntry(view: View) {}
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.option_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.action_logout) {
+
+            AlertDialog.Builder(this).apply {
+                setTitle("Are you sure?")
+                setPositiveButton("Yes") { _, _ ->
+
+                    FirebaseAuth.getInstance().signOut()
+                    logout()
+
+                }
+                setNegativeButton("Cancel") { _, _ ->
+                }
+            }.create().show()
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }
