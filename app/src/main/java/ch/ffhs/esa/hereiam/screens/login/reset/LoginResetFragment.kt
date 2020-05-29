@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentLoginResetBinding
 
 class LoginResetFragment : Fragment() {
@@ -23,13 +24,13 @@ class LoginResetFragment : Fragment() {
             val email = binding.username.text.toString().trim()
 
             if (email.isEmpty()) {
-                binding.username.error = "Email Required!"
+                binding.username.error = getString(R.string.error_mandatory)
                 binding.username.requestFocus()
                 return@setOnClickListener
             }
 
             if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                binding.username.error = "Valid Email Required!"
+                binding.username.error = getString(R.string.error_invalid_email)
                 binding.username.requestFocus()
                 return@setOnClickListener
             }
@@ -40,11 +41,8 @@ class LoginResetFragment : Fragment() {
 
             // TODO: wait on reset
             binding.progressbar.visibility = View.GONE
-
-            
         }
 
         return binding.root
     }
-
 }
