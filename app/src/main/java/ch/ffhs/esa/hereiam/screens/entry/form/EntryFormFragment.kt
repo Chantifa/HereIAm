@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentEntryFormBinding
 
 class EntryFormFragment : Fragment() {
@@ -22,10 +21,9 @@ class EntryFormFragment : Fragment() {
 
         val heading = binding.inputHeadingEntry
         val text = binding.inputTextEntry
-        val collectionPath = getString(R.string.firestore_collection_path)
 
         binding.btnAddEntry.setOnClickListener {
-            viewModel.addEntry(heading, text, collectionPath)
+            viewModel.addEntry(heading, text)
             Toast.makeText(context, "Eintrag gespeichert", Toast.LENGTH_SHORT).show()
         }
         return binding.root

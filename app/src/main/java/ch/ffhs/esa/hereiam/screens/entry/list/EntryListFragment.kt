@@ -25,18 +25,7 @@ class EntryListFragment : Fragment() {
                 adapter.submitList(it)
             }
         })
-
-//        val collectionPath = getString(R.string.firestore_collection_path)
-
-//        viewModel.getEntries(collectionPath, binding.entryList)
-
         return binding.root
     }
-
-//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        super.onViewCreated(view, savedInstanceState)
-//        val ctx = requireContext()
-//        viewModel.addAdadpter(ctx)
-//    }
 }
 
