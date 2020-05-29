@@ -6,9 +6,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ch.ffhs.esa.hereiam.R
+import ch.ffhs.esa.hereiam.model.Entry
 
 class EntryListAdapter : RecyclerView.Adapter<EntryListAdapter.ViewHolder>() {
-    var data = listOf<String>()
+    var data = listOf<Entry>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -30,10 +31,10 @@ class EntryListAdapter : RecyclerView.Adapter<EntryListAdapter.ViewHolder>() {
         private val entryContent: TextView = itemView.findViewById(R.id.entryContent)
 
         fun bind(
-            item: String
+            item: Entry
         ) {
-            entryTitle.text = item
-            entryContent.text = item
+            entryTitle.text = item.entryTitle
+            entryContent.text = item.entryContent
         }
 
         companion object {
