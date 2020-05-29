@@ -30,6 +30,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentHomeBinding.inflate(inflater)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
         val btnViewList = binding.btnAllEntries
         btnViewList.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_entryListFragment))

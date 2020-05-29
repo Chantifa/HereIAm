@@ -59,6 +59,7 @@ class HomeViewModel : ViewModel() {
         ctx: Context?,
         newLocationName: String
     ) {
+//        Timber.i("Oliver $_locationName")
         _locationName.value = newLocationName
         val location =
             getLocationFromAddress(ctx)
