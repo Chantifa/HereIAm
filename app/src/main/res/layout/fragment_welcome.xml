@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/gap_default">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_marginHorizontal="@dimen/gap_large"
+            android:contentDescription="@string/hereiam_logo"
+            android:src="@mipmap/here_i_am_logo"
+            app:layout_constraintBottom_toTopOf="@+id/welcome_teaser"
+            app:layout_constraintEnd_toEndOf="@+id/welcome_teaser"
+            app:layout_constraintStart_toStartOf="@+id/welcome_teaser"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/welcome_teaser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/gap_large"
+            android:text="@string/welcome_teaser"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/welcome_intro_1"
+            app:layout_constraintEnd_toEndOf="@+id/welcome_intro_1"
+            app:layout_constraintStart_toStartOf="@+id/welcome_intro_1"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <TextView
+            android:id="@+id/welcome_intro_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/gap_large"
+            android:text="@string/welcome_intro_1"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/welcome_intro_2"
+            app:layout_constraintEnd_toEndOf="@+id/welcome_intro_2"
+            app:layout_constraintStart_toStartOf="@+id/welcome_intro_2"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_teaser" />
+
+        <TextView
+            android:id="@+id/welcome_intro_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/gap_large"
+            android:text="@string/welcome_intro_2"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/btnToHome"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_intro_1"
+            tools:layout_editor_absoluteX="13dp" />
+
+        <Button
+            android:id="@+id/btnToHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/gap_large"
+            android:text="@string/welcome_start_btn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/welcome_intro_2"
+            app:layout_constraintVertical_bias="0.2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

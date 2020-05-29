@@ -25,8 +25,10 @@
     <string name="label_comment_entry">Kommentieren</string>
     <string name="label_all_entries">Alle Einträge</string>
     <string name="firestore_collection_path">entriesV2</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="heading_all_entries">Alle Einträge</string>
+    <string name="hereiam_logo">HereIAm Logo</string>
+    <string name="welcome_teaser">Herzlich willkommen in unserer HereIam App!</string>
+    <string name="welcome_intro_1">Unsere App bringt dir die Möglichkeit mehr über deinen Standort zu erfahren.</string>
+    <string name="welcome_intro_2">Du kannst Beiträge auch selber zu dem Standort erfassen und passende Fotos hochladen.</string>
+    <string name="welcome_start_btn">Los geht es!</string>
 </resources>
