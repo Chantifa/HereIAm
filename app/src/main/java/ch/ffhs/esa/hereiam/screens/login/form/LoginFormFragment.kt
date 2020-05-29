@@ -12,7 +12,7 @@ import ch.ffhs.esa.hereiam.databinding.FragmentLoginFormBinding
 
 class LoginFormFragment : Fragment() {
 
-    private val formViewModel: LoginFormViewModel by viewModels()
+    private val viewModel: LoginFormViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
