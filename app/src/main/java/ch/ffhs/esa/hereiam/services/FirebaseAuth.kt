@@ -5,7 +5,7 @@ import timber.log.Timber
 
 class FirebaseAuth {
     companion object {
-        val fbAuth = FirebaseAuth.getInstance()
+        private val fbAuth = FirebaseAuth.getInstance()
         fun resetPassword(
             email: String
         ) {

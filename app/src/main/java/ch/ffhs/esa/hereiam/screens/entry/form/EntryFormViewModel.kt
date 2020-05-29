@@ -1,18 +1,13 @@
 package ch.ffhs.esa.hereiam.screens.entry.form
 
-import android.widget.EditText
 import androidx.lifecycle.ViewModel
+import ch.ffhs.esa.hereiam.services.FirebaseFirestore
 
 class EntryFormViewModel : ViewModel() {
     fun addEntry(
-        heading: EditText,
-        text: EditText
+        heading: String,
+        text: String
     ) {
-        val headingValue = heading.text.toString()
-        val textValue = text.text.toString()
-        if (headingValue.isNotEmpty() && textValue.isNotEmpty()) {
-            heading.text.clear()
-            text.text.clear()
-        }
+        FirebaseFirestore.addEntry(heading, text)
     }
 }

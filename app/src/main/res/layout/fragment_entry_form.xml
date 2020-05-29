@@ -8,6 +8,16 @@
         android:padding="@dimen/gap_default"
         tools:context=".screens.entry.form.EntryFormFragment">
 
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/heading_new_entry"
             android:layout_width="match_parent"
@@ -19,7 +29,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/progressbar" />
 
         <EditText
             android:id="@+id/input_heading_entry"
