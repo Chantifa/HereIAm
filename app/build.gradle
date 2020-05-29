@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -35,10 +36,12 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
-    def nav_version = "2.3.0-beta01"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -63,4 +66,5 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:21.4.3'
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation "androidx.fragment:fragment-ktx:1.2.4"
+    kapt "com.android.databinding:compiler:$compiler_version"
 }
