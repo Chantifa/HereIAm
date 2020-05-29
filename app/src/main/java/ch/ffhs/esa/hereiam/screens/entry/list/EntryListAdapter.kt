@@ -18,18 +18,31 @@ class EntryListAdapter : RecyclerView.Adapter<EntryListAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
-        holder.entryTitle.text = item
-        holder.entryContent.text = item
+        holder.bind(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.entry_list_item, parent, false)
-        return ViewHolder(view)
+        return ViewHolder.from(parent)
     }
 
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val entryTitle: TextView =itemView.findViewById(R.id.entryTitle)
-        val entryContent: TextView =itemView.findViewById(R.id.entryContent)
+    class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val entryTitle: TextView = itemView.findViewById(R.id.entryTitle)
+        private val entryContent: TextView = itemView.findViewById(R.id.entryContent)
+
+        fun bind(
+            item: String
+        ) {
+            entryTitle.text = item
+            entryContent.text = item
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val view =
+                    LayoutInflater.from(parent.context)
+                        .inflate(R.layout.entry_list_item, parent, false)
+                return ViewHolder(view)
+            }
+        }
     }
 }
