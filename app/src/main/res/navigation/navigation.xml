@@ -32,6 +32,9 @@
             android:id="@+id/action_nav_profile_to_profileFragment"
             app:destination="@id/profileFragment"
             app:popUpTo="@id/nav_home" />
+        <action
+            android:id="@+id/action_nav_profile_to_loginResetFragment"
+            app:destination="@id/loginResetFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -47,4 +50,8 @@
             app:destination="@id/nav_home"
             app:popUpTo="@id/nav_home" />
     </fragment>
+    <fragment
+        android:id="@+id/loginResetFragment"
+        android:name="ch.ffhs.esa.hereiam.screens.login.reset.LoginResetFragment"
+        android:label="LoginResetFragment" />
 </navigation>

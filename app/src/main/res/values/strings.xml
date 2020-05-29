@@ -34,4 +34,7 @@
     <string name="login_registration">Noch kein Konto?</string>
     <string name="login_registration_link">Registriere dich hier.</string>
     <string name="login_forgot_password">Passwort vergessen?</string>
+    <string name="heading_reset_password">Passwort vergessen?</string>
+    <string name="reset_passwort_explanation">Fülle deine E-Mail-Adresse aus, um dein Passwort zurückzusetzen.</string>
+    <string name="btn_reset_password">Passwort zurücksetzen</string>
 </resources>
