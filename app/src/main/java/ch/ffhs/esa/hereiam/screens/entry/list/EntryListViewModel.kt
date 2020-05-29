@@ -5,8 +5,6 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.R
-import ch.ffhs.esa.hereiam.model.Entry
-import com.google.firebase.firestore.FirebaseFirestore
 
 class EntryListViewModel : ViewModel() {
 
@@ -16,15 +14,15 @@ class EntryListViewModel : ViewModel() {
     fun getEntries(collection_path: String, listView: ListView) {
         this.listView = listView
 
-        FirebaseFirestore.getInstance()
-            .collection(collection_path)
-            .get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    val entry = document.toObject(Entry::class.java)
-                    entries.add(entry.heading)
-                }
-            }
+//        FirebaseFirestore.getInstance()
+//            .collection(collection_path)
+//            .get()
+//            .addOnSuccessListener { result ->
+//                for (document in result) {
+//                    val entry = document.toObject(Entry::class.java)
+//                    entries.add(entry.heading)
+//                }
+//            }
     }
 
     fun addAdadpter(ctx: Context) {

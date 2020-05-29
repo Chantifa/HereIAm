@@ -2,9 +2,7 @@ package ch.ffhs.esa.hereiam.screens.entry.form
 
 import android.widget.EditText
 import androidx.lifecycle.ViewModel
-import ch.ffhs.esa.hereiam.model.Entry
 import com.google.firebase.Timestamp
-import com.google.firebase.firestore.FirebaseFirestore
 
 class EntryFormViewModel : ViewModel() {
     fun addEntry(
@@ -16,9 +14,9 @@ class EntryFormViewModel : ViewModel() {
         val textValue = text.text.toString()
         if (headingValue.isNotEmpty() && textValue.isNotEmpty()) {
             val timestamp = Timestamp.now()
-            FirebaseFirestore.getInstance()
-                .collection(collectionPath)
-                .add(Entry(heading.text.toString(), text.text.toString(), timestamp))
+//            FirebaseFirestore.getInstance()
+//                .collection(collectionPath)
+//                .add(Entry(heading.text.toString(), text.text.toString(), timestamp))
             heading.text.clear()
             text.text.clear()
         }
