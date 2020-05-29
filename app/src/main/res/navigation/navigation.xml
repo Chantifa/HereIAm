@@ -25,9 +25,9 @@
         android:label="EntryListFragment" />
     <fragment
         android:id="@+id/nav_profile"
-        android:name="ch.ffhs.esa.hereiam.screens.login.LoginFragment"
+        android:name="ch.ffhs.esa.hereiam.screens.login.form.LoginFormFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login_form" >
         <action
             android:id="@+id/action_nav_profile_to_profileFragment"
             app:destination="@id/profileFragment"

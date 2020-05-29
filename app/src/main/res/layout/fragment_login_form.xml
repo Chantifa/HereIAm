@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="@dimen/gap_default"
-        tools:context=".screens.login.LoginFragment">
+        tools:context=".screens.login.form.LoginFormFragment">
 
         <TextView
             android:id="@+id/heading_login"
@@ -29,6 +30,8 @@
             android:layout_marginHorizontal="@dimen/gap_large"
             android:layout_marginTop="@dimen/gap_xxlarge"
             android:autofillHints="E-Mail"
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:drawablePadding="10dp"
             android:hint="@string/label_email"
             android:inputType="textEmailAddress"
             android:selectAllOnFocus="true"
@@ -43,6 +46,8 @@
             android:layout_marginHorizontal="@dimen/gap_large"
             android:layout_marginTop="@dimen/gap_default"
             android:autofillHints="******"
+            android:drawableStart="@drawable/ic_baseline_vpn_key_24"
+            android:drawablePadding="10dp"
             android:hint="@string/password"
             android:inputType="textPassword"
             android:selectAllOnFocus="true"
@@ -50,19 +55,53 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/username" />
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/gap_large"
+            android:text="@string/login_forgot_password"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password" />
+
         <Button
             android:id="@+id/btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/gap_large"
             android:layout_marginTop="@dimen/gap_default"
-            android:layout_marginBottom="@dimen/gap_xlarge"
             android:text="@string/label_sign_in"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password"
-            app:layout_constraintVertical_bias="0.2" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/textRegistration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/gap_large"
+            android:layout_marginTop="@dimen/gap_xxlarge"
+            android:text="@string/login_registration"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+        <TextView
+            android:id="@+id/textRegistrationLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/gap_large"
+            android:layout_marginTop="@dimen/gap_default"
+            android:text="@string/login_registration_link"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textRegistration" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
