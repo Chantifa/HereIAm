@@ -8,15 +8,10 @@ data class Entry(
     val entryContent: String,
     val locationName: String,
     val latitude: Double,
-    val longitude: Double
+    val longitude: Double,
+    val entryLastModified: Timestamp = Timestamp.now(),
+    val entryUUID: String = UUID.randomUUID().toString()
 ) {
-    val entryLastModified = Timestamp.now()
-    val entryUUID = generateId()
-
-    companion object {
-        private fun generateId(): String {
-            return UUID.randomUUID().toString()
-        }
-    }
-
+    // Firestore needs an empty constructor for deserialization
+    constructor() : this("", "", "", 0.0, 0.0)
 }

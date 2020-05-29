@@ -27,12 +27,12 @@ class EntryFormFragment : Fragment() {
         }
 
         binding.btnAddEntry.setOnClickListener {
-            val entryTitle = binding.headingNewEntry.text.toString().trim()
+            val entryTitle = binding.inputHeadingEntry.text.toString().trim()
             val entryContent = binding.inputTextEntry.text.toString().trim()
 
             if (entryTitle.isEmpty()) {
-                binding.headingNewEntry.error = getString(R.string.error_mandatory)
-                binding.headingNewEntry.requestFocus()
+                binding.inputHeadingEntry.error = getString(R.string.error_mandatory)
+                binding.inputHeadingEntry.requestFocus()
                 return@setOnClickListener
             }
 
