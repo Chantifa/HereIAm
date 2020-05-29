@@ -36,6 +36,11 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
+    // obsolete?
     dataBinding {
         enabled = true
     }

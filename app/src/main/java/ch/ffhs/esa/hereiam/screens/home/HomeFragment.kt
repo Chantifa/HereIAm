@@ -5,16 +5,14 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import ch.ffhs.esa.hereiam.R
+import ch.ffhs.esa.hereiam.databinding.FragmentHomeBinding
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
 
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
@@ -31,13 +29,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        val binding = FragmentHomeBinding.inflate(inflater)
 
-        val btnViewList = view.btn_all_entries as Button
+        val btnViewList = binding.btnAllEntries
         btnViewList.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_entryListFragment))
 
-        val locationText = view.location_edit_text as EditText
-        locationText.setOnKeyListener { _, keyCode, event ->                  // If the event is a key-down event on the "enter" button
+        val locationText = binding.locationEditText
+        locationText.setOnKeyListener { _, keyCode, event ->
+            // If the event is a key-down event on the "enter" button
             if (event.action == KeyEvent.ACTION_DOWN &&
                 keyCode == KeyEvent.KEYCODE_ENTER
             ) {
@@ -45,7 +44,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
             false
         }
-        return view
+        return binding.root
     }
 
     override fun onMapReady(map: GoogleMap?) {

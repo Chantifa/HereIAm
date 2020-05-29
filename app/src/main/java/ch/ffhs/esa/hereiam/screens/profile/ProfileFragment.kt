@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ch.ffhs.esa.hereiam.R
+import ch.ffhs.esa.hereiam.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
@@ -13,7 +13,8 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        val binding = FragmentProfileBinding.inflate(inflater)
+        return binding.root
     }
 
 }

@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import ch.ffhs.esa.hereiam.R
-import kotlinx.android.synthetic.main.fragment_login.view.*
+import ch.ffhs.esa.hereiam.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
 
@@ -15,12 +15,10 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
-        val btnLogin = view.btn_login
+        val binding = FragmentLoginBinding.inflate(inflater)
+        binding.btnLogin.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_profile_to_profileFragment))
 
-        btnLogin.setOnClickListener (Navigation.createNavigateOnClickListener(R.id.action_nav_profile_to_profileFragment))
-
-        return view
+        return binding.root
     }
 
 }

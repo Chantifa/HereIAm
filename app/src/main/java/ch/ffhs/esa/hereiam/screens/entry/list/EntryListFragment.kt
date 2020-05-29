@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import ch.ffhs.esa.hereiam.R
-import kotlinx.android.synthetic.main.fragment_entry_list_all.view.*
+import ch.ffhs.esa.hereiam.databinding.FragmentEntryListAllBinding
 
 
 class EntryListFragment : Fragment() {
@@ -17,12 +17,12 @@ class EntryListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_entry_list_all, container, false)
-        val collection_path = getString(R.string.firestore_collection_path)
+        val binding = FragmentEntryListAllBinding.inflate(inflater)
+        val collectionPath = getString(R.string.firestore_collection_path)
 
-        viewModel.getEntries(collection_path, view.entry_list)
+        viewModel.getEntries(collectionPath, binding.entryList)
 
-        return view
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

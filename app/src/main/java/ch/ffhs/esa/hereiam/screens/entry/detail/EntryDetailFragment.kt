@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ch.ffhs.esa.hereiam.R
+import ch.ffhs.esa.hereiam.databinding.FragmentEntryDetailBinding
 
 class EntryDetailFragment : Fragment() {
 
@@ -13,7 +13,8 @@ class EntryDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_entry_detail, container, false)
+        val binding = FragmentEntryDetailBinding.inflate(inflater)
+        return binding.root
     }
 
 }
