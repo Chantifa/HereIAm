@@ -37,4 +37,8 @@
     <string name="heading_reset_password">Passwort vergessen?</string>
     <string name="reset_passwort_explanation">Fülle deine E-Mail-Adresse aus, um dein Passwort zurückzusetzen.</string>
     <string name="btn_reset_password">Passwort zurücksetzen</string>
+    <string name="heading_new_user">Neuen Benutzer erstellen</string>
+    <string name="btn_create_new_user">Benutzer erstellen</string>
+    <string name="text_already_user">Bereits ein Konto?</string>
+    <string name="text_back_to_login">Melde dich hier an.</string>
 </resources>

@@ -22,6 +22,7 @@ class LoginFormFragment : Fragment() {
 
         binding.btnLogin.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_profile_to_profileFragment))
         binding.textResetPassword.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_profile_to_loginResetFragment))
+        binding.textRegistrationLink.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_profile_to_registrationFormFragment))
 
         return binding.root
     }
