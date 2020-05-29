@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import ch.ffhs.esa.hereiam.R
+import androidx.lifecycle.Observer
 import ch.ffhs.esa.hereiam.databinding.FragmentEntryListAllBinding
 
 
@@ -18,17 +18,25 @@ class EntryListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentEntryListAllBinding.inflate(inflater)
-        val collectionPath = getString(R.string.firestore_collection_path)
+        val adapter = EntryListAdapter()
+        binding.entriesList.adapter = adapter
+        viewModel.entries.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.data = it
+            }
+        })
 
-        viewModel.getEntries(collectionPath, binding.entryList)
+//        val collectionPath = getString(R.string.firestore_collection_path)
+
+//        viewModel.getEntries(collectionPath, binding.entryList)
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val ctx = requireContext()
-        viewModel.addAdadpter(ctx)
-    }
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//        val ctx = requireContext()
+//        viewModel.addAdadpter(ctx)
+//    }
 }
 
