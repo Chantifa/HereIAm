@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import ch.ffhs.esa.hereiam.databinding.EntryListItemBinding
 import ch.ffhs.esa.hereiam.model.Entry
 
-class EntryListAdapter : ListAdapter<Entry, EntryListAdapter.ViewHolder>(EntryDiffCallback()) {
+class EntryListAdapter :
+    ListAdapter<Entry, EntryListAdapter.ViewHolder>(EntryDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
@@ -19,7 +20,8 @@ class EntryListAdapter : ListAdapter<Entry, EntryListAdapter.ViewHolder>(EntryDi
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(val binding: EntryListItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ViewHolder private constructor(val binding: EntryListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(
             item: Entry
         ) {
@@ -37,7 +39,7 @@ class EntryListAdapter : ListAdapter<Entry, EntryListAdapter.ViewHolder>(EntryDi
     }
 }
 
-class EntryDiffCallback: DiffUtil.ItemCallback<Entry>() {
+class EntryDiffCallback : DiffUtil.ItemCallback<Entry>() {
     override fun areItemsTheSame(oldItem: Entry, newItem: Entry): Boolean {
         return oldItem.entryUUID == newItem.entryUUID
     }
