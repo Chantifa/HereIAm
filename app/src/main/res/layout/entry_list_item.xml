@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="entry"
             type="ch.ffhs.esa.hereiam.model.Entry" />
@@ -18,6 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/gap_large"
             android:layout_marginVertical="@dimen/gap_default"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/entryContent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
