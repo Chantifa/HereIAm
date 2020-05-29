@@ -33,5 +33,18 @@ class FirebaseAuth {
                 }
         }
 
+        fun registerUser(email: String, password: String) {
+            fbAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    // TODO: login
+                    if (task.isSuccessful) {
+                        Timber.i("success")
+                    } else {
+                        Timber.i("error ${task.exception?.message!!}")
+                    }
+                }
+
+        }
+
     }
 }
