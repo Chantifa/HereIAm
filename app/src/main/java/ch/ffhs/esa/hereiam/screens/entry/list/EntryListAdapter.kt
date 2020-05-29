@@ -4,21 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.model.Entry
 
-class EntryListAdapter : RecyclerView.Adapter<EntryListAdapter.ViewHolder>() {
-    var data = listOf<Entry>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
-
-    override fun getItemCount(): Int = data.size
+class EntryListAdapter : ListAdapter<Entry, EntryListAdapter.ViewHolder>(EntryDiffCallback()) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
         holder.bind(item)
     }
 
@@ -45,5 +40,15 @@ class EntryListAdapter : RecyclerView.Adapter<EntryListAdapter.ViewHolder>() {
                 return ViewHolder(view)
             }
         }
+    }
+}
+
+class EntryDiffCallback: DiffUtil.ItemCallback<Entry>() {
+    override fun areItemsTheSame(oldItem: Entry, newItem: Entry): Boolean {
+        return oldItem.entryUUID == newItem.entryUUID
+    }
+
+    override fun areContentsTheSame(oldItem: Entry, newItem: Entry): Boolean {
+        return oldItem == newItem
     }
 }
