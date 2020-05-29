@@ -44,4 +44,5 @@
     <string name="error_mandatory">Pflichtfeld</string>
     <string name="error_invalid_email">Bitte gib eine gültige Adresse ein!</string>
     <string name="error_min_char_count">mindestens 6 Zeichen</string>
+    <string name="btn_add_image">Bild hochladen</string>
 </resources>

@@ -1,6 +1,8 @@
 package ch.ffhs.esa.hereiam.screens.entry.form
 
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,8 +21,10 @@ class EntryFormFragment : Fragment() {
     ): View? {
         val binding = FragmentEntryFormBinding.inflate(inflater)
 
-        val heading = binding.inputHeadingEntry
-        val text = binding.inputTextEntry
+        binding.btnAddPhoto.setOnClickListener {
+            val img = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(img, 123)
+        }
 
         binding.btnAddEntry.setOnClickListener {
             val entryTitle = binding.headingNewEntry.text.toString().trim()
@@ -40,6 +44,7 @@ class EntryFormFragment : Fragment() {
 
             binding.progressbar.visibility = View.VISIBLE
 
+            // TODO upload image
             viewModel.addEntry(entryTitle, entryContent)
 
             // TODO: wait on save
