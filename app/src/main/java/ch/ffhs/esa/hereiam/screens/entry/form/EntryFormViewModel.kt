@@ -2,10 +2,9 @@ package ch.ffhs.esa.hereiam.screens.entry.form
 
 import android.widget.EditText
 import androidx.lifecycle.ViewModel
-import ch.ffhs.esa.hereiam.model.EntryDatabaseDao
 import com.google.firebase.Timestamp
 
-class EntryFormViewModel(private val database: EntryDatabaseDao) : ViewModel() {
+class EntryFormViewModel : ViewModel() {
     fun addEntry(
         heading: EditText,
         text: EditText,
