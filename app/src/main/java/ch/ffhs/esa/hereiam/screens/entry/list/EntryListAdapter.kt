@@ -1,13 +1,11 @@
 package ch.ffhs.esa.hereiam.screens.entry.list
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import ch.ffhs.esa.hereiam.R
+import ch.ffhs.esa.hereiam.databinding.EntryListItemBinding
 import ch.ffhs.esa.hereiam.model.Entry
 
 class EntryListAdapter : ListAdapter<Entry, EntryListAdapter.ViewHolder>(EntryDiffCallback()) {
@@ -21,23 +19,19 @@ class EntryListAdapter : ListAdapter<Entry, EntryListAdapter.ViewHolder>(EntryDi
         return ViewHolder.from(parent)
     }
 
-    class ViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val entryTitle: TextView = itemView.findViewById(R.id.entryTitle)
-        private val entryContent: TextView = itemView.findViewById(R.id.entryContent)
-
+    class ViewHolder private constructor(val binding: EntryListItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(
             item: Entry
         ) {
-            entryTitle.text = item.entryTitle
-            entryContent.text = item.entryContent
+            binding.entryTitle.text = item.entryTitle
+            binding.entryContent.text = item.entryContent
         }
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {
-                val view =
-                    LayoutInflater.from(parent.context)
-                        .inflate(R.layout.entry_list_item, parent, false)
-                return ViewHolder(view)
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = EntryListItemBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
             }
         }
     }
