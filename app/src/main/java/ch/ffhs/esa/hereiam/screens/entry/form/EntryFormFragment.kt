@@ -57,9 +57,8 @@ class EntryFormFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if(requestCode==123)
-        {
-            val bmp= data?.getParcelableExtra("data") as Bitmap
+        if (requestCode == 123) {
+            val bmp = data?.getParcelableExtra("data") as Bitmap
             binding.entryPhoto.setImageBitmap(bmp)
             binding.entryPhoto.visibility = View.VISIBLE
             binding.btnAddPhoto.visibility = View.GONE
