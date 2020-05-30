@@ -16,9 +16,7 @@ import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentProfileBinding
 import ch.ffhs.esa.hereiam.util.toast
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.google.firebase.storage.FirebaseStorage
 import java.io.ByteArrayOutputStream
 
 class ProfileFragment : Fragment() {
@@ -39,7 +37,7 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater)
 
         binding.btnProfileSave.setOnClickListener {
-            val currentUser = viewModel.currentUser
+            val currentUser = viewModel.currentUser.value
             val photo = when {
                 ::imageUri.isInitialized -> imageUri
                 currentUser?.photoUrl == null -> Uri.parse(defaultImageUrl)
@@ -49,7 +47,7 @@ class ProfileFragment : Fragment() {
             val name = binding.username.text.toString().trim()
 
             if (name.isEmpty()) {
-                binding.username.error = "name required"
+                binding.username.error = getString(R.string.error_mandatory)
                 binding.username.requestFocus()
                 return@setOnClickListener
             }
@@ -82,7 +80,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (viewModel.currentUser == null) {
+        if (viewModel.currentUser.value == null) {
             findNavController().navigate(R.id.nav_profile)
         } else {
             loadUser()
@@ -90,8 +88,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun loadUser() {
-        viewModel.currentUser?.let { user ->
-
+        viewModel.currentUser.value?.let { user ->
             Glide.with(this)
                 .load(user.photoUrl)
                 .into(binding.profileAvatar)
@@ -118,34 +115,12 @@ class ProfileFragment : Fragment() {
 
     private fun uploadImageAndSaveUri(bitmap: Bitmap) {
         val baos = ByteArrayOutputStream()
-        val storageRef = FirebaseStorage.getInstance()
-            .reference
-            .child("pics/${FirebaseAuth.getInstance().currentUser?.uid}")
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-        val image = baos.toByteArray()
-
-        val upload = storageRef.putBytes(image)
+        val upload = viewModel.uploadImage(bitmap, baos)
 
         binding.progressbarPic.visibility = View.VISIBLE
-        upload.addOnCompleteListener { uploadTask ->
-            binding.progressbarPic.visibility = View.INVISIBLE
-            try {
-                if (uploadTask.isSuccessful) {
-                    storageRef.downloadUrl.addOnCompleteListener { urlTask ->
-                        urlTask.result?.let {
-                            imageUri = it
-                            activity?.toast(imageUri.toString())
-                            binding.profileAvatar.setImageBitmap(bitmap)
-                        }
-                    }
-                } else {
-                    uploadTask.exception?.let {
-                        activity?.toast(it.message!!)
-                    }
-                }
-            } catch (e: Exception) {
-                activity?.toast(e.message!!)
-            }
-        }
+
+        viewModel.waitOnUpload(upload, bitmap, binding, activity)
+
+        binding.progressbarPic.visibility = View.INVISIBLE
     }
 }
