@@ -34,7 +34,7 @@
         <RelativeLayout
             android:id="@+id/profile_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             android:layout_marginHorizontal="@dimen/gap_large"
             android:layout_marginTop="@dimen/gap_default"
             android:background="@color/quantum_grey"
@@ -43,15 +43,14 @@
 
             <ImageView
                 android:id="@+id/profile_avatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_centerInParent="true"
                 android:layout_marginHorizontal="@dimen/gap_large"
                 android:layout_marginTop="@dimen/gap_default"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/desc_profile_avatar"
-                android:maxWidth="150dp"
-                android:maxHeight="150dp"
+                android:background="@drawable/avatar"
                 android:src="@drawable/avatar" />
 
             <ProgressBar
