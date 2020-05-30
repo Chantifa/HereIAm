@@ -45,4 +45,8 @@
     <string name="error_invalid_email">Bitte gib eine gültige Adresse ein!</string>
     <string name="error_min_char_count">mindestens 6 Zeichen</string>
     <string name="btn_add_image">Bild hochladen</string>
+    <string name="logout">Abmelden</string>
+    <string name="logout_question">Bist du dir sicher?</string>
+    <string name="logout_yes">Ja</string>
+    <string name="logout_abort">Abbrechen</string>
 </resources>

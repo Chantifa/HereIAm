@@ -16,5 +16,4 @@ class ProfileFragment : Fragment() {
         val binding = FragmentProfileBinding.inflate(inflater)
         return binding.root
     }
-
 }
