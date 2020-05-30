@@ -60,4 +60,14 @@ class LoginFormFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // TODO hack to give time for checking current user
+        Thread.sleep(100)
+        if (viewModel.currentUser.value != null) {
+            findNavController().navigate(R.id.profileFragment)
+        }
+    }
+
 }

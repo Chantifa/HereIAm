@@ -80,6 +80,8 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // TODO hack to give time for checking current user
+        Thread.sleep(1000)
         if (viewModel.currentUser.value == null) {
             findNavController().navigate(R.id.nav_profile)
         } else {
