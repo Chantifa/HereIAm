@@ -46,5 +46,9 @@ class FirebaseAuth {
 
         }
 
+        fun signOut() {
+            fbAuth.signOut()
+        }
+
     }
 }
