@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentLoginFormBinding
 
@@ -52,6 +53,8 @@ class LoginFormFragment : Fragment() {
 
             // TODO: wait on login
             binding.progressbar.visibility = View.GONE
+
+            findNavController().navigate(R.id.profileFragment)
         }
         
         return binding.root

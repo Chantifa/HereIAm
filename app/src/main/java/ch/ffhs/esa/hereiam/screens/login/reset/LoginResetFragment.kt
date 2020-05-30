@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentLoginResetBinding
 
@@ -41,6 +42,8 @@ class LoginResetFragment : Fragment() {
 
             // TODO: wait on reset
             binding.progressbar.visibility = View.GONE
+
+            findNavController().navigate(R.id.nav_profile)
         }
 
         return binding.root
