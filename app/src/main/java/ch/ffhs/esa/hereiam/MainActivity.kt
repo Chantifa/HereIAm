@@ -7,7 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import ch.ffhs.esa.hereiam.services.FirebaseAuth
+import ch.ffhs.esa.hereiam.services.AuthenticationService
 import ch.ffhs.esa.hereiam.util.logout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                 setTitle(getString(R.string.logout_question))
                 setPositiveButton(getString(R.string.logout_yes)) { _, _ ->
 
-                    FirebaseAuth.signOut()
+                    AuthenticationService.signOut()
                     this.context.logout()
 
                 }

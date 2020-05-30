@@ -3,7 +3,7 @@ package ch.ffhs.esa.hereiam.screens.entry.list
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.model.Entry
-import ch.ffhs.esa.hereiam.services.FirebaseFirestore
+import ch.ffhs.esa.hereiam.services.DatabaseService
 
 class EntryListViewModel : ViewModel() {
 
@@ -16,6 +16,6 @@ class EntryListViewModel : ViewModel() {
 //            Entry("Titel 3", "Some Content", "Luzern", 5.5, 6.6),
 //            Entry("Titel 4", "Some Content", "Luzern", 5.5, 6.6)
 //        )
-        FirebaseFirestore.getAllEntries(entries)
+        DatabaseService.getAllEntries(entries)
     }
 }

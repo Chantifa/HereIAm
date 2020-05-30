@@ -1,10 +1,10 @@
 package ch.ffhs.esa.hereiam.screens.login.reset
 
 import androidx.lifecycle.ViewModel
-import ch.ffhs.esa.hereiam.services.FirebaseAuth
+import ch.ffhs.esa.hereiam.services.AuthenticationService
 
 class LoginResetViewModel: ViewModel() {
     fun resetPassword(email: String) {
-        FirebaseAuth.resetPassword(email)
+        AuthenticationService.resetPassword(email)
     }
 }

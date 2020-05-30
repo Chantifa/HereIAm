@@ -3,7 +3,7 @@ package ch.ffhs.esa.hereiam.services
 import com.google.firebase.auth.FirebaseAuth
 import timber.log.Timber
 
-class FirebaseAuth {
+class AuthenticationService {
     companion object {
         private val fbAuth = FirebaseAuth.getInstance()
         fun resetPassword(

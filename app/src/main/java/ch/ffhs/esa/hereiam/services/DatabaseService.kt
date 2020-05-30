@@ -5,7 +5,7 @@ import ch.ffhs.esa.hereiam.model.Entry
 import com.google.firebase.firestore.FirebaseFirestore
 import timber.log.Timber
 
-class FirebaseFirestore {
+class DatabaseService {
     companion object {
 
         private const val collection = "entriesV3"
