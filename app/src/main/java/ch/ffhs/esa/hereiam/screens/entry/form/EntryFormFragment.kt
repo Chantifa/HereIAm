@@ -1,6 +1,7 @@
 package ch.ffhs.esa.hereiam.screens.entry.form
 
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -14,12 +15,13 @@ import ch.ffhs.esa.hereiam.databinding.FragmentEntryFormBinding
 class EntryFormFragment : Fragment() {
 
     private val viewModel: EntryFormViewModel by viewModels()
+    private lateinit var binding: FragmentEntryFormBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentEntryFormBinding.inflate(inflater)
+        binding = FragmentEntryFormBinding.inflate(inflater)
 
         binding.btnAddPhoto.setOnClickListener {
             val img = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -51,5 +53,16 @@ class EntryFormFragment : Fragment() {
             binding.progressbar.visibility = View.GONE
         }
         return binding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(requestCode==123)
+        {
+            val bmp= data?.getParcelableExtra("data") as Bitmap
+            binding.entryPhoto.setImageBitmap(bmp)
+            binding.entryPhoto.visibility = View.VISIBLE
+            binding.btnAddPhoto.visibility = View.GONE
+        }
     }
 }

@@ -53,4 +53,5 @@
     <string name="mail_placeholder">meine@email.com</string>
     <string name="message_profile_changed">Dein Profil wurde angepasst</string>
     <string name="link_reset_password">Setze dein Passwort zurück (TODO)</string>
+    <string name="image_to_entry">Bild zum Beitrag</string>
 </resources>
