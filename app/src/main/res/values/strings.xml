@@ -49,4 +49,8 @@
     <string name="logout_question">Bist du dir sicher?</string>
     <string name="logout_yes">Ja</string>
     <string name="logout_abort">Abbrechen</string>
+    <string name="input_your_name">Dein Name</string>
+    <string name="mail_placeholder">meine@email.com</string>
+    <string name="message_profile_changed">Dein Profil wurde angepasst</string>
+    <string name="link_reset_password">Setze dein Passwort zurück (TODO)</string>
 </resources>

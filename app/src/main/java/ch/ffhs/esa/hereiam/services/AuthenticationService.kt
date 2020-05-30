@@ -6,6 +6,7 @@ import timber.log.Timber
 class AuthenticationService {
     companion object {
         private val fbAuth = FirebaseAuth.getInstance()
+        val currentUser = fbAuth.currentUser
         fun resetPassword(
             email: String
         ) {
