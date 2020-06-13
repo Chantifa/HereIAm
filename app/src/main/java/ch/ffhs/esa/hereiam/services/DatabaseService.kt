@@ -3,6 +3,7 @@ package ch.ffhs.esa.hereiam.services
 import androidx.lifecycle.MutableLiveData
 import ch.ffhs.esa.hereiam.model.Entry
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import timber.log.Timber
 
 class DatabaseService {
@@ -10,6 +11,10 @@ class DatabaseService {
 
         private const val collection = "entriesV3"
         private val fbFirestore = FirebaseFirestore.getInstance().collection(collection)
+
+        private const val sortBy = "entryLastModified"
+        private val sortDir = Query.Direction.DESCENDING
+        private const val limit = 20L
 
         fun addEntry(heading: String, text: String) {
             val entry = Entry(heading, text, "LocationName TODO", 0.0, 0.0)
@@ -28,7 +33,7 @@ class DatabaseService {
         fun getAllEntries(
             entries: MutableLiveData<List<Entry>>
         ) {
-            val task = fbFirestore.get()
+            val task = fbFirestore.orderBy(sortBy, sortDir).limit(limit).get()
             task.addOnCompleteListener {
                 if (it.isSuccessful) {
                     val list = ArrayList<Entry>()
