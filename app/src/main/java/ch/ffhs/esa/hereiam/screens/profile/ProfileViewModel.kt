@@ -23,7 +23,7 @@ class ProfileViewModel : ViewModel() {
     }
 
     private lateinit var imageUri: Uri
-    lateinit var storageRef: StorageReference
+    private lateinit var storageRef: StorageReference
 
     fun uploadImage(
         bitmap: Bitmap,
