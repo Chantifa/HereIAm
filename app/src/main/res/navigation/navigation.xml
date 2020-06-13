@@ -51,7 +51,7 @@
         <action
             android:id="@+id/action_welcomeFragment_to_nav_home"
             app:destination="@id/nav_home"
-            app:popUpTo="@id/nav_home" />
+            app:popUpTo="@id/navigation" />
     </fragment>
     <fragment
         android:id="@+id/loginResetFragment"
