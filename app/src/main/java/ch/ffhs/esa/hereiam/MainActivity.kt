@@ -10,12 +10,16 @@ import androidx.navigation.ui.setupWithNavController
 import ch.ffhs.esa.hereiam.services.AuthenticationService
 import ch.ffhs.esa.hereiam.util.logout
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())}
+            setContentView(R.layout.activity_main)
+
     }
 
     override fun onStart() {

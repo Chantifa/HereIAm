@@ -9,7 +9,6 @@ fun Context.toast(message: String) =
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 
 fun Context.login() {
-    // TODO change navigation from Activity to Fragment
     val intent = Intent(this, MainActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }
@@ -17,7 +16,6 @@ fun Context.login() {
 }
 
 fun Context.logout() {
-    // TODO change navigation from Activity to Fragment
     val intent = Intent(this, MainActivity::class.java).apply {
         flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     }

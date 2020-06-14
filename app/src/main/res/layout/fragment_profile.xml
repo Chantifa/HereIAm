@@ -89,18 +89,6 @@
             app:layout_constraintTop_toBottomOf="@+id/username"
             tools:text="@string/mail_placeholder" />
 
-        <TextView
-            android:id="@+id/changePasswordLink"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/gap_large"
-            android:layout_marginTop="@dimen/gap_default"
-            android:text="@string/link_reset_password"
-            android:textColor="@color/colorPrimaryDark"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/email" />
-
         <Button
             android:id="@+id/btn_profile_save"
             android:layout_width="wrap_content"
@@ -113,7 +101,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/changePasswordLink"
+            app:layout_constraintTop_toBottomOf="@+id/email"
             app:layout_constraintVertical_bias="0.2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
