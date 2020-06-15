@@ -11,7 +11,6 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.requestPermissions
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -30,6 +29,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 class HomeViewModel : ViewModel() {
 
     lateinit var mFusedLocationClient: FusedLocationProviderClient
+    var fragmentActivity = FragmentActivity()
 
 
     companion object Location {
@@ -93,22 +93,22 @@ class HomeViewModel : ViewModel() {
         if (checkPermissions()) {
             if (isLocationEnabled()) {
 
-                mFusedLocationClient.lastLocation.addOnCompleteListener(FragmentActivity()) { task ->
+                mFusedLocationClient.lastLocation.addOnCompleteListener(fragmentActivity) { task ->
                     val location: android.location.Location? = task.result
                     if (location == null) {
                         requestNewLocationData()
                     } else {
                         val latitude = location.latitude
-                         val longitude = location.longitude
+                        val longitude = location.longitude
                         setLocationOnGoogleMaps(LatLng(latitude, longitude))
                     }
                 }
             } else {
-                val toast = makeText(FragmentActivity(), "Turn on location!", Toast.LENGTH_SHORT)
+                val toast = makeText(fragmentActivity, "Turn on location!", Toast.LENGTH_SHORT)
                 toast.show()
             }
         } else {
-            requestPermissions(FragmentActivity(),
+            requestPermissions(fragmentActivity,
                 arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
                 PERMISSION_ID)
         }
@@ -116,7 +116,7 @@ class HomeViewModel : ViewModel() {
 
 
     private fun isLocationEnabled(): Boolean {
-        val locationManager = FragmentActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val locationManager = fragmentActivity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
             LocationManager.NETWORK_PROVIDER
         )
@@ -124,11 +124,11 @@ class HomeViewModel : ViewModel() {
 
     private fun checkPermissions(): Boolean {
         if (ActivityCompat.checkSelfPermission(
-                FragmentActivity(),
+                fragmentActivity,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(
-                FragmentActivity(),
+                fragmentActivity,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
@@ -144,7 +144,7 @@ class HomeViewModel : ViewModel() {
         mLocationRequest.interval = 0
         mLocationRequest.fastestInterval = 0
         mLocationRequest.numUpdates = 1
-        mFusedLocationClient = getFusedLocationProviderClient(FragmentActivity())
+        mFusedLocationClient = getFusedLocationProviderClient(fragmentActivity)
         mFusedLocationClient.requestLocationUpdates(
             mLocationRequest, mLocationCallback,
             Looper.myLooper()
@@ -156,7 +156,6 @@ class HomeViewModel : ViewModel() {
             val mLastLocation: android.location.Location = locationResult.lastLocation
             val latitude = mLastLocation.latitude
             val longitude = mLastLocation.longitude
-
             setLocationOnGoogleMaps(LatLng(latitude, longitude))
         }
     }

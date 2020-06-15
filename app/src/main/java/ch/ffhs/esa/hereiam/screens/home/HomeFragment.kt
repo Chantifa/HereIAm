@@ -1,6 +1,6 @@
 package ch.ffhs.esa.hereiam.screens.home
 
-import android.app.Activity
+
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.KeyEvent
@@ -15,15 +15,20 @@ import androidx.navigation.Navigation
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentHomeBinding
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 
+
 const val PERMISSION_ID = 42
-lateinit var mFusedLocationClient: FusedLocationProviderClient
+
+
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private val viewModel: HomeViewModel by viewModels()
     lateinit var binding: FragmentHomeBinding
+    lateinit var mFusedLocationClient: FusedLocationProviderClient
+    var fragmentActivity = FragmentActivity()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -31,6 +36,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         mapView.onCreate(savedInstanceState)
         mapView.onResume()
         mapView.getMapAsync(this)
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(fragmentActivity)
     }
 
     override fun onCreateView(
@@ -75,10 +81,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+
     override fun onMapReady(map: GoogleMap?) {
         map?.let {
             viewModel.googleMap = it
             viewModel.getLastLocation()
+            viewModel.loadDefaultLocation()
         }
     }
 }

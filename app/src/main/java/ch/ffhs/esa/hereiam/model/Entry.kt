@@ -1,9 +1,11 @@
 package ch.ffhs.esa.hereiam.model
 
+import android.graphics.Bitmap
 import com.google.firebase.Timestamp
 import java.util.*
 
 data class Entry(
+
     val entryTitle: String,
     val entryContent: String,
     val locationName: String,

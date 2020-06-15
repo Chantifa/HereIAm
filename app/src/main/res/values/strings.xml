@@ -72,4 +72,5 @@
     <string name="notif_gps_waiting_body">Waiting for GPS to be enabled…</string>
     <string name="simulate_notifications">Simulate Notification(s)</string>
     <string name="click_to_retry"> (click to retry)</string>
+    <string name="delete">Eintrag löschen</string>
 </resources>

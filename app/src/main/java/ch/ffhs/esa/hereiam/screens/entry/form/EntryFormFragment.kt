@@ -7,10 +7,13 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.drawToBitmap
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentEntryFormBinding
+import kotlinx.android.synthetic.main.entry_list_item.*
+
 
 class EntryFormFragment : Fragment() {
 
@@ -28,9 +31,19 @@ class EntryFormFragment : Fragment() {
             startActivityForResult(img, 123)
         }
 
-        binding.btnAddEntry.setOnClickListener {
+        btn_delete_entry.setOnClickListener {
+            val entryPhoto = binding.entryPhoto.drawToBitmap()
             val entryTitle = binding.inputHeadingEntry.text.toString().trim()
             val entryContent = binding.inputTextEntry.text.toString().trim()
+
+            viewModel.deleteEntry(entryPhoto, entryTitle, entryContent)
+        }
+        binding.btnAddEntry.setOnClickListener {
+
+            val entryPhoto = binding.entryPhoto.drawToBitmap()
+            val entryTitle = binding.inputHeadingEntry.text.toString().trim()
+            val entryContent = binding.inputTextEntry.text.toString().trim()
+
 
             if (entryTitle.isEmpty()) {
                 binding.inputHeadingEntry.error = getString(R.string.error_mandatory)
@@ -47,11 +60,12 @@ class EntryFormFragment : Fragment() {
             binding.progressbar.visibility = View.VISIBLE
 
             // TODO upload image
-            viewModel.addEntry(entryTitle, entryContent)
+            viewModel.addEntry(entryPhoto, entryTitle, entryContent)
 
             // TODO: wait on save
             binding.progressbar.visibility = View.GONE
         }
+
         return binding.root
     }
 
