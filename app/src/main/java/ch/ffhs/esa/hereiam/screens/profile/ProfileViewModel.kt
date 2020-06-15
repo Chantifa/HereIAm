@@ -21,7 +21,7 @@ class ProfileViewModel : ViewModel() {
     private val storageService = StorageServiceFirebase()
 
     init {
-        authenticationService.getCurrentUser(currentUser)
+        authenticationService.getCurrentUser().observeForever { result -> currentUser.value = result }
     }
 
     private lateinit var imageUri: Uri

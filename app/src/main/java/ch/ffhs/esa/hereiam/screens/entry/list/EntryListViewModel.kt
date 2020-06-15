@@ -11,6 +11,6 @@ class EntryListViewModel : ViewModel() {
     val entries = MutableLiveData<List<Entry>>()
 
     init {
-        databaseService.getAllEntries(entries)
+        databaseService.getAllEntries().observeForever {result -> entries.value = result}
     }
 }

@@ -11,7 +11,7 @@ class LoginFormViewModel : ViewModel() {
     private val authenticationService = AuthenticationServiceFirebaseAuth()
 
     init {
-        authenticationService.getCurrentUser(currentUser)
+        authenticationService.getCurrentUser().observeForever { result -> currentUser.value = result }
     }
 
     fun loginUser(email: String, password: String) {
