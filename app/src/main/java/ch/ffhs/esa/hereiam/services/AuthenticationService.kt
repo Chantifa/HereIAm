@@ -13,7 +13,7 @@ interface AuthenticationService {
     fun getCurrentUser(currentUser: MutableLiveData<FirebaseUser>)
 }
 
-class AuthenticationServiceFirebaseAuthImplementation : AuthenticationService {
+class AuthenticationServiceFirebaseAuth : AuthenticationService {
     private val fbAuth = FirebaseAuth.getInstance()
     override fun resetPassword(email: String) {
         fbAuth

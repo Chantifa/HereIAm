@@ -14,7 +14,7 @@ interface DatabaseService {
     fun addEntry(heading: String, text: String)
 }
 
-class DatabaseServiceFirestoreImplementation : DatabaseService {
+class DatabaseServiceFirestore : DatabaseService {
     private val collection = "entriesV3"
     private val fbFirestore = FirebaseFirestore.getInstance().collection(collection)
 

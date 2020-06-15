@@ -15,7 +15,7 @@ interface StorageService {
     ): Pair<StorageReference, UploadTask>
 }
 
-class StorageServiceFirebaseImplementation : StorageService {
+class StorageServiceFirebase : StorageService {
     private val fbStorage = FirebaseStorage.getInstance()
 
     override fun uploadImage(
