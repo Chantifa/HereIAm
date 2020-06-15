@@ -1,10 +1,12 @@
 package ch.ffhs.esa.hereiam.screens.login.registration
 
 import androidx.lifecycle.ViewModel
-import ch.ffhs.esa.hereiam.services.AuthenticationService
+import ch.ffhs.esa.hereiam.services.AuthenticationServiceFirebaseAuthImplementation
 
 class RegistrationFormViewModel : ViewModel() {
+    private val authenticationService = AuthenticationServiceFirebaseAuthImplementation()
+
     fun registerUser(email: String, password: String) {
-        AuthenticationService.registerUser(email, password)
+        authenticationService.registerUser(email, password)
     }
 }
