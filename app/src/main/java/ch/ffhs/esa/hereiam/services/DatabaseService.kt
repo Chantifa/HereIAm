@@ -6,51 +6,46 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 import timber.log.Timber
 
-interface DatabaseService {
-    fun getAllEntries(
-        entries: MutableLiveData<List<Entry>>
-    )
+class DatabaseService {
+    companion object {
 
-    fun addEntry(heading: String, text: String)
-}
+        private const val collection = "entriesV3"
+        private val fbFirestore = FirebaseFirestore.getInstance().collection(collection)
 
-class DatabaseServiceFirestoreImplementation : DatabaseService {
-    private val collection = "entriesV3"
-    private val fbFirestore = FirebaseFirestore.getInstance().collection(collection)
+        private const val sortBy = "entryLastModified"
+        private val sortDir = Query.Direction.DESCENDING
+        private const val limit = 20L
 
-    private val sortBy = "entryLastModified"
-    private val sortDir = Query.Direction.DESCENDING
-    private val limit = 20L
+        fun addEntry(heading: String, text: String) {
+            val entry = Entry(heading, text, "LocationName TODO", 0.0, 0.0)
+            Timber.i("added: $entry")
+            fbFirestore.add(entry)
+                .addOnCompleteListener { task ->
+                    // TODO: User feedback
+                    if (task.isSuccessful) {
+                        Timber.i("success")
+                    } else {
+                        Timber.i("error ${task.exception?.message!!}")
+                    }
+                }
+        }
 
-    override fun addEntry(heading: String, text: String) {
-        val entry = Entry(heading, text, "LocationName TODO", 0.0, 0.0)
-        Timber.i("added: $entry")
-        fbFirestore.add(entry)
-            .addOnCompleteListener { task ->
-                // TODO: User feedback
-                if (task.isSuccessful) {
-                    Timber.i("success")
+        fun getAllEntries(
+            entries: MutableLiveData<List<Entry>>
+        ) {
+            val task = fbFirestore.orderBy(sortBy, sortDir).limit(limit).get()
+            task.addOnCompleteListener {
+                if (it.isSuccessful) {
+                    val list = ArrayList<Entry>()
+                    for (doc in it.result!!) {
+                        Timber.i("${doc.toObject(Entry::class.java)}")
+                        list.add(doc.toObject(Entry::class.java))
+                    }
+                    entries.value = list
                 } else {
-                    Timber.i("error ${task.exception?.message!!}")
+                    // TODO return exception
+                    Timber.i(it.exception?.message!!)
                 }
-            }
-    }
-
-    override fun getAllEntries(
-        entries: MutableLiveData<List<Entry>>
-    ) {
-        val task = fbFirestore.orderBy(sortBy, sortDir).limit(limit).get()
-        task.addOnCompleteListener {
-            if (it.isSuccessful) {
-                val list = ArrayList<Entry>()
-                for (doc in it.result!!) {
-                    Timber.i("${doc.toObject(Entry::class.java)}")
-                    list.add(doc.toObject(Entry::class.java))
-                }
-                entries.value = list
-            } else {
-                // TODO return exception
-                Timber.i(it.exception?.message!!)
             }
         }
     }

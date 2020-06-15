@@ -6,8 +6,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.databinding.FragmentProfileBinding
-import ch.ffhs.esa.hereiam.services.AuthenticationServiceFirebaseAuthImplementation
-import ch.ffhs.esa.hereiam.services.StorageServiceFirebaseImplementation
+import ch.ffhs.esa.hereiam.services.AuthenticationService
+import ch.ffhs.esa.hereiam.services.StorageService
 import ch.ffhs.esa.hereiam.util.toast
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.storage.StorageReference
@@ -17,11 +17,9 @@ import java.io.ByteArrayOutputStream
 class ProfileViewModel : ViewModel() {
 
     val currentUser = MutableLiveData<FirebaseUser>()
-    private val authenticationService = AuthenticationServiceFirebaseAuthImplementation()
-    private val storageService = StorageServiceFirebaseImplementation()
 
     init {
-        authenticationService.getCurrentUser(currentUser)
+        AuthenticationService.getCurrentUser(currentUser)
     }
 
     private lateinit var imageUri: Uri
@@ -31,7 +29,7 @@ class ProfileViewModel : ViewModel() {
         bitmap: Bitmap,
         baos: ByteArrayOutputStream
     ): UploadTask {
-        val (storageRef, upload) = storageService.uploadImage(bitmap, baos, currentUser.value)
+        val (storageRef, upload) = StorageService.uploadImage(bitmap, baos, currentUser.value)
         this.storageRef = storageRef
         return upload
     }

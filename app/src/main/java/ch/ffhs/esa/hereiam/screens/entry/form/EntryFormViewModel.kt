@@ -1,15 +1,13 @@
 package ch.ffhs.esa.hereiam.screens.entry.form
 
 import androidx.lifecycle.ViewModel
-import ch.ffhs.esa.hereiam.services.DatabaseServiceFirestoreImplementation
+import ch.ffhs.esa.hereiam.services.DatabaseService
 
 class EntryFormViewModel : ViewModel() {
-    private val databaseService = DatabaseServiceFirestoreImplementation()
-
     fun addEntry(
         heading: String,
         text: String
     ) {
-        databaseService.addEntry(heading, text)
+        DatabaseService.addEntry(heading, text)
     }
 }
