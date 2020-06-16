@@ -27,8 +27,8 @@ const val PERMISSION_ID = 42
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private val viewModel: HomeViewModel by viewModels()
     lateinit var binding: FragmentHomeBinding
-    lateinit var mFusedLocationClient: FusedLocationProviderClient
-    var fragmentActivity = FragmentActivity()
+  //  lateinit var mFusedLocationClient: FusedLocationProviderClient
+    //var fragmentActivity = FragmentActivity()
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -36,7 +36,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         mapView.onCreate(savedInstanceState)
         mapView.onResume()
         mapView.getMapAsync(this)
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(fragmentActivity)
+      //  mFusedLocationClient = LocationServices.getFusedLocationProviderClient(fragmentActivity)
     }
 
     override fun onCreateView(
@@ -63,7 +63,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+   /* override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             PERMISSION_ID -> {
                 // If request is cancelled, the result arrays are empty.
@@ -80,12 +80,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         }
     }
-
+*/
 
     override fun onMapReady(map: GoogleMap?) {
         map?.let {
             viewModel.googleMap = it
-            viewModel.getLastLocation()
+          //  viewModel.getLastLocation()
             viewModel.loadDefaultLocation()
         }
     }
