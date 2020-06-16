@@ -22,7 +22,6 @@ class LoginFormFragment : Fragment() {
     ): View? {
         val binding = FragmentLoginFormBinding.inflate(inflater)
 
-        binding.textResetPassword.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_profile_to_loginResetFragment))
         binding.textRegistrationLink.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_profile_to_registrationFormFragment))
 
         binding.btnLogin.setOnClickListener {

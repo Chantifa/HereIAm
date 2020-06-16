@@ -2,7 +2,9 @@ package ch.ffhs.esa.hereiam.screens.home
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.LocationManager
@@ -11,10 +13,13 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.requestPermissions
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ch.ffhs.esa.hereiam.services.AuthenticationService
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -25,12 +30,14 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlin.coroutines.coroutineContext
 
 class HomeViewModel : ViewModel() {
 
-    lateinit var mFusedLocationClient: FusedLocationProviderClient
-    var fragmentActivity = FragmentActivity()
 
+    lateinit var mFusedLocationClient: FusedLocationProviderClient
+    lateinit var activity: Activity
+    var context : Context? = null
 
     companion object Location {
         private val _locationName = MutableLiveData<String>()
@@ -89,11 +96,11 @@ class HomeViewModel : ViewModel() {
     }
 
     @SuppressLint("MissingPermission")
-    fun getLastLocation() {
+    fun getLastLocation(){
         if (checkPermissions()) {
             if (isLocationEnabled()) {
 
-                mFusedLocationClient.lastLocation.addOnCompleteListener(fragmentActivity) { task ->
+                mFusedLocationClient.lastLocation.addOnCompleteListener(activity) { task ->
                     val location: android.location.Location? = task.result
                     if (location == null) {
                         requestNewLocationData()
@@ -104,11 +111,12 @@ class HomeViewModel : ViewModel() {
                     }
                 }
             } else {
-                val toast = makeText(fragmentActivity, "Turn on location!", Toast.LENGTH_SHORT)
+                val toast = makeText(context, "Turn on location!", Toast.LENGTH_SHORT)
                 toast.show()
             }
         } else {
-            requestPermissions(fragmentActivity,
+            requestPermissions(
+                activity,
                 arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
                 PERMISSION_ID)
         }
@@ -116,7 +124,7 @@ class HomeViewModel : ViewModel() {
 
 
     private fun isLocationEnabled(): Boolean {
-        val locationManager = fragmentActivity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        val locationManager = activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
             LocationManager.NETWORK_PROVIDER
         )
@@ -124,11 +132,11 @@ class HomeViewModel : ViewModel() {
 
     private fun checkPermissions(): Boolean {
         if (ActivityCompat.checkSelfPermission(
-                fragmentActivity,
+                activity,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED &&
             ActivityCompat.checkSelfPermission(
-                fragmentActivity,
+                activity,
                 Manifest.permission.ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
@@ -144,7 +152,7 @@ class HomeViewModel : ViewModel() {
         mLocationRequest.interval = 0
         mLocationRequest.fastestInterval = 0
         mLocationRequest.numUpdates = 1
-        mFusedLocationClient = getFusedLocationProviderClient(fragmentActivity)
+        mFusedLocationClient = getFusedLocationProviderClient(activity)
         mFusedLocationClient.requestLocationUpdates(
             mLocationRequest, mLocationCallback,
             Looper.myLooper()

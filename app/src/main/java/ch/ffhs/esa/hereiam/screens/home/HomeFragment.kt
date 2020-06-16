@@ -1,6 +1,7 @@
 package ch.ffhs.esa.hereiam.screens.home
 
 
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.KeyEvent
@@ -27,8 +28,7 @@ const val PERMISSION_ID = 42
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private val viewModel: HomeViewModel by viewModels()
     lateinit var binding: FragmentHomeBinding
-  //  lateinit var mFusedLocationClient: FusedLocationProviderClient
-    //var fragmentActivity = FragmentActivity()
+   lateinit var mFusedLocationClient: FusedLocationProviderClient
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -36,7 +36,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         mapView.onCreate(savedInstanceState)
         mapView.onResume()
         mapView.getMapAsync(this)
-      //  mFusedLocationClient = LocationServices.getFusedLocationProviderClient(fragmentActivity)
     }
 
     override fun onCreateView(
@@ -60,10 +59,14 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
             false
         }
+        viewModel.activity = requireActivity()
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        viewModel.mFusedLocationClient = mFusedLocationClient
+
         return binding.root
     }
 
-   /* override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         when (requestCode) {
             PERMISSION_ID -> {
                 // If request is cancelled, the result arrays are empty.
@@ -72,7 +75,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     viewModel.getLastLocation()
                 } else {
                     val toast =
-                        Toast.makeText(FragmentActivity(), "Turn on location!", Toast.LENGTH_SHORT)
+                        Toast.makeText(activity, "Turn on location!", Toast.LENGTH_SHORT)
                     toast.show()
                 }
                 return
@@ -80,13 +83,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         }
     }
-*/
+
 
     override fun onMapReady(map: GoogleMap?) {
         map?.let {
             viewModel.googleMap = it
-          //  viewModel.getLastLocation()
-            viewModel.loadDefaultLocation()
+            viewModel.getLastLocation()
         }
     }
 }

@@ -19,7 +19,6 @@ class EntryListFragment : Fragment() {
     ): View? {
         val binding = FragmentEntryListAllBinding.inflate(inflater)
         val adapter = EntryListAdapter()
-
         binding.entriesList.adapter = adapter
         viewModel.entries.observe(viewLifecycleOwner, Observer {
             it?.let {
