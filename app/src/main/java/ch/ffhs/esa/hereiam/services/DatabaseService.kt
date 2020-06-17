@@ -1,47 +1,54 @@
 package ch.ffhs.esa.hereiam.services
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import ch.ffhs.esa.hereiam.model.Entry
 import com.google.firebase.firestore.FirebaseFirestore
 import timber.log.Timber
 
-class DatabaseService {
-    companion object {
+interface DatabaseService {
+    fun getAllEntries(): LiveData<List<Entry>>
+    fun addEntry(heading: String, text: String)
+}
 
-        private const val collection = "entriesV3"
-        private val fbFirestore = FirebaseFirestore.getInstance().collection(collection)
+class DatabaseServiceFirestore : DatabaseService {
+    private val collection = "entriesV3"
+    private val fbFirestore = FirebaseFirestore.getInstance().collection(collection)
 
-        fun addEntry(heading: String, text: String) {
-            val entry = Entry(heading, text, "LocationName TODO", 0.0, 0.0)
-            Timber.i("added: $entry")
-            fbFirestore.add(entry)
-                .addOnCompleteListener { task ->
-                    // TODO: User feedback
-                    if (task.isSuccessful) {
-                        Timber.i("success")
-                    } else {
-                        Timber.i("error ${task.exception?.message!!}")
-                    }
-                }
-        }
+    private val sortBy = "entryLastModified"
+    private val sortDir = Query.Direction.DESCENDING
+    private val limit = 20L
 
-        fun getAllEntries(
-            entries: MutableLiveData<List<Entry>>
-        ) {
-            val task = fbFirestore.get()
-            task.addOnCompleteListener {
-                if (it.isSuccessful) {
-                    val list = ArrayList<Entry>()
-                    for (doc in it.result!!) {
-                        Timber.i("${doc.toObject(Entry::class.java)}")
-                        list.add(doc.toObject(Entry::class.java))
-                    }
-                    entries.value = list
+    override fun addEntry(heading: String, text: String) {
+        val entry = Entry(heading, text, "LocationName TODO", 0.0, 0.0)
+        Timber.i("added: $entry")
+        fbFirestore.add(entry)
+            .addOnCompleteListener { task ->
+                // TODO: User feedback
+                if (task.isSuccessful) {
+                    Timber.i("success")
                 } else {
-                    // TODO return exception
-                    Timber.i(it.exception?.message!!)
+                    Timber.i("error ${task.exception?.message!!}")
                 }
             }
+    }
+
+    override fun getAllEntries(): LiveData<List<Entry>> {
+        val list = ArrayList<Entry>()
+        val task = fbFirestore.orderBy(sortBy, sortDir).limit(limit).get()
+        task.addOnCompleteListener {
+            if (it.isSuccessful) {
+                for (doc in it.result!!) {
+                    Timber.i("${doc.toObject(Entry::class.java)}")
+                    list.add(doc.toObject(Entry::class.java))
+                }
+            } else {
+                // TODO return exception
+                Timber.i(it.exception?.message!!)
+            }
         }
+        val data = MutableLiveData<List<Entry>>()
+        data.value = list
+        return data
     }
 }

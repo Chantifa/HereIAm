@@ -7,23 +7,29 @@ import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.UploadTask
 import java.io.ByteArrayOutputStream
 
-class StorageService {
-    companion object {
-        private val fbStorage = FirebaseStorage.getInstance()
+interface StorageService {
+    fun uploadImage(
+        bitmap: Bitmap,
+        baos: ByteArrayOutputStream,
+        currentUser: FirebaseUser?
+    ): Pair<StorageReference, UploadTask>
+}
 
-        fun uploadImage(
-            bitmap: Bitmap,
-            baos: ByteArrayOutputStream,
-            currentUser: FirebaseUser?
-        ): Pair<StorageReference, UploadTask> {
-            val storageRef = fbStorage
-                .reference
-                .child("pics/${currentUser?.uid}")
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
-            val image = baos.toByteArray()
+class StorageServiceFirebase : StorageService {
+    private val fbStorage = FirebaseStorage.getInstance()
 
-            val upload = storageRef.putBytes(image)
-            return Pair(storageRef, upload)
-        }
+    override fun uploadImage(
+        bitmap: Bitmap,
+        baos: ByteArrayOutputStream,
+        currentUser: FirebaseUser?
+    ): Pair<StorageReference, UploadTask> {
+        val storageRef = fbStorage
+            .reference
+            .child("pics/${currentUser?.uid}")
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val image = baos.toByteArray()
+
+        val upload = storageRef.putBytes(image)
+        return Pair(storageRef, upload)
     }
 }
