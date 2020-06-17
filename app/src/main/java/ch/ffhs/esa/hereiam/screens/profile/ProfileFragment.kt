@@ -17,7 +17,6 @@ import ch.ffhs.esa.hereiam.databinding.FragmentProfileBinding
 import ch.ffhs.esa.hereiam.util.toast
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.UserProfileChangeRequest
-import java.io.ByteArrayOutputStream
 
 class ProfileFragment : Fragment() {
 
@@ -116,12 +115,10 @@ class ProfileFragment : Fragment() {
     }
 
     private fun uploadImageAndSaveUri(bitmap: Bitmap) {
-        val baos = ByteArrayOutputStream()
-        val upload = viewModel.uploadImage(bitmap, baos)
-
         binding.progressbarPic.visibility = View.VISIBLE
 
-        viewModel.waitOnUpload(upload, bitmap, binding, activity)
+        viewModel.uploadImage(bitmap)
+        binding.profileAvatar.setImageBitmap(bitmap)
 
         binding.progressbarPic.visibility = View.INVISIBLE
     }
