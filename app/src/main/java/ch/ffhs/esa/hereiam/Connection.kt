@@ -59,33 +59,6 @@ class Connection : AppCompatActivity() {
             unregisterReceiver(broadcastReceiver)
         }
 
-        override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-            super.onCreateOptionsMenu(menu)
-            menuInflater.inflate(R.menu.option_menu, menu)
-            return true
-        }
-
-        override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-            item?.let {
-                super.onOptionsItemSelected(item)
-            }
-            if (item?.itemId == R.id.action_logout) {
-
-                AlertDialog.Builder(this).apply {
-                    setTitle(getString(R.string.logout_question))
-                    setPositiveButton(getString(R.string.logout_yes)) { _, _ ->
-
-                        AuthenticationService.signOut()
-                        this.context.logout()
-
-                    }
-                    setNegativeButton(getString(R.string.logout_abort)) { _, _ ->
-                    }
-                }.create().show()
-
-            }
-            return true
-        }
 
         private var broadcastReceiver: BroadcastReceiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context, intent: Intent) {

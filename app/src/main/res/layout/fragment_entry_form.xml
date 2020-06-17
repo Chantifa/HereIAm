@@ -109,27 +109,17 @@
             app:layout_constraintTop_toBottomOf="@+id/entry_photo"
             app:layout_constraintVertical_bias="0.2" />
         <Button
-            android:id="@+id/btn_new_entry"
+            android:id="@+id/entry_delete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/gap_large"
             android:layout_marginTop="@dimen/gap_default"
             android:text="@string/new_entry"
-            android:visibility="visible"
+            android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_add_entry" />
-        <Button
-            android:id="@+id/btn_delete_entry"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/gap_large"
-            android:layout_marginTop="@dimen/gap_default"
-            android:text="@string/delete"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_new_entry" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

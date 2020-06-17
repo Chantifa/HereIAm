@@ -5,9 +5,11 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.Address
 import android.location.Geocoder
 import android.location.LocationManager
 import android.os.Looper
+import android.util.Log
 import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.core.app.ActivityCompat
@@ -25,9 +27,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import java.util.*
 
 class HomeViewModel : ViewModel() {
-
 
     lateinit var mFusedLocationClient: FusedLocationProviderClient
     lateinit var activity: Activity
@@ -43,10 +45,11 @@ class HomeViewModel : ViewModel() {
             get() = _location
     }
 
+
     lateinit var googleMap: GoogleMap
     private lateinit var currentMarker: Marker
 
-    private fun getLocationFromAddress(
+    fun getLocationFromAddress(
         context: Context?
     ): LatLng? {
         val coder = Geocoder(context)
@@ -66,10 +69,39 @@ class HomeViewModel : ViewModel() {
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
     }
 
-    fun getLocationFromGoogleMaps(){
-                val currentLocation = getLastLocation().toString().trim()
-                currentLocation
+    fun getLocation(locationResult: LocationResult){
+                val mLastLocation: android.location.Location = locationResult.lastLocation
+                val latitude = mLastLocation.latitude
+                val longitude = mLastLocation.longitude
+            getCompleteAddress(latitude,longitude)
         }
+
+
+    private fun getCompleteAddress(
+        LATITUDE: Double,
+        LONGITUDE: Double
+    ): String? {
+        var address = ""
+        val geocoder = Geocoder(activity, Locale.getDefault())
+        try {
+            val addresses: List<Address>? = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1)
+            if (addresses != null) {
+                val returnedAddress: Address = addresses[0]
+                val strReturnedAddress = StringBuilder("")
+                for (i in 0..returnedAddress.maxAddressLineIndex) {
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                }
+                address = strReturnedAddress.toString()
+                Log.w("Deine Adresse", strReturnedAddress.toString())
+            } else {
+                Log.w("Deine Adresse", "Keine Adresse!")
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Log.w("Keine Adresse", "Keine Adresse")
+        }
+        return address
+    }
 
     fun loadDefaultLocation() {
 
@@ -98,7 +130,6 @@ class HomeViewModel : ViewModel() {
     fun getLastLocation(){
         if (checkPermissions()) {
             if (isLocationEnabled()) {
-
                 mFusedLocationClient.lastLocation.addOnCompleteListener(activity) { task ->
                     val location: android.location.Location? = task.result
                     if (location == null) {
@@ -165,7 +196,6 @@ class HomeViewModel : ViewModel() {
             val latitude = mLastLocation.latitude
             val longitude = mLastLocation.longitude
             setLocationOnGoogleMaps(LatLng(latitude, longitude))
-
         }
     }
 

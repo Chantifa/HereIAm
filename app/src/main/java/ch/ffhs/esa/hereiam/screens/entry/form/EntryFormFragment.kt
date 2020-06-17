@@ -10,8 +10,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentEntryFormBinding
+import ch.ffhs.esa.hereiam.screens.home.HomeViewModel
+import com.google.android.gms.location.LocationResult
 
 class EntryFormFragment : Fragment() {
 
@@ -28,6 +31,9 @@ class EntryFormFragment : Fragment() {
             val img = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(img, 123)
         }
+
+        val location = binding.locationEntry
+        location.setText(HomeViewModel.locationName.toString()).toString()
 
         binding.btnAddEntry.setOnClickListener {
             val entryTitle = binding.inputHeadingEntry.text.toString().trim()
