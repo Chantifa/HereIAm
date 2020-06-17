@@ -1,7 +1,7 @@
 package ch.ffhs.esa.hereiam.model
 
 import com.google.firebase.Timestamp
-import java.util.UUID
+import java.util.*
 
 
 data class Entry(

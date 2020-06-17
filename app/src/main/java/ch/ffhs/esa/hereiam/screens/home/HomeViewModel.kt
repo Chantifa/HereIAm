@@ -57,7 +57,7 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    private fun setLocationOnGoogleMaps(location: LatLng) {
+        private fun setLocationOnGoogleMaps(location: LatLng) {
         if (this::currentMarker.isInitialized) {
             currentMarker.remove()
         }
@@ -65,6 +65,11 @@ class HomeViewModel : ViewModel() {
             googleMap.addMarker(MarkerOptions().position(location).title(locationName.value))
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
     }
+
+    fun getLocationFromGoogleMaps(){
+                val currentLocation = getLastLocation().toString().trim()
+                currentLocation
+        }
 
     fun loadDefaultLocation() {
 
@@ -105,8 +110,9 @@ class HomeViewModel : ViewModel() {
                     }
                 }
             } else {
-                val toast = makeText(context, "Turn on location!", Toast.LENGTH_SHORT)
+                val toast = makeText(context, "Bitte Zugriff auf Standort aktivieren!", Toast.LENGTH_SHORT)
                 toast.show()
+                loadDefaultLocation()
             }
         } else {
             requestPermissions(
@@ -159,6 +165,7 @@ class HomeViewModel : ViewModel() {
             val latitude = mLastLocation.latitude
             val longitude = mLastLocation.longitude
             setLocationOnGoogleMaps(LatLng(latitude, longitude))
+
         }
     }
 
