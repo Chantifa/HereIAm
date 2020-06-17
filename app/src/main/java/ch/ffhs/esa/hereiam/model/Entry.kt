@@ -3,8 +3,8 @@ package ch.ffhs.esa.hereiam.model
 import com.google.firebase.Timestamp
 import java.util.*
 
-data class Entry(
 
+data class Entry(
     val entryTitle: String,
     val entryContent: String,
     val locationName: String,
