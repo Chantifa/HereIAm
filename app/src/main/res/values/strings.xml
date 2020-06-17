@@ -4,7 +4,7 @@
     <string name="label_entry">Beitrag</string>
     <string name="label_profile">Profil</string>
     <string name="label_your_location">Dein Standort</string>
-    <string name="text_your_location">Bern</string>
+    <string name="text_your_location">gewünschter Standort</string>
     <string name="desc_edit_your_location">Standort editieren</string>
     <string name="desc_placeholder">Platzhalter</string>
     <string name="heading_placeholder">Beitragstitel</string>
@@ -71,6 +71,8 @@
     <string name="notif_gps_waiting_body">Warte für GPS für Aktivierung…</string>
     <string name="simulate_notifications">Simuliere Nachrichten</string>
     <string name="click_to_retry"> (klicke zum wiederholen)</string>
-    <string name="delete">Eintrag löschen</string>
+    <string name="delete">Beitrag löschen</string>
     <string name="chosenLocation">gewählter Standort</string>
+    <string name="new_entry">neuer Beitrag</string>
+    <string name="your_location">momentaner Standort</string>
 </resources>

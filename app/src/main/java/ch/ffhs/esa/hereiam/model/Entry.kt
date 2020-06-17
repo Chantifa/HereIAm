@@ -5,7 +5,6 @@ import java.util.*
 
 data class Entry(
 
-
     val entryTitle: String,
     val entryContent: String,
     val locationName: String,
@@ -14,8 +13,6 @@ data class Entry(
     val entryLastModified: Timestamp = Timestamp.now(),
     val entryUUID: String = UUID.randomUUID().toString()
 ) {
-
-
     // Firestore needs an empty constructor for deserialization
-    constructor(heading: String, text: String) : this("", "", "",0.0,0.0)
+    constructor() : this("", "", "", 0.0, 0.0)
 }

@@ -11,4 +11,3 @@ class EntryFormViewModel : ViewModel() {
         DatabaseService.addEntry(heading, text)
     }
 }
-

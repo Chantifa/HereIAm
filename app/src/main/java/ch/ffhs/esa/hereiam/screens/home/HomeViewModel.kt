@@ -165,6 +165,7 @@ class HomeViewModel : ViewModel() {
             val latitude = mLastLocation.latitude
             val longitude = mLastLocation.longitude
             setLocationOnGoogleMaps(LatLng(latitude, longitude))
+
         }
     }
 

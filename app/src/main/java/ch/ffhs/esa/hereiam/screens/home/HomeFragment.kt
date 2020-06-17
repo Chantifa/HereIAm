@@ -18,7 +18,6 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 
-
 const val PERMISSION_ID = 42
 
 
@@ -57,6 +56,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             }
             false
         }
+
         viewModel.activity = requireActivity()
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         viewModel.mFusedLocationClient = mFusedLocationClient
@@ -72,9 +72,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                             grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     viewModel.getLastLocation()
                 } else {
-                    val toast =
-                        Toast.makeText(activity, "Aktiviere Standort!", Toast.LENGTH_SHORT)
-                    toast.show()
+                    Toast.makeText(activity, "Aktiviere Standort!", Toast.LENGTH_SHORT).show()
                 }
                 return
             }
