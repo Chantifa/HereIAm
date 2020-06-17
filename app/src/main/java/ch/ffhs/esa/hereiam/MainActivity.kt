@@ -19,18 +19,16 @@ class MainActivity : AppCompatActivity() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())}
             setContentView(R.layout.activity_main)
-
     }
 
     override fun onStart() {
         super.onStart()
-
-        // Set up bottom navigation
         val navController = findNavController(R.id.fragment_container)
         findViewById<BottomNavigationView>(R.id.bottom_navigation_menu).setupWithNavController(
             navController
         )
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
@@ -59,4 +57,6 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
+
 }
+

@@ -4,7 +4,6 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.LocationManager
@@ -13,13 +12,9 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.requestPermissions
-import androidx.core.app.ActivityCompat.startActivityForResult
-import androidx.core.content.ContextCompat.startActivity
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import ch.ffhs.esa.hereiam.services.AuthenticationService
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -30,7 +25,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlin.coroutines.coroutineContext
 
 class HomeViewModel : ViewModel() {
 
@@ -63,7 +57,7 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    private fun setLocationOnGoogleMaps(location: LatLng) {
+        private fun setLocationOnGoogleMaps(location: LatLng) {
         if (this::currentMarker.isInitialized) {
             currentMarker.remove()
         }
@@ -71,6 +65,11 @@ class HomeViewModel : ViewModel() {
             googleMap.addMarker(MarkerOptions().position(location).title(locationName.value))
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
     }
+
+    fun getLocationFromGoogleMaps(){
+                val currentLocation = getLastLocation().toString().trim()
+                currentLocation
+        }
 
     fun loadDefaultLocation() {
 
@@ -111,8 +110,9 @@ class HomeViewModel : ViewModel() {
                     }
                 }
             } else {
-                val toast = makeText(context, "Turn on location!", Toast.LENGTH_SHORT)
+                val toast = makeText(context, "Bitte Zugriff auf Standort aktivieren!", Toast.LENGTH_SHORT)
                 toast.show()
+                loadDefaultLocation()
             }
         } else {
             requestPermissions(

@@ -1,7 +1,6 @@
 package ch.ffhs.esa.hereiam.screens.home
 
 
-import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.KeyEvent
@@ -10,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import ch.ffhs.esa.hereiam.R
@@ -75,7 +73,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     viewModel.getLastLocation()
                 } else {
                     val toast =
-                        Toast.makeText(activity, "Turn on location!", Toast.LENGTH_SHORT)
+                        Toast.makeText(activity, "Aktiviere Standort!", Toast.LENGTH_SHORT)
                     toast.show()
                 }
                 return
@@ -83,7 +81,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
 
         }
     }
-
 
     override fun onMapReady(map: GoogleMap?) {
         map?.let {
