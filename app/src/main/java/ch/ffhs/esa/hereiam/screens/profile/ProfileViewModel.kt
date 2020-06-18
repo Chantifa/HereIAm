@@ -7,6 +7,10 @@ import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.services.StorageService
 import ch.ffhs.esa.hereiam.services.StorageServiceFirebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class ProfileViewModel : ViewModel() {
 
@@ -16,8 +20,12 @@ class ProfileViewModel : ViewModel() {
 
     fun uploadImage(bitmap: Bitmap) {
         val userId = HereIAmApplication.currentUser?.uid
-        storageService.uploadImage(bitmap, folder, userId ?: "")
-            .observeForever { result -> userPicture.value = result }
+        CoroutineScope(IO).launch {
+            try {
+                userPicture.value = storageService.uploadImage(bitmap, folder, userId ?: "")
+            } catch (e: Exception) {
+                Timber.e("Error while uploading Image: ${e.message}")
+            }
+        }
     }
-
 }

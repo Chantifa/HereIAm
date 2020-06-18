@@ -1,14 +1,12 @@
 package ch.ffhs.esa.hereiam.services
 
 import ch.ffhs.esa.hereiam.HereIAmApplication
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
-import timber.log.Timber
 
 interface AuthenticationService {
-    suspend fun loginUser(email: String, password: String): AuthResult?
-    fun registerUser(email: String, password: String)
+    suspend fun loginUser(email: String, password: String)
+    suspend fun registerUser(email: String, password: String)
     fun signOut()
     fun updateCurrentUser()
 }
@@ -16,25 +14,12 @@ interface AuthenticationService {
 class AuthenticationServiceFirebaseAuth : AuthenticationService {
     private val fbAuth = FirebaseAuth.getInstance()
 
-    override suspend fun loginUser(email: String, password: String): AuthResult? {
-        return try {
-            fbAuth.signInWithEmailAndPassword(email, password).await()
-        } catch (e: Exception) {
-            null
-        }
+    override suspend fun loginUser(email: String, password: String) {
+        fbAuth.signInWithEmailAndPassword(email, password).await()
     }
 
-    override fun registerUser(email: String, password: String) {
-        fbAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                // TODO: login
-                if (task.isSuccessful) {
-                    Timber.i("success")
-                } else {
-                    Timber.i("error ${task.exception?.message!!}")
-                }
-            }
-
+    override suspend fun registerUser(email: String, password: String) {
+        fbAuth.createUserWithEmailAndPassword(email, password).await()
     }
 
     override fun signOut() {

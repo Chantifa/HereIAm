@@ -14,11 +14,11 @@ class LoginFormViewModel : ViewModel() {
 
     fun loginUser(email: String, password: String) {
         CoroutineScope(IO).launch {
-            val result = authenticationService.loginUser(email, password)
-            if (result == null) {
-                Timber.e("Login error")
-            } else {
-                Timber.e("Login successfully: $result")
+            try {
+                authenticationService.loginUser(email, password)
+                Timber.e("Login successfully!")
+            } catch (e: Exception) {
+                Timber.e("Login error: ${e.message}")
             }
         }
     }

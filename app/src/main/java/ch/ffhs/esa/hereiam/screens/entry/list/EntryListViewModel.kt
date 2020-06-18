@@ -5,6 +5,10 @@ import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.model.Entry
 import ch.ffhs.esa.hereiam.services.DatabaseService
 import ch.ffhs.esa.hereiam.services.DatabaseServiceFirestore
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class EntryListViewModel : ViewModel() {
 
@@ -12,6 +16,12 @@ class EntryListViewModel : ViewModel() {
     val entries = MutableLiveData<List<Entry>>()
 
     init {
-        databaseService.getAllEntries().observeForever { result -> entries.value = result }
+        CoroutineScope(IO).launch {
+            try {
+                entries.value = databaseService.getAllEntries()
+            } catch (e: Exception) {
+                Timber.e("Error while loading all Entries: ${e.message}")
+            }
+        }
     }
 }
