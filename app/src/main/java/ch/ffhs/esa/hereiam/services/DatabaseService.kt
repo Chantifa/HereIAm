@@ -1,15 +1,13 @@
 package ch.ffhs.esa.hereiam.services
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import ch.ffhs.esa.hereiam.model.Entry
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
-import timber.log.Timber
+import kotlinx.coroutines.tasks.await
 
 interface DatabaseService {
-    fun getAllEntries(): LiveData<List<Entry>>
-    fun addEntry(heading: String, text: String)
+    suspend fun getAllEntries(): List<Entry>
+    suspend fun addEntry(entry: Entry)
 }
 
 class DatabaseServiceFirestore : DatabaseService {
@@ -20,36 +18,16 @@ class DatabaseServiceFirestore : DatabaseService {
     private val sortDir = Query.Direction.DESCENDING
     private val limit = 20L
 
-    override fun addEntry(heading: String, text: String) {
-        val entry = Entry(heading, text, "LocationName TODO", 0.0, 0.0)
-        Timber.i("added: $entry")
-        fbFirestore.add(entry)
-            .addOnCompleteListener { task ->
-                // TODO: User feedback
-                if (task.isSuccessful) {
-                    Timber.i("success")
-                } else {
-                    Timber.i("error ${task.exception?.message!!}")
-                }
-            }
+    override suspend fun addEntry(entry: Entry) {
+        fbFirestore.add(entry).await()
     }
 
-    override fun getAllEntries(): LiveData<List<Entry>> {
+    override suspend fun getAllEntries(): List<Entry> {
         val list = ArrayList<Entry>()
-        val task = fbFirestore.orderBy(sortBy, sortDir).limit(limit).get()
-        task.addOnCompleteListener {
-            if (it.isSuccessful) {
-                for (doc in it.result!!) {
-                    Timber.i("${doc.toObject(Entry::class.java)}")
-                    list.add(doc.toObject(Entry::class.java))
-                }
-            } else {
-                // TODO return exception
-                Timber.i(it.exception?.message!!)
-            }
+        val entries = fbFirestore.orderBy(sortBy, sortDir).limit(limit).get().await()
+        for (doc in entries) {
+            list.add(doc.toObject(Entry::class.java))
         }
-        val data = MutableLiveData<List<Entry>>()
-        data.value = list
-        return data
+        return list
     }
 }
