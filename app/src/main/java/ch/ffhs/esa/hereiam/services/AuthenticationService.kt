@@ -7,7 +7,6 @@ import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 
 interface AuthenticationService {
-    fun resetPassword(email: String)
     suspend fun loginUser(email: String, password: String): AuthResult?
     fun registerUser(email: String, password: String)
     fun signOut()
@@ -16,18 +15,6 @@ interface AuthenticationService {
 
 class AuthenticationServiceFirebaseAuth : AuthenticationService {
     private val fbAuth = FirebaseAuth.getInstance()
-    override fun resetPassword(email: String) {
-        fbAuth
-            .sendPasswordResetEmail(email)
-            .addOnCompleteListener { task ->
-                // TODO: User feedback
-                if (task.isSuccessful) {
-                    Timber.i("success")
-                } else {
-                    Timber.i("error ${task.exception?.message!!}")
-                }
-            }
-    }
 
     override suspend fun loginUser(email: String, password: String): AuthResult? {
         return try {
