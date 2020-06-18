@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentProfileBinding
 import ch.ffhs.esa.hereiam.util.toast
@@ -36,7 +37,7 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater)
 
         binding.btnProfileSave.setOnClickListener {
-            val currentUser = viewModel.currentUser.value
+            val currentUser = HereIAmApplication.currentUser.value
             val photo = when {
                 ::imageUri.isInitialized -> imageUri
                 currentUser?.photoUrl == null -> Uri.parse(defaultImageUrl)
@@ -81,7 +82,7 @@ class ProfileFragment : Fragment() {
 
         // TODO hack to give time for checking current user
         Thread.sleep(1000)
-        if (viewModel.currentUser.value == null) {
+        if (HereIAmApplication.currentUser.value == null) {
             findNavController().navigate(R.id.nav_profile)
         } else {
             loadUser()
@@ -89,7 +90,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun loadUser() {
-        viewModel.currentUser.value?.let { user ->
+        HereIAmApplication.currentUser.value?.let { user ->
             Glide.with(this)
                 .load(user.photoUrl)
                 .into(binding.profileAvatar)

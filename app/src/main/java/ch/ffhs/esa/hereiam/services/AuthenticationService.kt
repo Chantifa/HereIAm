@@ -1,9 +1,7 @@
 package ch.ffhs.esa.hereiam.services
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import ch.ffhs.esa.hereiam.HereIAmApplication
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import timber.log.Timber
 
 interface AuthenticationService {
@@ -11,7 +9,7 @@ interface AuthenticationService {
     fun loginUser(email: String, password: String)
     fun registerUser(email: String, password: String)
     fun signOut()
-    fun getCurrentUser() : LiveData<FirebaseUser?>
+    fun updateCurrentUser()
 }
 
 class AuthenticationServiceFirebaseAuth : AuthenticationService {
@@ -56,11 +54,10 @@ class AuthenticationServiceFirebaseAuth : AuthenticationService {
 
     override fun signOut() {
         fbAuth.signOut()
+        HereIAmApplication.currentUser.value = null
     }
 
-    override fun getCurrentUser() : LiveData<FirebaseUser?> {
-        val currentUser = MutableLiveData<FirebaseUser?>()
-        currentUser.value = fbAuth.currentUser
-        return currentUser
+    override fun updateCurrentUser() {
+        HereIAmApplication.currentUser.value = fbAuth.currentUser
     }
 }

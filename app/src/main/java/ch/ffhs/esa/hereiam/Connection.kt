@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import ch.ffhs.esa.hereiam.services.ApiService
 import ch.ffhs.esa.hereiam.services.AuthenticationServiceFirebaseAuth
 import ch.ffhs.esa.hereiam.util.RecyclerAdapter
-import ch.ffhs.esa.hereiam.util.logout
 import kotlinx.android.synthetic.main.activity_connection.*
 import okhttp3.OkHttpClient
 import org.json.JSONObject
@@ -77,7 +76,7 @@ class Connection : AppCompatActivity() {
                 setPositiveButton(getString(R.string.logout_yes)) { _, _ ->
 
                     authenticationService.signOut()
-                    this.context.logout()
+//                    this.context.logout()
 
                 }
                 setNegativeButton(getString(R.string.logout_abort)) { _, _ ->
