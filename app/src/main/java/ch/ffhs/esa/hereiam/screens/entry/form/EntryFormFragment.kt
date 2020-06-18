@@ -25,13 +25,12 @@ class EntryFormFragment : Fragment() {
     ): View? {
         binding = FragmentEntryFormBinding.inflate(inflater)
 
+        binding.viewModel = viewModel
+
         binding.btnAddPhoto.setOnClickListener {
             val img = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(img, 123)
         }
-
-        val location = binding.locationEntry
-        location.setText(HomeViewModel.locationName.toString()).toString()
 
         binding.btnAddEntry.setOnClickListener {
             val entryTitle = binding.inputHeadingEntry.text.toString().trim()
@@ -55,6 +54,10 @@ class EntryFormFragment : Fragment() {
             viewModel.addEntry(entryTitle, entryContent)
             Toast.makeText(activity, "Beitrag wurde erfolgreich hinzugefügt!", Toast.LENGTH_LONG).show()
 
+            binding.inputHeadingEntry.text.clear()
+            binding.inputTextEntry.text.clear()
+            binding.entryPhoto.visibility = View.GONE
+            binding.btnAddPhoto.visibility = View.VISIBLE
 
             // TODO: wait on save
             binding.progressbar.visibility = View.GONE

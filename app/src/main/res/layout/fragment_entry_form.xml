@@ -3,6 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="ch.ffhs.esa.hereiam.screens.entry.form.EntryFormViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/gap_large"
             android:layout_marginTop="@dimen/gap_default"
-            android:text="@string/chosenLocation"
+            android:text="@{viewModel.locationName}"
             android:textSize="26sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

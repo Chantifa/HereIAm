@@ -2,6 +2,7 @@ package ch.ffhs.esa.hereiam.screens.entry.form
 
 import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.model.Entry
+import ch.ffhs.esa.hereiam.screens.home.HomeViewModel
 import ch.ffhs.esa.hereiam.services.DatabaseService
 import ch.ffhs.esa.hereiam.services.DatabaseServiceFirestore
 import kotlinx.coroutines.CoroutineScope
@@ -11,6 +12,8 @@ import timber.log.Timber
 
 class EntryFormViewModel : ViewModel() {
     private val databaseService: DatabaseService = DatabaseServiceFirestore()
+
+    val locationName = HomeViewModel.locationName
 
     fun addEntry(
         heading: String,

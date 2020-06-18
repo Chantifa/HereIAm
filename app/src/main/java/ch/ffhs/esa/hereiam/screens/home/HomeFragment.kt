@@ -12,10 +12,14 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentHomeBinding
+import ch.ffhs.esa.hereiam.model.Location
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.model.LatLng
 
 const val PERMISSION_ID = 42
 
@@ -25,7 +29,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     lateinit var binding: FragmentHomeBinding
     lateinit var mFusedLocationClient: FusedLocationProviderClient
 
-//    private val mLocation = viewModel.getLastLocation()
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -50,9 +53,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         val locationText = binding.locationEditText
         val wishedLocation = binding.wishedLocation
         // Current location isn't converting in Address right now
-        //val yourLocation = binding.yourlocation
-        //val input = viewModel.getLocationFromAddress(mLocation)
-      // val currentLocation  = viewModel.getLocation(input)
 
         locationText.setOnKeyListener { _, keyCode, event ->
             // If the event is a key-down event on the "enter" button
@@ -65,10 +65,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             false
         }
         viewModel.activity = requireActivity()
+        viewModel.onActivity()
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         viewModel.mFusedLocationClient = mFusedLocationClient
-
-        // yourLocation.setText(currentLocation.toString()).toString()
         return binding.root
     }
 

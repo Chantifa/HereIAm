@@ -2,7 +2,6 @@ package ch.ffhs.esa.hereiam.screens.home
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Address
@@ -14,8 +13,10 @@ import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityCompat.requestPermissions
+import androidx.core.app.ComponentActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
@@ -32,8 +33,14 @@ import java.util.*
 class HomeViewModel : ViewModel() {
 
     lateinit var mFusedLocationClient: FusedLocationProviderClient
-    lateinit var activity: Activity
-    var context : Context? = null
+    lateinit var activity: ComponentActivity
+    var context: Context? = null
+
+    val currentLocation = MutableLiveData<LatLng>()
+
+    val locationName = Transformations.map(currentLocation) { latLng ->
+        getCompleteAddress(latLng.latitude, latLng.longitude)
+    }
 
     companion object Location {
         private val _locationName = MutableLiveData<String>()
@@ -45,22 +52,32 @@ class HomeViewModel : ViewModel() {
             get() = _location
     }
 
-
     lateinit var googleMap: GoogleMap
     private lateinit var currentMarker: Marker
 
+    @SuppressLint("RestrictedApi")
+    fun onActivity() {
+        location.observe({activity.lifecycle}) { latLng ->
+            if (latLng != null) {
+                val locationName = getCompleteAddress(latLng.latitude, latLng.longitude)
+                _locationName.postValue(locationName)
+            }
+        }
+    }
+
     fun getLocationFromAddress(
-        context: Context?
+        context: Context?,
+        query: String
     ): LatLng? {
         val coder = Geocoder(context)
-        val address = coder.getFromLocationName(locationName.value, 5)
+        val address = coder.getFromLocationName(query, 5)
         return if (address.isNullOrEmpty()) null else address.let {
             val location = it[0]
             LatLng(location.latitude, location.longitude)
         }
     }
 
-        private fun setLocationOnGoogleMaps(location: LatLng) {
+    private fun setLocationOnGoogleMaps(location: LatLng) {
         if (this::currentMarker.isInitialized) {
             currentMarker.remove()
         }
@@ -69,15 +86,7 @@ class HomeViewModel : ViewModel() {
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 10f))
     }
 
-    fun getLocation(locationResult: LocationResult){
-                val mLastLocation: android.location.Location = locationResult.lastLocation
-                val latitude = mLastLocation.latitude
-                val longitude = mLastLocation.longitude
-            getCompleteAddress(latitude,longitude)
-        }
-
-
-    private fun getCompleteAddress(
+    fun getCompleteAddress(
         LATITUDE: Double,
         LONGITUDE: Double
     ): String? {
@@ -89,7 +98,7 @@ class HomeViewModel : ViewModel() {
                 val returnedAddress: Address = addresses[0]
                 val strReturnedAddress = StringBuilder("")
                 for (i in 0..returnedAddress.maxAddressLineIndex) {
-                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n")
+                    strReturnedAddress.append(returnedAddress.getAddressLine(i).split(", ").joinToString(separator = "\n")).append("\n")
                 }
                 address = strReturnedAddress.toString()
                 Log.w("Deine Adresse", strReturnedAddress.toString())
@@ -115,11 +124,12 @@ class HomeViewModel : ViewModel() {
 
     fun changeMapBasedOnUserInput(
         ctx: Context?,
-        newLocationName: String
+        query: String
     ) {
-        _locationName.value = newLocationName
         val location =
-            getLocationFromAddress(ctx)
+            getLocationFromAddress(ctx, query)
+
+        _location.postValue(location)
 
         location?.let {
             setLocationOnGoogleMaps(it)
@@ -127,7 +137,7 @@ class HomeViewModel : ViewModel() {
     }
 
     @SuppressLint("MissingPermission")
-    fun getLastLocation(){
+    fun getLastLocation() {
         if (checkPermissions()) {
             if (isLocationEnabled()) {
                 mFusedLocationClient.lastLocation.addOnCompleteListener(activity) { task ->
@@ -137,7 +147,10 @@ class HomeViewModel : ViewModel() {
                     } else {
                         val latitude = location.latitude
                         val longitude = location.longitude
-                        setLocationOnGoogleMaps(LatLng(latitude, longitude))
+                        val latLng = LatLng(latitude, longitude)
+                        _location.postValue(latLng)
+                        currentLocation.postValue(latLng)
+                        setLocationOnGoogleMaps(latLng)
                     }
                 }
             } else {
@@ -195,8 +208,10 @@ class HomeViewModel : ViewModel() {
             val mLastLocation: android.location.Location = locationResult.lastLocation
             val latitude = mLastLocation.latitude
             val longitude = mLastLocation.longitude
-            setLocationOnGoogleMaps(LatLng(latitude, longitude))
+            val latLng = LatLng(latitude, longitude)
+            _location.postValue(latLng)
+            currentLocation.postValue(latLng)
+            setLocationOnGoogleMaps(latLng)
         }
     }
-
 }

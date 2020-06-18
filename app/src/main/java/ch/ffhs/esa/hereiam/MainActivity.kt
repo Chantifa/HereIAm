@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
             Timber.plant(Timber.DebugTree())
         }
         setContentView(R.layout.activity_main)
+        Connection(this)
     }
 
     override fun onStart() {
