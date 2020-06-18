@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentLoginFormBinding
 
@@ -55,7 +56,7 @@ class LoginFormFragment : Fragment() {
 
             findNavController().navigate(R.id.profileFragment)
         }
-        
+
         return binding.root
     }
 
@@ -64,7 +65,7 @@ class LoginFormFragment : Fragment() {
 
         // TODO hack to give time for checking current user
         Thread.sleep(100)
-        if (viewModel.currentUser.value != null) {
+        if (HereIAmApplication.userLoggedIn()) {
             findNavController().navigate(R.id.profileFragment)
         }
     }

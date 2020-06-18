@@ -14,9 +14,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.ffhs.esa.hereiam.services.ApiService
+import ch.ffhs.esa.hereiam.services.AuthenticationService
 import ch.ffhs.esa.hereiam.services.AuthenticationServiceFirebaseAuth
 import ch.ffhs.esa.hereiam.util.RecyclerAdapter
-import ch.ffhs.esa.hereiam.util.logout
 import kotlinx.android.synthetic.main.activity_connection.*
 import okhttp3.OkHttpClient
 import org.json.JSONObject
@@ -29,7 +29,7 @@ import timber.log.Timber
 
 class Connection : AppCompatActivity() {
 
-    private val authenticationService = AuthenticationServiceFirebaseAuth()
+    private val authenticationService: AuthenticationService = AuthenticationServiceFirebaseAuth()
     private val arrayList = ArrayList<String>()
     private var adapter = RecyclerAdapter()
     private val retrofit = Retrofit.Builder()
@@ -77,7 +77,7 @@ class Connection : AppCompatActivity() {
                 setPositiveButton(getString(R.string.logout_yes)) { _, _ ->
 
                     authenticationService.signOut()
-                    this.context.logout()
+//                    this.context.logout()
 
                 }
                 setNegativeButton(getString(R.string.logout_abort)) { _, _ ->
