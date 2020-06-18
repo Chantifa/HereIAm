@@ -35,10 +35,11 @@ class MainActivity : AppCompatActivity() {
         )
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.option_menu, menu)
+        val item = menu?.findItem(R.id.action_logout)
+        item?.isVisible = HereIAmApplication.userLoggedIn()
         return true
     }
 
@@ -61,6 +62,5 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
-
 }
 

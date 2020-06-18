@@ -1,7 +1,6 @@
 package ch.ffhs.esa.hereiam
 
 import android.app.Application
-import androidx.lifecycle.MutableLiveData
 import ch.ffhs.esa.hereiam.model.Location
 import com.google.firebase.auth.FirebaseUser
 import timber.log.Timber
@@ -10,10 +9,10 @@ import timber.log.Timber
 class HereIAmApplication : Application() {
 
     companion object {
-        val currentLocation = MutableLiveData<Location>()
-        val currentUser = MutableLiveData<FirebaseUser?>()
-
-        fun userLoggedIn() = currentUser.value != null
+        var currentLocation: Location? = null
+        var currentUser: FirebaseUser? = null
+        
+        fun userLoggedIn() = currentUser != null
     }
 
     override fun onCreate() {
