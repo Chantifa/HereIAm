@@ -37,7 +37,7 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater)
 
         binding.btnProfileSave.setOnClickListener {
-            val currentUser = HereIAmApplication.currentUser.value
+            val currentUser = HereIAmApplication.currentUser
             val photo = when {
                 ::imageUri.isInitialized -> imageUri
                 currentUser?.photoUrl == null -> Uri.parse(defaultImageUrl)
@@ -82,7 +82,7 @@ class ProfileFragment : Fragment() {
 
         // TODO hack to give time for checking current user
         Thread.sleep(1000)
-        if (HereIAmApplication.currentUser.value == null) {
+        if (HereIAmApplication.currentUser == null) {
             findNavController().navigate(R.id.nav_profile)
         } else {
             loadUser()
@@ -90,7 +90,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun loadUser() {
-        HereIAmApplication.currentUser.value?.let { user ->
+        HereIAmApplication.currentUser?.let { user ->
             Glide.with(this)
                 .load(user.photoUrl)
                 .into(binding.profileAvatar)

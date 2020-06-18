@@ -15,7 +15,7 @@ class ProfileViewModel : ViewModel() {
     private val folder = "profileImages"
 
     fun uploadImage(bitmap: Bitmap) {
-        val userId = HereIAmApplication.currentUser.value?.uid
+        val userId = HereIAmApplication.currentUser?.uid
         storageService.uploadImage(bitmap, folder, userId ?: "")
             .observeForever { result -> userPicture.value = result }
     }
