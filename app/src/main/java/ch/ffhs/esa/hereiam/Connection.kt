@@ -14,6 +14,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.ffhs.esa.hereiam.services.ApiService
+import ch.ffhs.esa.hereiam.services.AuthenticationService
 import ch.ffhs.esa.hereiam.services.AuthenticationServiceFirebaseAuth
 import ch.ffhs.esa.hereiam.util.RecyclerAdapter
 import kotlinx.android.synthetic.main.activity_connection.*
@@ -28,7 +29,7 @@ import timber.log.Timber
 
 class Connection : AppCompatActivity() {
 
-    private val authenticationService = AuthenticationServiceFirebaseAuth()
+    private val authenticationService: AuthenticationService = AuthenticationServiceFirebaseAuth()
     private val arrayList = ArrayList<String>()
     private var adapter = RecyclerAdapter()
     private val retrofit = Retrofit.Builder()

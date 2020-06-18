@@ -8,13 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import ch.ffhs.esa.hereiam.services.AuthenticationService
 import ch.ffhs.esa.hereiam.services.AuthenticationServiceFirebaseAuth
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.BuildConfig
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
-    private val authenticationService = AuthenticationServiceFirebaseAuth()
+    private val authenticationService: AuthenticationService = AuthenticationServiceFirebaseAuth()
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
