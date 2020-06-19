@@ -1,7 +1,6 @@
 package ch.ffhs.esa.hereiam.services
 
 import android.graphics.Bitmap
-import android.net.Uri
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 import java.io.ByteArrayOutputStream
@@ -12,7 +11,7 @@ interface StorageService {
         bitmap: Bitmap,
         folder: String,
         fileName: String = getRandomString(20)
-    ): Uri?
+    ): String
 
     private fun getRandomString(length: Int): String {
         val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
@@ -30,11 +29,11 @@ class StorageServiceFirebase : StorageService {
         bitmap: Bitmap,
         folder: String,
         fileName: String
-    ): Uri? {
+    ): String {
         val fileReference = fbStorage.reference.child("$folder/$fileName.jpg")
         val byteArray = compressBitmapToByteArray(bitmap)
         fileReference.putBytes(byteArray).await()
-        return fileReference.downloadUrl.await()
+        return fileReference.path
     }
 
     private fun compressBitmapToByteArray(bitmap: Bitmap): ByteArray {

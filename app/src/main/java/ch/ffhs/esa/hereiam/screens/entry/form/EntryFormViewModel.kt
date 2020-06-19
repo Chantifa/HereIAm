@@ -1,7 +1,6 @@
 package ch.ffhs.esa.hereiam.screens.entry.form
 
 import android.graphics.Bitmap
-import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.model.Entry
@@ -17,13 +16,13 @@ class EntryFormViewModel : ViewModel() {
     val image = MutableLiveData<Bitmap>()
     val locationName = HomeViewModel.locationName
     private val folder = "entryImages"
-    private var pathToImage: Uri? = null
+    private var pathToImage: String? = null
 
     suspend fun addEntry(
         heading: String,
         text: String
     ) {
-        val entry = Entry(heading, text, "LocationName TODO", 0.0, 0.0, pathToImage.toString())
+        val entry = Entry(heading, text, "LocationName TODO", 0.0, 0.0, pathToImage)
         databaseService.addEntry(entry)
     }
 

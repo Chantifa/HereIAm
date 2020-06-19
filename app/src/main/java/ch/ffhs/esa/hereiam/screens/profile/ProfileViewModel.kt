@@ -1,7 +1,6 @@
 package ch.ffhs.esa.hereiam.screens.profile
 
 import android.graphics.Bitmap
-import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.HereIAmApplication
@@ -14,7 +13,7 @@ import timber.log.Timber
 
 class ProfileViewModel : ViewModel() {
 
-    private val userPicture = MutableLiveData<Uri>()
+    private val userPicture = MutableLiveData<String>()
     private val storageService: StorageService = StorageServiceFirebase()
     private val folder = "profileImages"
 
