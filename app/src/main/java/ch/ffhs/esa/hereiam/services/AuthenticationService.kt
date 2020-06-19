@@ -4,7 +4,7 @@ import ch.ffhs.esa.hereiam.HereIAmApplication
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 
-interface AuthenticationService {
+interface AuthenticationService  {
     suspend fun loginUser(email: String, password: String)
     suspend fun registerUser(email: String, password: String)
     fun signOut()

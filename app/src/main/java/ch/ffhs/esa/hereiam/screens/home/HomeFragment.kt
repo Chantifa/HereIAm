@@ -38,6 +38,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        viewModel.initContext(context)
         binding = FragmentHomeBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -54,7 +55,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
             if (event.action == KeyEvent.ACTION_DOWN &&
                 keyCode == KeyEvent.KEYCODE_ENTER
             ) {
-                viewModel.changeMapBasedOnUserInput(context, locationText.text.toString())
+                viewModel.changeMapBasedOnUserInput(locationText.text.toString())
                 wishedLocation.setText(locationText.text).toString()
             }
             false
