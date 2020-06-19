@@ -12,6 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentEntryFormBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class EntryFormFragment : Fragment() {
 
@@ -32,37 +38,65 @@ class EntryFormFragment : Fragment() {
         }
 
         binding.btnAddEntry.setOnClickListener {
-            val entryTitle = binding.inputHeadingEntry.text.toString().trim()
-            val entryContent = binding.inputTextEntry.text.toString().trim()
-
-            if (entryTitle.isEmpty()) {
-                binding.inputHeadingEntry.error = getString(R.string.error_mandatory)
-                binding.inputHeadingEntry.requestFocus()
-                return@setOnClickListener
-            }
-
-            if (entryContent.isEmpty()) {
-                binding.inputTextEntry.error = getString(R.string.error_mandatory)
-                binding.inputTextEntry.requestFocus()
-                return@setOnClickListener
-            }
-
-            binding.progressbar.visibility = View.VISIBLE
-
-            // TODO upload image
-            viewModel.addEntry(entryTitle, entryContent)
-            Toast.makeText(activity, "Beitrag wurde erfolgreich hinzugefügt!", Toast.LENGTH_LONG).show()
-
-            binding.inputHeadingEntry.text.clear()
-            binding.inputTextEntry.text.clear()
-            binding.entryPhoto.visibility = View.GONE
-            binding.btnAddPhoto.visibility = View.VISIBLE
-
-            // TODO: wait on save
-            binding.progressbar.visibility = View.GONE
+            addEntry()
         }
 
         return binding.root
+    }
+
+    private fun addEntry() {
+        val entryTitle = binding.inputHeadingEntry.text.toString().trim()
+        val entryContent = binding.inputTextEntry.text.toString().trim()
+
+        if (!validateUserInput(entryTitle, entryContent)) return
+
+        binding.progressbar.visibility = View.VISIBLE
+        // TODO upload image
+
+        CoroutineScope(IO).launch {
+            try {
+                viewModel.addEntry(entryTitle, entryContent)
+                withContext(Main) {
+                    clearFields()
+                    giveUserFeedback(getString(R.string.entry_successfully_saved))
+                }
+            } catch (e: Exception) {
+                val msg = "Error while saving the entry. Reason: ${e.message}";
+                Timber.e(msg)
+                withContext(Main) {
+                    giveUserFeedback(msg)
+                }
+            }
+        }
+    }
+
+    private fun validateUserInput(
+        entryTitle: String,
+        entryContent: String
+    ): Boolean {
+        if (entryTitle.isEmpty()) {
+            binding.inputHeadingEntry.error = getString(R.string.error_mandatory)
+            binding.inputHeadingEntry.requestFocus()
+            return false
+        }
+
+        if (entryContent.isEmpty()) {
+            binding.inputTextEntry.error = getString(R.string.error_mandatory)
+            binding.inputTextEntry.requestFocus()
+            return false
+        }
+        return true
+    }
+
+    private fun giveUserFeedback(msg: String) {
+        Toast.makeText(activity, msg, Toast.LENGTH_LONG).show()
+    }
+
+    private fun clearFields() {
+        binding.inputHeadingEntry.text.clear()
+        binding.inputTextEntry.text.clear()
+        binding.entryPhoto.visibility = View.GONE
+        binding.progressbar.visibility = View.GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -6,7 +6,7 @@ import ch.ffhs.esa.hereiam.model.Entry
 import ch.ffhs.esa.hereiam.services.DatabaseService
 import ch.ffhs.esa.hereiam.services.DatabaseServiceFirestore
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -16,8 +16,8 @@ class EntryListViewModel : ViewModel() {
     private val databaseService: DatabaseService = DatabaseServiceFirestore()
     val entries = MutableLiveData<List<Entry>>()
 
-    init {
-        CoroutineScope(IO).launch {
+    fun loadList() {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
                 val list = databaseService.getAllEntries()
                 displayList(list)

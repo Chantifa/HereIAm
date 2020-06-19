@@ -75,4 +75,5 @@
     <string name="chosenLocation">gewählter Standort</string>
     <string name="new_entry">neuer Beitrag</string>
     <string name="your_location">momentaner Standort</string>
+    <string name="entry_successfully_saved">Beitrag wurde erfolgreich hinzugefügt!</string>
 </resources>
