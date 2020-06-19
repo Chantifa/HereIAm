@@ -130,9 +130,14 @@ class ProfileFragment : Fragment() {
             try {
                 viewModel.uploadImage(bitmap)
             } catch (e: Exception) {
-                Timber.e("Error while uploading Image: ${e.message}")
+                val msg = "Error while uploading image. Reason: ${e.message}"
+                Timber.e(msg)
+                withContext(Main) {
+                    activity?.toast(msg)
+                }
             }
             withContext(Main) {
+                activity?.toast(getString(R.string.profile_picture_successfully_saved))
                 binding.profileAvatar.setImageBitmap(bitmap)
                 binding.progressbarPic.visibility = View.GONE
             }

@@ -7,7 +7,7 @@ import ch.ffhs.esa.hereiam.services.AuthenticationServiceFirebaseAuth
 class LoginResetViewModel : ViewModel() {
     private val authenticationService: AuthenticationService = AuthenticationServiceFirebaseAuth()
 
-    fun resetPassword(email: String) {
+    suspend fun resetPassword(email: String) {
         authenticationService.resetPassword(email)
     }
 }

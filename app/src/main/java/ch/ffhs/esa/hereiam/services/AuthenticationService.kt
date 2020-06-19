@@ -3,14 +3,13 @@ package ch.ffhs.esa.hereiam.services
 import ch.ffhs.esa.hereiam.HereIAmApplication
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
-import timber.log.Timber
 
 interface AuthenticationService {
     suspend fun loginUser(email: String, password: String)
     suspend fun registerUser(email: String, password: String)
+    suspend fun resetPassword(email: String)
     fun signOut()
     fun updateCurrentUser()
-    fun resetPassword(email: String)
 }
 
 class AuthenticationServiceFirebaseAuth : AuthenticationService {
@@ -34,17 +33,7 @@ class AuthenticationServiceFirebaseAuth : AuthenticationService {
         HereIAmApplication.currentUser = fbAuth.currentUser
     }
 
-    override fun resetPassword(email: String) {
-        fbAuth
-            .sendPasswordResetEmail(email)
-            .addOnCompleteListener { task ->
-                // TODO: User feedback
-                if (task.isSuccessful) {
-                    Timber.i("success")
-                } else {
-                    Timber.i("error ${task.exception?.message!!}")
-                }
-            }
-
+    override suspend fun resetPassword(email: String) {
+        fbAuth.sendPasswordResetEmail(email).await()
     }
 }

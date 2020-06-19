@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.services.StorageService
 import ch.ffhs.esa.hereiam.services.StorageServiceFirebase
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.withContext
 
 class ProfileViewModel : ViewModel() {
 
@@ -15,6 +17,9 @@ class ProfileViewModel : ViewModel() {
 
     suspend fun uploadImage(bitmap: Bitmap) {
         val userId = HereIAmApplication.currentUser?.uid
-        userPicture.value = storageService.uploadImage(bitmap, folder, userId ?: "")
+        val path = storageService.uploadImage(bitmap, folder, userId ?: "")
+        withContext(Main) {
+            userPicture.value = path
+        }
     }
 }
