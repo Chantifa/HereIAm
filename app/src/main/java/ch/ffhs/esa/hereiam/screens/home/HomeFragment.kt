@@ -29,8 +29,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     lateinit var binding: FragmentHomeBinding
     lateinit var mFusedLocationClient: FusedLocationProviderClient
 
-
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val mapView = binding.mapView

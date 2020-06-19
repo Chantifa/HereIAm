@@ -9,7 +9,6 @@ import timber.log.Timber
 class HereIAmApplication : Application() {
 
     companion object {
-        var currentLocation: Location? = null
         var currentUser: FirebaseUser? = null
 
         fun userLoggedIn() = currentUser != null
