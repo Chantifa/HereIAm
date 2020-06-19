@@ -12,14 +12,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentHomeBinding
-import ch.ffhs.esa.hereiam.model.Location
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
 
 const val PERMISSION_ID = 42
 
@@ -28,7 +24,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     private val viewModel: HomeViewModel by viewModels()
     lateinit var binding: FragmentHomeBinding
     lateinit var mFusedLocationClient: FusedLocationProviderClient
-
 
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -71,12 +66,17 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         when (requestCode) {
             PERMISSION_ID -> {
                 // If request is cancelled, the result arrays are empty.
                 if ((grantResults.isNotEmpty() &&
-                            grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
+                            grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                ) {
                     viewModel.getLastLocation()
                 } else {
                     Toast.makeText(activity, "Aktiviere Standort!", Toast.LENGTH_SHORT).show()

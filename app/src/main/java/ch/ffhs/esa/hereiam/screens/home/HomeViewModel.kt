@@ -57,7 +57,7 @@ class HomeViewModel : ViewModel() {
 
     @SuppressLint("RestrictedApi")
     fun onActivity() {
-        location.observe({activity.lifecycle}) { latLng ->
+        location.observe({ activity.lifecycle }) { latLng ->
             if (latLng != null) {
                 val locationName = getCompleteAddress(latLng.latitude, latLng.longitude)
                 _locationName.postValue(locationName)
@@ -98,7 +98,9 @@ class HomeViewModel : ViewModel() {
                 val returnedAddress: Address = addresses[0]
                 val strReturnedAddress = StringBuilder("")
                 for (i in 0..returnedAddress.maxAddressLineIndex) {
-                    strReturnedAddress.append(returnedAddress.getAddressLine(i).split(", ").joinToString(separator = "\n")).append("\n")
+                    strReturnedAddress.append(
+                        returnedAddress.getAddressLine(i).split(", ").joinToString(separator = "\n")
+                    ).append("\n")
                 }
                 address = strReturnedAddress.toString()
                 Log.w("Deine Adresse", strReturnedAddress.toString())
@@ -154,15 +156,20 @@ class HomeViewModel : ViewModel() {
                     }
                 }
             } else {
-                val toast = makeText(context, "Bitte Zugriff auf Standort aktivieren!", Toast.LENGTH_SHORT)
+                val toast =
+                    makeText(context, "Bitte Zugriff auf Standort aktivieren!", Toast.LENGTH_SHORT)
                 toast.show()
                 loadDefaultLocation()
             }
         } else {
             requestPermissions(
                 activity,
-                arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION),
-                PERMISSION_ID)
+                arrayOf(
+                    Manifest.permission.ACCESS_COARSE_LOCATION,
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ),
+                PERMISSION_ID
+            )
         }
     }
 
