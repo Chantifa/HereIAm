@@ -57,21 +57,40 @@ class EntryFormFragment : Fragment() {
         if (!validateUserInput(entryTitle, entryContent)) return
 
         binding.progressbar.visibility = View.VISIBLE
-        // TODO upload image
 
         CoroutineScope(IO).launch {
-            try {
-                viewModel.addEntry(entryTitle, entryContent)
-                withContext(Main) {
-                    clearFields()
-                    giveUserFeedback(getString(R.string.entry_successfully_saved))
-                }
-            } catch (e: Exception) {
-                val msg = "Error while saving the entry. Reason: ${e.message}";
-                Timber.e(msg)
-                withContext(Main) {
-                    giveUserFeedback(msg)
-                }
+            uploadImage()
+            saveEntry(entryTitle, entryContent)
+            withContext(Main) {
+                clearFields()
+                giveUserFeedback(getString(R.string.entry_successfully_saved))
+            }
+        }
+    }
+
+    private suspend fun saveEntry(
+        entryTitle: String,
+        entryContent: String
+    ) {
+        try {
+            viewModel.addEntry(entryTitle, entryContent)
+        } catch (e: Exception) {
+            val msg = "Error while saving the entry. Reason: ${e.message}";
+            Timber.e(msg)
+            withContext(Main) {
+                giveUserFeedback(msg)
+            }
+        }
+    }
+
+    private suspend fun uploadImage() {
+        try {
+            viewModel.uploadImage()
+        } catch (e: Exception) {
+            val msg = "Error while saving the image. Reason: ${e.message}";
+            Timber.e(msg)
+            withContext(Main) {
+                giveUserFeedback(msg)
             }
         }
     }
