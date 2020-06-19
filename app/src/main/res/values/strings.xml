@@ -76,4 +76,6 @@
     <string name="new_entry">neuer Beitrag</string>
     <string name="your_location">momentaner Standort</string>
     <string name="entry_successfully_saved">Beitrag wurde erfolgreich hinzugefügt!</string>
+    <string name="registration_successfully">Registration erfolgreich!</string>
+    <string name="please_login_first">Bitte melde dich zuerst an.</string>
 </resources>

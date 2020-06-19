@@ -18,7 +18,11 @@
         android:id="@+id/nav_edit"
         android:name="ch.ffhs.esa.hereiam.screens.entry.form.EntryFormFragment"
         android:label="fragment_entry_form"
-        tools:layout="@layout/fragment_entry_form" />
+        tools:layout="@layout/fragment_entry_form" >
+        <action
+            android:id="@+id/action_nav_edit_to_nav_profile"
+            app:destination="@id/nav_profile" />
+    </fragment>
     <fragment
         android:id="@+id/entryListFragment"
         android:name="ch.ffhs.esa.hereiam.screens.entry.list.EntryListFragment"

@@ -7,13 +7,15 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentEntryFormBinding
 import ch.ffhs.esa.hereiam.util.hide
 import ch.ffhs.esa.hereiam.util.show
+import ch.ffhs.esa.hereiam.util.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -65,7 +67,7 @@ class EntryFormFragment : Fragment() {
             saveEntry(entryTitle, entryContent)
             withContext(Main) {
                 clearFields()
-                giveUserFeedback(getString(R.string.entry_successfully_saved))
+                activity?.toast(getString(R.string.entry_successfully_saved))
             }
         }
     }
@@ -80,7 +82,7 @@ class EntryFormFragment : Fragment() {
             val msg = "Error while saving the entry. Reason: ${e.message}";
             Timber.e(msg)
             withContext(Main) {
-                giveUserFeedback(msg)
+                activity?.toast(msg)
             }
         }
     }
@@ -92,7 +94,7 @@ class EntryFormFragment : Fragment() {
             val msg = "Error while saving the image. Reason: ${e.message}";
             Timber.e(msg)
             withContext(Main) {
-                giveUserFeedback(msg)
+                activity?.toast(msg)
             }
         }
     }
@@ -115,10 +117,6 @@ class EntryFormFragment : Fragment() {
         return true
     }
 
-    private fun giveUserFeedback(msg: String) {
-        Toast.makeText(activity, msg, Toast.LENGTH_LONG).show()
-    }
-
     private fun clearFields() {
         binding.inputHeadingEntry.text.clear()
         binding.inputTextEntry.text.clear()
@@ -131,6 +129,15 @@ class EntryFormFragment : Fragment() {
         if (requestCode == IMAGE_CAPTURE_REQUEST_CODE) {
             viewModel.image.value = data?.getParcelableExtra("data") as Bitmap
             showImage()
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (!HereIAmApplication.userLoggedIn()) {
+            activity?.toast(getString(R.string.please_login_first))
+            findNavController().navigate(R.id.action_nav_edit_to_nav_profile)
         }
     }
 

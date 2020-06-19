@@ -13,11 +13,13 @@ import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentRegistrationFormBinding
 import ch.ffhs.esa.hereiam.util.hide
 import ch.ffhs.esa.hereiam.util.show
+import ch.ffhs.esa.hereiam.util.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class RegistrationFormFragment : Fragment() {
 
@@ -52,10 +54,15 @@ class RegistrationFormFragment : Fragment() {
                 viewModel.registerUser(email, password)
                 withContext(Main) {
                     binding.progressbar.hide()
+                    activity?.toast(getString(R.string.registration_successfully))
                     findNavController().navigate(R.id.profileFragment)
                 }
             } catch (e: Exception) {
-
+                val msg = "Error while trying to register your account. Reason: ${e.message}";
+                Timber.e(msg)
+                withContext(Main) {
+                    activity?.toast(msg)
+                }
             }
         }
     }
