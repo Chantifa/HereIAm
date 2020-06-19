@@ -27,10 +27,10 @@ class Connection(private val activity: MainActivity) : ConnectivityManager.Netwo
 
     private fun showHint() {
         val dialog = AlertDialog.Builder(activity)
-            .setTitle("Kein Internet")
-            .setMessage("Bitte Internet einschalten !")
+            .setTitle(activity.getString(R.string.missing_connection_title))
+            .setMessage(activity.getString(R.string.missing_connection_body_text))
             .setCancelable(false)
-            .setPositiveButton("Ausgeführt", null)
+            .setPositiveButton(activity.getString(R.string.ok), null)
             .show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
             if (isConnected()) {
