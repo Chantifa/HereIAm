@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentEntryFormBinding
+import ch.ffhs.esa.hereiam.util.hide
+import ch.ffhs.esa.hereiam.util.show
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -56,7 +58,7 @@ class EntryFormFragment : Fragment() {
 
         if (!validateUserInput(entryTitle, entryContent)) return
 
-        binding.progressbar.visibility = View.VISIBLE
+        binding.progressbar.show()
 
         CoroutineScope(IO).launch {
             uploadImage()
@@ -121,7 +123,7 @@ class EntryFormFragment : Fragment() {
         binding.inputHeadingEntry.text.clear()
         binding.inputTextEntry.text.clear()
         binding.entryPhoto.visibility = View.GONE
-        binding.progressbar.visibility = View.GONE
+        binding.progressbar.hide()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -138,4 +140,6 @@ class EntryFormFragment : Fragment() {
         binding.btnAddPhoto.visibility = View.GONE
     }
 }
+
+
 

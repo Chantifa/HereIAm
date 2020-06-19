@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentLoginFormBinding
+import ch.ffhs.esa.hereiam.util.hide
+import ch.ffhs.esa.hereiam.util.show
 
 class LoginFormFragment : Fragment() {
 
@@ -47,12 +49,12 @@ class LoginFormFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            binding.progressbar.visibility = View.VISIBLE
+            binding.progressbar.show()
 
             viewModel.loginUser(email, password)
 
             // TODO: wait on login
-            binding.progressbar.visibility = View.GONE
+            binding.progressbar.hide()
 
             findNavController().navigate(R.id.profileFragment)
         }

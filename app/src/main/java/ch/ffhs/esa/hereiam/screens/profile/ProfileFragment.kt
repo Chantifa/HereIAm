@@ -15,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentProfileBinding
+import ch.ffhs.esa.hereiam.util.hide
+import ch.ffhs.esa.hereiam.util.show
 import ch.ffhs.esa.hereiam.util.toast
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -63,11 +65,11 @@ class ProfileFragment : Fragment() {
                 .setPhotoUri(photo)
                 .build()
 
-            binding.progressbar.visibility = View.VISIBLE
+            binding.progressbar.show()
 
             currentUser?.updateProfile(updates)
                 ?.addOnCompleteListener { task ->
-                    binding.progressbar.visibility = View.INVISIBLE
+                    binding.progressbar.hide()
                     if (task.isSuccessful) {
                         context?.toast(getString(R.string.message_profile_changed))
                     } else {
