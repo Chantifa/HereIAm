@@ -18,6 +18,12 @@ import ch.ffhs.esa.hereiam.databinding.FragmentProfileBinding
 import ch.ffhs.esa.hereiam.util.toast
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.UserProfileChangeRequest
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 class ProfileFragment : Fragment() {
 
@@ -118,9 +124,16 @@ class ProfileFragment : Fragment() {
     private fun uploadImageAndSaveUri(bitmap: Bitmap) {
         binding.progressbarPic.visibility = View.VISIBLE
 
-        viewModel.uploadImage(bitmap)
-        binding.profileAvatar.setImageBitmap(bitmap)
-
-        binding.progressbarPic.visibility = View.INVISIBLE
+        CoroutineScope(IO).launch {
+            try {
+                viewModel.uploadImage(bitmap)
+            } catch (e: Exception) {
+                Timber.e("Error while uploading Image: ${e.message}")
+            }
+            withContext(Main) {
+                binding.profileAvatar.setImageBitmap(bitmap)
+                binding.progressbarPic.visibility = View.GONE
+            }
+        }
     }
 }
