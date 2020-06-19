@@ -19,12 +19,10 @@ import com.google.android.gms.maps.OnMapReadyCallback
 
 const val PERMISSION_ID = 42
 
-
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private val viewModel: HomeViewModel by viewModels()
     lateinit var binding: FragmentHomeBinding
-    lateinit var mFusedLocationClient: FusedLocationProviderClient
-
+    private lateinit var mFusedLocationClient: FusedLocationProviderClient
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

@@ -16,6 +16,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.services.LocationService
 import ch.ffhs.esa.hereiam.services.LocationServiceImplementation
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -121,7 +122,7 @@ class HomeViewModel : ViewModel() {
                 }
             } else {
                 val toast =
-                    makeText(context, "Bitte Zugriff auf Standort aktivieren!", Toast.LENGTH_SHORT)
+                    makeText(context, context?.getString(R.string.please_activate_access_on_location), Toast.LENGTH_SHORT)
                 toast.show()
                 loadDefaultLocation()
             }

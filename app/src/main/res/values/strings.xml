@@ -84,4 +84,5 @@
     <string name="missing_connection_title">Fehlende Netzwerkverbindung</string>
     <string name="ok">OK</string>
     <string name="username_successfully_saved">Username gespeichert!</string>
+    <string name="please_activate_access_on_location">Bitte Zugriff auf Standort aktivieren!</string>
 </resources>
