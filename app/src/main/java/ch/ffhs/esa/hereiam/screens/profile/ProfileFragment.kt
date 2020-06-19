@@ -18,7 +18,6 @@ import ch.ffhs.esa.hereiam.util.hide
 import ch.ffhs.esa.hereiam.util.show
 import ch.ffhs.esa.hereiam.util.toast
 import com.bumptech.glide.Glide
-import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -44,37 +43,7 @@ class ProfileFragment : Fragment() {
         binding = FragmentProfileBinding.inflate(inflater)
 
         binding.btnProfileSave.setOnClickListener {
-            val currentUser = HereIAmApplication.currentUser
-            val photo = when {
-                ::imageUri.isInitialized -> imageUri
-                currentUser?.photoUrl == null -> Uri.parse(defaultImageUrl)
-                else -> currentUser.photoUrl
-            }
-
-            val name = binding.username.text.toString().trim()
-
-            if (name.isEmpty()) {
-                binding.username.error = getString(R.string.error_mandatory)
-                binding.username.requestFocus()
-                return@setOnClickListener
-            }
-
-            val updates = UserProfileChangeRequest.Builder()
-                .setDisplayName(name)
-                .setPhotoUri(photo)
-                .build()
-
-            binding.progressbar.show()
-
-            currentUser?.updateProfile(updates)
-                ?.addOnCompleteListener { task ->
-                    binding.progressbar.hide()
-                    if (task.isSuccessful) {
-                        context?.toast(getString(R.string.message_profile_changed))
-                    } else {
-                        context?.toast(task.exception?.message!!)
-                    }
-                }
+            saveEdits()
         }
 
         binding.profileAvatar.setOnClickListener {
@@ -82,6 +51,42 @@ class ProfileFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    private fun saveEdits() {
+
+        val name = binding.username.text.toString().trim()
+
+        if (!validateUserInput(name)) return
+
+        binding.progressbar.show()
+
+        CoroutineScope(IO).launch {
+            try {
+                viewModel.saveUserName(name)
+                withContext(Main) {
+                    activity?.toast(getString(R.string.username_successfully_saved))
+                }
+            } catch (e: Exception) {
+                val msg = "Error while resetting your account. Reason: ${e.message}"
+                Timber.e(msg)
+                withContext(Main) {
+                    activity?.toast(msg)
+                }
+            }
+            withContext(Main) {
+                binding.progressbar.hide()
+            }
+        }
+    }
+
+    private fun validateUserInput(name: String): Boolean {
+        if (name.isEmpty()) {
+            binding.username.error = getString(R.string.error_mandatory)
+            binding.username.requestFocus()
+            return false
+        }
+        return true
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -121,6 +126,10 @@ class ProfileFragment : Fragment() {
         CoroutineScope(IO).launch {
             try {
                 viewModel.uploadImage(bitmap)
+                withContext(Main) {
+                    activity?.toast(getString(R.string.profile_picture_successfully_saved))
+                    binding.profileAvatar.setImageBitmap(bitmap)
+                }
             } catch (e: Exception) {
                 val msg = "Error while uploading image. Reason: ${e.message}"
                 Timber.e(msg)
@@ -129,8 +138,6 @@ class ProfileFragment : Fragment() {
                 }
             }
             withContext(Main) {
-                activity?.toast(getString(R.string.profile_picture_successfully_saved))
-                binding.profileAvatar.setImageBitmap(bitmap)
                 binding.progressbarPic.visibility = View.GONE
             }
         }

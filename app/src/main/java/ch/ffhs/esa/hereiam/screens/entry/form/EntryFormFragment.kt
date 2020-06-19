@@ -63,38 +63,23 @@ class EntryFormFragment : Fragment() {
         binding.progressbar.show()
 
         CoroutineScope(IO).launch {
-            uploadImage()
-            saveEntry(entryTitle, entryContent)
-            withContext(Main) {
-                clearFields()
-                activity?.toast(getString(R.string.entry_successfully_saved))
+            try {
+                viewModel.uploadImage()
+                viewModel.addEntry(entryTitle, entryContent)
+                withContext(Main) {
+                    clearFields()
+                    activity?.toast(getString(R.string.entry_successfully_saved))
+                }
+            } catch (e: Exception) {
+                val msg = "Error while saving the entry. Reason: ${e.message}";
+                Timber.e(msg)
+                withContext(Main) {
+                    activity?.toast(msg)
+                }
             }
-        }
-    }
 
-    private suspend fun saveEntry(
-        entryTitle: String,
-        entryContent: String
-    ) {
-        try {
-            viewModel.addEntry(entryTitle, entryContent)
-        } catch (e: Exception) {
-            val msg = "Error while saving the entry. Reason: ${e.message}";
-            Timber.e(msg)
             withContext(Main) {
-                activity?.toast(msg)
-            }
-        }
-    }
-
-    private suspend fun uploadImage() {
-        try {
-            viewModel.uploadImage()
-        } catch (e: Exception) {
-            val msg = "Error while saving the image. Reason: ${e.message}";
-            Timber.e(msg)
-            withContext(Main) {
-                activity?.toast(msg)
+                binding.progressbar.hide()
             }
         }
     }
@@ -121,7 +106,6 @@ class EntryFormFragment : Fragment() {
         binding.inputHeadingEntry.text.clear()
         binding.inputTextEntry.text.clear()
         binding.entryPhoto.visibility = View.GONE
-        binding.progressbar.hide()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

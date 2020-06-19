@@ -52,6 +52,10 @@ class RegistrationFormFragment : Fragment() {
         CoroutineScope(IO).launch {
             try {
                 viewModel.registerUser(email, password)
+                withContext(Main) {
+                    activity?.toast(getString(R.string.registration_successfully))
+                    findNavController().navigate(R.id.nav_profile)
+                }
             } catch (e: Exception) {
                 val msg = "Error while trying to register your account. Reason: ${e.message}";
                 Timber.e(msg)
@@ -61,8 +65,6 @@ class RegistrationFormFragment : Fragment() {
             }
             withContext(Main) {
                 binding.progressbar.hide()
-                activity?.toast(getString(R.string.registration_successfully))
-                findNavController().navigate(R.id.nav_profile)
             }
         }
     }

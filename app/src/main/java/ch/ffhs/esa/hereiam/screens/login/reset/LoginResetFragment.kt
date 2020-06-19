@@ -48,16 +48,19 @@ class LoginResetFragment : Fragment() {
         CoroutineScope(IO).launch {
             try {
                 viewModel.resetPassword(email)
-                activity?.toast(getString(R.string.reset_password_successfully))
+                withContext(Main) {
+                    activity?.toast(getString(R.string.reset_password_successfully))
+                    findNavController().navigate(R.id.nav_profile)
+                }
             } catch (e: Exception) {
                 val msg = "Error while resetting your account. Reason: ${e.message}"
                 Timber.e(msg)
-                activity?.toast(msg)
+                withContext(Main) {
+                    activity?.toast(msg)
+                }
             }
-
             withContext(Main) {
                 binding.progressbar.hide()
-                findNavController().navigate(R.id.nav_profile)
             }
         }
     }

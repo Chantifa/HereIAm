@@ -83,4 +83,5 @@
     <string name="missing_connection_body_text">HereIAm funktioniert nur mit aktiver Internetverbindung. Bitte schalte das Internet ein und klicke auf «OK».</string>
     <string name="missing_connection_title">Fehlende Netzwerkverbindung</string>
     <string name="ok">OK</string>
+    <string name="username_successfully_saved">Username gespeichert!</string>
 </resources>

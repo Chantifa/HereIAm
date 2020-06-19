@@ -6,6 +6,7 @@ import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.services.StorageService
 import ch.ffhs.esa.hereiam.services.StorageServiceFirebase
 import com.google.firebase.auth.UserProfileChangeRequest
+import kotlinx.coroutines.tasks.await
 
 class ProfileViewModel : ViewModel() {
 
@@ -16,7 +17,11 @@ class ProfileViewModel : ViewModel() {
         val userId = HereIAmApplication.currentUser?.uid
         val path = storageService.uploadImageAndSaveUri(bitmap, folder, userId ?: "")
         val changeRequest = UserProfileChangeRequest.Builder().setPhotoUri(path).build()
-        HereIAmApplication.currentUser?.updateProfile(changeRequest)
+        HereIAmApplication.currentUser?.updateProfile(changeRequest)?.await()
+    }
 
+    suspend fun saveUserName(name: String) {
+        val changeRequest = UserProfileChangeRequest.Builder().setDisplayName(name).build()
+        HereIAmApplication.currentUser?.updateProfile(changeRequest)?.await()
     }
 }
