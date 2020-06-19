@@ -27,6 +27,8 @@ class LoginFormFragment : Fragment() {
 
         binding.textRegistrationLink.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_profile_to_registrationFormFragment))
 
+        binding.textResetPassword.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_nav_profile_to_loginResetFragment))
+
         binding.btnLogin.setOnClickListener {
             val email = binding.username.text.toString().trim()
             val password = binding.password.text.toString().trim()
@@ -65,8 +67,6 @@ class LoginFormFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO hack to give time for checking current user
-        Thread.sleep(100)
         if (HereIAmApplication.userLoggedIn()) {
             findNavController().navigate(R.id.profileFragment)
         }
