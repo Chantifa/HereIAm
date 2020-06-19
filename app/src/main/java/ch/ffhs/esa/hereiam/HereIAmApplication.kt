@@ -1,7 +1,7 @@
 package ch.ffhs.esa.hereiam
 
 import android.app.Application
-import ch.ffhs.esa.hereiam.model.Location
+import android.location.Address
 import com.google.firebase.auth.FirebaseUser
 import timber.log.Timber
 
@@ -9,6 +9,7 @@ import timber.log.Timber
 class HereIAmApplication : Application() {
 
     companion object {
+        var currentLocation: Address? = null
         var currentUser: FirebaseUser? = null
 
         fun userLoggedIn() = currentUser != null

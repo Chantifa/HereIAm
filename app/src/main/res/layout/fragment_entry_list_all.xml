@@ -8,31 +8,4 @@
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-
-    <!--
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/heading_all_entries"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_large"
-            android:layout_marginTop="@dimen/gap_default"
-            android:layout_marginEnd="@dimen/gap_large"
-            android:text="@string/heading_all_entries"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <ListView
-            android:id="@+id/entry_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/gap_large"
-            android:layout_marginTop="@dimen/gap_default"
-            android:layout_marginEnd="@dimen/gap_large" />
-
-    </LinearLayout>-->
 </layout>

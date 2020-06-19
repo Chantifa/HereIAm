@@ -7,7 +7,7 @@ import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import androidx.appcompat.app.AlertDialog
 
-class Connection(private val activity: MainActivity): ConnectivityManager.NetworkCallback() {
+class Connection(private val activity: MainActivity) : ConnectivityManager.NetworkCallback() {
     private val connectivityManager =
         activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 

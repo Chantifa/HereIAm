@@ -27,5 +27,10 @@ class EntryListFragment : Fragment() {
         })
         return binding.root
     }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.loadList()
+    }
 }
 
