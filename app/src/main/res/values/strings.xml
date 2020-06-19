@@ -80,4 +80,5 @@
     <string name="please_login_first">Bitte melde dich zuerst an.</string>
     <string name="profile_picture_successfully_saved">Profilbild wurde erfolgreich gespeichert.</string>
     <string name="reset_password_successfully">In den nächsten Minuten erhältst du eine E-Mail, um dein Passwort zurücksetzen zu können.</string>
+    <string name="login_successfully">Du hast dich erfolgreich angemeldet.</string>
 </resources>

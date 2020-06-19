@@ -11,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentProfileBinding
@@ -87,14 +86,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // TODO hack to give time for checking current user
-        Thread.sleep(1000)
-        if (HereIAmApplication.currentUser == null) {
-            findNavController().navigate(R.id.nav_profile)
-        } else {
-            loadUser()
-        }
+        loadUser()
     }
 
     private fun loadUser() {

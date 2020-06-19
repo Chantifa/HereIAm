@@ -28,7 +28,7 @@ class EntryFormViewModel : ViewModel() {
 
     suspend fun uploadImage() {
         image.value?.apply {
-            pathToImage = storageService.uploadImage(this, folder)
+            pathToImage = storageService.uploadImageAndSaveRelativePath(this, folder)
         }
     }
 }

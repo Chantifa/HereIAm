@@ -22,6 +22,7 @@ class AuthenticationServiceFirebaseAuth : AuthenticationService {
 
     override suspend fun registerUser(email: String, password: String) {
         fbAuth.createUserWithEmailAndPassword(email, password).await()
+        updateCurrentUser()
     }
 
     override fun signOut() {
