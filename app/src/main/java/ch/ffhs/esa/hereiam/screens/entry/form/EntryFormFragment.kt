@@ -19,6 +19,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
+private const val IMAGE_CAPTURE_REQUEST_CODE = 123
+
 class EntryFormFragment : Fragment() {
 
     private val viewModel: EntryFormViewModel by viewModels()
@@ -32,9 +34,13 @@ class EntryFormFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        if (viewModel.image.value != null) {
+            showImage()
+        }
+
         binding.btnAddPhoto.setOnClickListener {
-            val img = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(img, 123)
+            val intent: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(intent, IMAGE_CAPTURE_REQUEST_CODE)
         }
 
         binding.btnAddEntry.setOnClickListener {
@@ -101,12 +107,16 @@ class EntryFormFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 123) {
-            val bmp = data?.getParcelableExtra("data") as Bitmap
-            binding.entryPhoto.setImageBitmap(bmp)
-            binding.entryPhoto.visibility = View.VISIBLE
-            binding.btnAddPhoto.visibility = View.GONE
+        if (requestCode == IMAGE_CAPTURE_REQUEST_CODE) {
+            viewModel.image.value = data?.getParcelableExtra("data") as Bitmap
+            showImage()
         }
+    }
+
+    private fun showImage() {
+        binding.entryPhoto.setImageBitmap(viewModel.image.value)
+        binding.entryPhoto.visibility = View.VISIBLE
+        binding.btnAddPhoto.visibility = View.GONE
     }
 }
 
