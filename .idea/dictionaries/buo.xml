@@ -2,6 +2,7 @@
   <dictionary name="buo">
     <words>
       <w>coords</w>
+      <w>firestore</w>
       <w>geocoder</w>
     </words>
   </dictionary>
