@@ -7,9 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
+import ch.ffhs.esa.hereiam.HereIAmApplication
+import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentEntryListAllBinding
 import ch.ffhs.esa.hereiam.util.hide
 import ch.ffhs.esa.hereiam.util.show
+import ch.ffhs.esa.hereiam.util.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
@@ -33,6 +37,15 @@ class EntryListFragment : Fragment() {
             }
         })
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (!HereIAmApplication.userLoggedIn()) {
+            activity?.toast(getString(R.string.please_login_first))
+            findNavController().navigate(R.id.nav_profile)
+        }
     }
 
     override fun onStart() {
