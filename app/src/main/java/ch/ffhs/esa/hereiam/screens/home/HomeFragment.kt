@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentHomeBinding
+import ch.ffhs.esa.hereiam.services.LocationServiceImplementation
 import ch.ffhs.esa.hereiam.util.getShortAddress
 import ch.ffhs.esa.hereiam.util.toast
 import com.google.android.gms.location.LocationServices
@@ -41,8 +42,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         activity?.let {
             viewModel.initLocationService(
-                Geocoder(it),
-                LocationServices.getFusedLocationProviderClient(it)
+                LocationServiceImplementation(
+                    Geocoder(it),
+                    LocationServices.getFusedLocationProviderClient(it)
+                )
             )
         }
         binding = FragmentHomeBinding.inflate(inflater)

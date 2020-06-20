@@ -1,14 +1,11 @@
 package ch.ffhs.esa.hereiam.screens.home
 
-import android.location.Geocoder
 import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.MainActivity
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.services.LocationService
-import ch.ffhs.esa.hereiam.services.LocationServiceImplementation
 import ch.ffhs.esa.hereiam.util.getShortAddress
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
@@ -50,8 +47,8 @@ class HomeViewModel : ViewModel() {
         }
     }
 
-    fun initLocationService(geocoder: Geocoder, fusedLocationClient: FusedLocationProviderClient) {
-        locationService = LocationServiceImplementation(geocoder, fusedLocationClient)
+    fun initLocationService(locationService: LocationService) {
+        this.locationService = locationService
     }
 
     suspend fun resetLocation() {
