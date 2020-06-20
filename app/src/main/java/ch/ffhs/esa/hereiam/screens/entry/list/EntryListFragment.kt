@@ -8,19 +8,23 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import ch.ffhs.esa.hereiam.databinding.FragmentEntryListAllBinding
+import ch.ffhs.esa.hereiam.util.hide
+import ch.ffhs.esa.hereiam.util.show
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 class EntryListFragment : Fragment() {
     private val viewModel: EntryListViewModel by viewModels()
-
+    private lateinit var binding: FragmentEntryListAllBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentEntryListAllBinding.inflate(inflater)
+        binding = FragmentEntryListAllBinding.inflate(inflater)
         val adapter = EntryListAdapter()
         binding.entriesList.adapter = adapter
         viewModel.entries.observe(viewLifecycleOwner, Observer {
@@ -33,8 +37,12 @@ class EntryListFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        binding.progressbar.show()
         CoroutineScope(IO).launch {
             viewModel.loadList()
+            withContext(Main) {
+                binding.progressbar.hide()
+            }
         }
     }
 }
