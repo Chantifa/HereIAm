@@ -27,8 +27,8 @@
     <string name="heading_all_entries">Alle Einträge</string>
     <string name="hereiam_logo">HereIAm Logo</string>
     <string name="welcome_teaser">Herzlich willkommen in unserer HereIam App!</string>
-    <string name="welcome_intro_1">Unsere App bringt dir die Möglichkeit mehr über deinen Standort zu erfahren.</string>
-    <string name="welcome_intro_2">Du kannst Beiträge auch selber zu dem Standort erfassen und passende Fotos hochladen.</string>
+    <string name="welcome_intro_1">Unsere App bringt dir die Möglichkeit mehr über Standorte zu erfahren.</string>
+    <string name="welcome_intro_2">Du kannst Beiträge auch selber zu deinem oder zu einem gewünschten Standort erfassen und dazu kannst auch passende Fotos hochladen.</string>
     <string name="welcome_start_btn">Los geht es!</string>
     <string name="login_registration">Noch kein Konto?</string>
     <string name="login_registration_link">Registriere dich hier.</string>
