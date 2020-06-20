@@ -3,6 +3,7 @@ package ch.ffhs.esa.hereiam.screens.entry.form
 import android.graphics.Bitmap
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.model.Entry
 import ch.ffhs.esa.hereiam.screens.home.HomeViewModel
 import ch.ffhs.esa.hereiam.services.DatabaseService
@@ -22,7 +23,8 @@ class EntryFormViewModel : ViewModel() {
         heading: String,
         text: String
     ) {
-        val entry = Entry(heading, text, "LocationName TODO", 0.0, 0.0, pathToImage)
+        val author = HereIAmApplication.currentUser?.displayName
+        val entry = Entry(heading, text, "LocationName TODO", 0.0, 0.0, author, pathToImage)
         databaseService.addEntry(entry)
     }
 
