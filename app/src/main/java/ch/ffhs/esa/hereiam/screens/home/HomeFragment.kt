@@ -89,7 +89,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
-
     override fun onMapReady(map: GoogleMap?) {
         map?.let {
             viewModel.googleMap = it
