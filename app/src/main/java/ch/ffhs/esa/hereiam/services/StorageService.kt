@@ -27,6 +27,8 @@ interface StorageService {
             .map(charPool::get)
             .joinToString("")
     }
+
+    suspend fun getUriFromPath(path: String): Uri?
 }
 
 class StorageServiceFirebase : StorageService {
@@ -52,6 +54,11 @@ class StorageServiceFirebase : StorageService {
         val byteArray = compressBitmapToByteArray(bitmap)
         fileReference.putBytes(byteArray).await()
         return fileReference.path
+    }
+
+    override suspend fun getUriFromPath(path: String): Uri? {
+        val fileReference = fbStorage.reference.child(path)
+        return fileReference.downloadUrl.await()
     }
 
     private fun compressBitmapToByteArray(bitmap: Bitmap): ByteArray {
