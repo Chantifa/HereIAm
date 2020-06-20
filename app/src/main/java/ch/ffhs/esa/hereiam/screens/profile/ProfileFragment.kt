@@ -95,7 +95,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun loadUser() {
-        HereIAmApplication.currentUser?.let { user ->
+        HereIAmApplication.currentUser.value?.let { user ->
             Glide.with(this)
                 .load(user.photoUrl)
                 .into(binding.profileAvatar)

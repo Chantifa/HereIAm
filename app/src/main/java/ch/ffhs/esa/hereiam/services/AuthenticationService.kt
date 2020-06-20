@@ -2,6 +2,9 @@ package ch.ffhs.esa.hereiam.services
 
 import ch.ffhs.esa.hereiam.HereIAmApplication
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
 interface AuthenticationService {
@@ -31,7 +34,9 @@ class AuthenticationServiceFirebaseAuth : AuthenticationService {
     }
 
     override fun updateCurrentUser() {
-        HereIAmApplication.currentUser = fbAuth.currentUser
+        CoroutineScope(Main).launch {
+            HereIAmApplication.currentUser.value = fbAuth.currentUser
+        }
     }
 
     override suspend fun resetPassword(email: String) {
