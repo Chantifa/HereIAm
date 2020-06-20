@@ -10,8 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentHomeBinding
+import ch.ffhs.esa.hereiam.util.toast
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
+import timber.log.Timber
 
 class HomeFragment : Fragment(), OnMapReadyCallback {
     private val viewModel: HomeViewModel by viewModels()
@@ -37,19 +39,24 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         binding.btnAllEntries.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_entryListFragment))
 
         val locationText = binding.locationEditText
-        // Current location isn't converting in Address right now
-
         locationText.setOnKeyListener { _, keyCode, event ->
-            // If the event is a key-down event on the "enter" button
+            // If the event is a key-down event and the "enter" button
             if (event.action == KeyEvent.ACTION_DOWN &&
                 keyCode == KeyEvent.KEYCODE_ENTER
             ) {
-                viewModel.changeMapBasedOnUserInput(locationText.text.toString())
+                try {
+                    viewModel.changeMapBasedOnUserInput(locationText.text.toString())
+                    binding.yourLocation.text = locationText.text.toString()
+                    locationText.text.clear()
+                } catch (e: Exception) {
+                    val msg = "Location not found. Reason: ${e.message}";
+                    Timber.e(msg)
+                    activity?.toast(msg)
+                }
             }
             false
         }
         viewModel.activity = requireActivity()
-        viewModel.onActivity()
         return binding.root
     }
 
