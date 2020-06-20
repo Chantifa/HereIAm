@@ -47,7 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/gap_large"
             android:layout_marginTop="@dimen/gap_default"
-            android:text="@{viewModel.xyz}"
+            android:text="@{viewModel.currentLocation}"
             android:textSize="26sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
