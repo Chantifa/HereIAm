@@ -1,4 +1,4 @@
-package ch.ffhs.esa.hereiam.screens.login.registration
+package ch.ffhs.esa.hereiam.screens.login.reset
 
 import android.os.Bundle
 import android.util.Patterns
@@ -7,10 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import ch.ffhs.esa.hereiam.R
-import ch.ffhs.esa.hereiam.databinding.FragmentRegistrationFormBinding
+import ch.ffhs.esa.hereiam.databinding.FragmentLoginResetBinding
 import ch.ffhs.esa.hereiam.util.hide
 import ch.ffhs.esa.hereiam.util.show
 import ch.ffhs.esa.hereiam.util.toast
@@ -21,43 +20,40 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
-class RegistrationFormFragment : Fragment() {
+class LoginResetFragment : Fragment() {
 
-    private val viewModel: RegistrationFormViewModel by viewModels()
-    private lateinit var binding: FragmentRegistrationFormBinding
+    private val viewModel: LoginResetViewModel by viewModels()
+    private lateinit var binding: FragmentLoginResetBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRegistrationFormBinding.inflate(inflater)
+        binding = FragmentLoginResetBinding.inflate(inflater)
 
-        binding.textBackLink.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_registrationFormFragment_to_nav_profile))
-
-        binding.btnCreateUser.setOnClickListener {
-            createUser()
+        binding.btnResetPassword.setOnClickListener {
+            resetPassword()
         }
 
         return binding.root
     }
 
-    private fun createUser() {
+    private fun resetPassword() {
         val email = binding.username.text.toString().trim()
-        val password = binding.password.text.toString().trim()
 
-        if (!validateUserInput(email, binding, password)) return
+        if (!validateUserInput(email)) return
 
         binding.progressbar.show()
 
         CoroutineScope(IO).launch {
             try {
-                viewModel.registerUser(email, password)
+                viewModel.resetPassword(email)
                 withContext(Main) {
-                    activity?.toast(getString(R.string.registration_successfully))
+                    activity?.toast(getString(R.string.reset_password_successfully))
                     findNavController().navigate(R.id.nav_profile)
                 }
             } catch (e: Exception) {
-                val msg = "Error while trying to register your account. Reason: ${e.message}";
+                val msg = "Error while resetting your account. Reason: ${e.message}"
                 Timber.e(msg)
                 withContext(Main) {
                     activity?.toast(msg)
@@ -70,9 +66,7 @@ class RegistrationFormFragment : Fragment() {
     }
 
     private fun validateUserInput(
-        email: String,
-        binding: FragmentRegistrationFormBinding,
-        password: String
+        email: String
     ): Boolean {
         if (email.isEmpty()) {
             binding.username.error = getString(R.string.error_mandatory)
@@ -83,12 +77,6 @@ class RegistrationFormFragment : Fragment() {
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             binding.username.error = getString(R.string.error_invalid_email)
             binding.username.requestFocus()
-            return false
-        }
-
-        if (password.isEmpty() || password.length < 6) {
-            binding.password.error = getString(R.string.error_min_char_count)
-            binding.password.requestFocus()
             return false
         }
         return true

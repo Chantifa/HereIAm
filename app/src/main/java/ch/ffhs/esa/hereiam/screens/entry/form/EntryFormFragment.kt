@@ -7,17 +7,23 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentEntryFormBinding
+import ch.ffhs.esa.hereiam.util.hide
+import ch.ffhs.esa.hereiam.util.show
+import ch.ffhs.esa.hereiam.util.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+
+private const val IMAGE_CAPTURE_REQUEST_CODE = 123
 
 class EntryFormFragment : Fragment() {
 
@@ -32,9 +38,13 @@ class EntryFormFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        if (viewModel.image.value != null) {
+            showImage()
+        }
+
         binding.btnAddPhoto.setOnClickListener {
-            val img = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(img, 123)
+            val intent: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            startActivityForResult(intent, IMAGE_CAPTURE_REQUEST_CODE)
         }
 
         binding.btnAddEntry.setOnClickListener {
@@ -50,22 +60,26 @@ class EntryFormFragment : Fragment() {
 
         if (!validateUserInput(entryTitle, entryContent)) return
 
-        binding.progressbar.visibility = View.VISIBLE
-        // TODO upload image
+        binding.progressbar.show()
 
         CoroutineScope(IO).launch {
             try {
+                viewModel.uploadImage()
                 viewModel.addEntry(entryTitle, entryContent)
                 withContext(Main) {
                     clearFields()
-                    giveUserFeedback(getString(R.string.entry_successfully_saved))
+                    activity?.toast(getString(R.string.entry_successfully_saved))
                 }
             } catch (e: Exception) {
                 val msg = "Error while saving the entry. Reason: ${e.message}";
                 Timber.e(msg)
                 withContext(Main) {
-                    giveUserFeedback(msg)
+                    activity?.toast(msg)
                 }
+            }
+
+            withContext(Main) {
+                binding.progressbar.hide()
             }
         }
     }
@@ -88,25 +102,35 @@ class EntryFormFragment : Fragment() {
         return true
     }
 
-    private fun giveUserFeedback(msg: String) {
-        Toast.makeText(activity, msg, Toast.LENGTH_LONG).show()
-    }
-
     private fun clearFields() {
         binding.inputHeadingEntry.text.clear()
         binding.inputTextEntry.text.clear()
         binding.entryPhoto.visibility = View.GONE
-        binding.progressbar.visibility = View.GONE
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 123) {
-            val bmp = data?.getParcelableExtra("data") as Bitmap
-            binding.entryPhoto.setImageBitmap(bmp)
-            binding.entryPhoto.visibility = View.VISIBLE
-            binding.btnAddPhoto.visibility = View.GONE
+        if (requestCode == IMAGE_CAPTURE_REQUEST_CODE) {
+            viewModel.image.value = data?.getParcelableExtra("data") as Bitmap
+            showImage()
         }
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        if (!HereIAmApplication.userLoggedIn()) {
+            activity?.toast(getString(R.string.please_login_first))
+            findNavController().navigate(R.id.action_nav_edit_to_nav_profile)
+        }
+    }
+
+    private fun showImage() {
+        binding.entryPhoto.setImageBitmap(viewModel.image.value)
+        binding.entryPhoto.visibility = View.VISIBLE
+        binding.btnAddPhoto.visibility = View.GONE
+    }
 }
+
+
 

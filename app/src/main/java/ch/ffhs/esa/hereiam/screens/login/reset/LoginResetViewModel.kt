@@ -1,14 +1,13 @@
-package ch.ffhs.esa.hereiam.screens.login.form
+package ch.ffhs.esa.hereiam.screens.login.reset
 
 import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.services.AuthenticationService
 import ch.ffhs.esa.hereiam.services.AuthenticationServiceFirebaseAuth
 
-class LoginFormViewModel : ViewModel() {
-
+class LoginResetViewModel : ViewModel() {
     private val authenticationService: AuthenticationService = AuthenticationServiceFirebaseAuth()
 
-    suspend fun loginUser(email: String, password: String) {
-        authenticationService.loginUser(email, password)
+    suspend fun resetPassword(email: String) {
+        authenticationService.resetPassword(email)
     }
 }

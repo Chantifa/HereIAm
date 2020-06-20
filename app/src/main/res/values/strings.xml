@@ -8,7 +8,6 @@
     <string name="desc_edit_your_location">Standort editieren</string>
     <string name="desc_placeholder">Platzhalter</string>
     <string name="heading_placeholder">Beitragstitel</string>
-    <string name="text_placeholder"></string>
     <string name="text_last_entries">Letzte Beiträge</string>
     <string name="label_email">E-Mail</string>
     <string name="password">Passwort</string>
@@ -76,4 +75,15 @@
     <string name="new_entry">neuer Beitrag</string>
     <string name="your_location">momentaner Standort</string>
     <string name="entry_successfully_saved">Beitrag wurde erfolgreich hinzugefügt!</string>
+    <string name="registration_successfully">Registration erfolgreich!</string>
+    <string name="please_login_first">Bitte melde dich zuerst an.</string>
+    <string name="profile_picture_successfully_saved">Profilbild wurde erfolgreich gespeichert.</string>
+    <string name="reset_password_successfully">In den nächsten Minuten erhältst du eine E-Mail, um dein Passwort zurücksetzen zu können.</string>
+    <string name="login_successfully">Du hast dich erfolgreich angemeldet.</string>
+    <string name="missing_connection_body_text">HereIAm funktioniert nur mit aktiver Internetverbindung. Bitte schalte das Internet ein und klicke auf «OK».</string>
+    <string name="missing_connection_title">Fehlende Netzwerkverbindung</string>
+    <string name="ok">OK</string>
+    <string name="username_successfully_saved">Username gespeichert!</string>
+    <string name="please_activate_access_on_location">Bitte Zugriff auf Standort aktivieren!</string>
+    <string name="couldnt_get_location">Leider konnten wir deinen Standort nicht ausfindig machen.</string>
 </resources>

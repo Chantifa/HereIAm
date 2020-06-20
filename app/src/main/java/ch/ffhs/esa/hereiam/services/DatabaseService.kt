@@ -11,7 +11,7 @@ interface DatabaseService {
 }
 
 class DatabaseServiceFirestore : DatabaseService {
-    private val collection = "entriesV3"
+    private val collection = "entriesV5"
     private val fbFirestore = FirebaseFirestore.getInstance().collection(collection)
 
     private val sortBy = "entryLastModified"

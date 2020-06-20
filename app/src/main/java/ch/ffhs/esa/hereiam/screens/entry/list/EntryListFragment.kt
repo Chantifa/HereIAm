@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import ch.ffhs.esa.hereiam.databinding.FragmentEntryListAllBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
 
 
 class EntryListFragment : Fragment() {
@@ -30,7 +33,9 @@ class EntryListFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        viewModel.loadList()
+        CoroutineScope(IO).launch {
+            viewModel.loadList()
+        }
     }
 }
 

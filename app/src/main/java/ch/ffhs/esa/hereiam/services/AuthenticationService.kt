@@ -4,9 +4,10 @@ import ch.ffhs.esa.hereiam.HereIAmApplication
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 
-interface AuthenticationService  {
+interface AuthenticationService {
     suspend fun loginUser(email: String, password: String)
     suspend fun registerUser(email: String, password: String)
+    suspend fun resetPassword(email: String)
     fun signOut()
     fun updateCurrentUser()
 }
@@ -21,6 +22,7 @@ class AuthenticationServiceFirebaseAuth : AuthenticationService {
 
     override suspend fun registerUser(email: String, password: String) {
         fbAuth.createUserWithEmailAndPassword(email, password).await()
+        updateCurrentUser()
     }
 
     override fun signOut() {
@@ -30,5 +32,9 @@ class AuthenticationServiceFirebaseAuth : AuthenticationService {
 
     override fun updateCurrentUser() {
         HereIAmApplication.currentUser = fbAuth.currentUser
+    }
+
+    override suspend fun resetPassword(email: String) {
+        fbAuth.sendPasswordResetEmail(email).await()
     }
 }

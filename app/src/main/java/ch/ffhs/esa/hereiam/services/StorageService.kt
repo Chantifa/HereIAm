@@ -8,11 +8,17 @@ import java.io.ByteArrayOutputStream
 import kotlin.random.Random
 
 interface StorageService {
-    suspend fun uploadImage(
+    suspend fun uploadImageAndSaveUri(
         bitmap: Bitmap,
         folder: String,
         fileName: String = getRandomString(20)
     ): Uri?
+
+    suspend fun uploadImageAndSaveRelativePath(
+        bitmap: Bitmap,
+        folder: String,
+        fileName: String = getRandomString(20)
+    ): String?
 
     private fun getRandomString(length: Int): String {
         val charPool: List<Char> = ('a'..'z') + ('A'..'Z') + ('0'..'9')
@@ -21,12 +27,14 @@ interface StorageService {
             .map(charPool::get)
             .joinToString("")
     }
+
+    suspend fun getUriFromPath(path: String): Uri?
 }
 
 class StorageServiceFirebase : StorageService {
     private val fbStorage = FirebaseStorage.getInstance()
 
-    override suspend fun uploadImage(
+    override suspend fun uploadImageAndSaveUri(
         bitmap: Bitmap,
         folder: String,
         fileName: String
@@ -34,6 +42,22 @@ class StorageServiceFirebase : StorageService {
         val fileReference = fbStorage.reference.child("$folder/$fileName.jpg")
         val byteArray = compressBitmapToByteArray(bitmap)
         fileReference.putBytes(byteArray).await()
+        return fileReference.downloadUrl.await()
+    }
+
+    override suspend fun uploadImageAndSaveRelativePath(
+        bitmap: Bitmap,
+        folder: String,
+        fileName: String
+    ): String? {
+        val fileReference = fbStorage.reference.child("$folder/$fileName.jpg")
+        val byteArray = compressBitmapToByteArray(bitmap)
+        fileReference.putBytes(byteArray).await()
+        return fileReference.path
+    }
+
+    override suspend fun getUriFromPath(path: String): Uri? {
+        val fileReference = fbStorage.reference.child(path)
         return fileReference.downloadUrl.await()
     }
 
