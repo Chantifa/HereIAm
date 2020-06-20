@@ -41,30 +41,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/progressbar" />
 
-        <TextView
-            android:id="@+id/location_entry"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/gap_large"
-            android:layout_marginTop="@dimen/gap_default"
-            android:text="@{viewModel.currentLocationString}"
-            android:textSize="26sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/heading_new_entry" />
-
-        <Button
-            android:id="@+id/btn_add_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginHorizontal="@dimen/gap_large"
-            android:layout_marginTop="@dimen/gap_large"
-            android:text="@string/btn_add_image"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/location_entry" />
-
         <EditText
             android:id="@+id/input_heading_entry"
             android:layout_width="match_parent"
@@ -76,7 +52,7 @@
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_add_photo"
+            app:layout_constraintTop_toBottomOf="@+id/heading_new_entry"
             tools:ignore="LabelFor" />
 
         <EditText
@@ -93,6 +69,28 @@
             app:layout_constraintTop_toBottomOf="@+id/input_heading_entry"
             tools:ignore="LabelFor" />
 
+        <TextView
+            android:id="@+id/your_location_label"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:layout_marginHorizontal="@dimen/gap_large"
+            android:layout_marginTop="@dimen/gap_default"
+            android:text="@string/label_your_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/input_text_entry" />
+
+        <TextView
+            android:id="@+id/location_entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/gap_large"
+            android:text="@{viewModel.currentLocationString}"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/your_location_label" />
+
         <ImageView
             android:id="@+id/entry_photo"
             android:layout_width="224dp"
@@ -104,20 +102,32 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/input_text_entry" />
+            app:layout_constraintTop_toBottomOf="@+id/location_entry" />
+
+        <Button
+            android:id="@+id/btn_add_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginHorizontal="@dimen/gap_large"
+            android:layout_marginTop="@dimen/gap_large"
+            android:text="@string/btn_add_image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/entry_photo" />
 
         <Button
             android:id="@+id/btn_add_entry"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:layout_marginHorizontal="@dimen/gap_large"
             android:layout_marginTop="@dimen/gap_default"
             android:text="@string/label_save_entry"
-            style="@style/Widget.AppCompat.Button.Colored"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/entry_photo"
+            app:layout_constraintTop_toBottomOf="@+id/btn_add_photo"
             app:layout_constraintVertical_bias="0.2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
