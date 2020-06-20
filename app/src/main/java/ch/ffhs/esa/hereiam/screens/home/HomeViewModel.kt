@@ -19,7 +19,7 @@ class HomeViewModel : ViewModel() {
     lateinit var activity: ComponentActivity
     var context: Context? = null
     private lateinit var locationService: LocationService
-    var xxx = HereIAmApplication.currentLocation.getShortAddress()
+    var currentLocation = HereIAmApplication.currentLocation.getShortAddress()
 
     lateinit var googleMap: GoogleMap
     private lateinit var currentMarker: Marker
