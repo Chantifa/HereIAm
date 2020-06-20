@@ -16,9 +16,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.services.LocationService
 import ch.ffhs.esa.hereiam.services.LocationServiceImplementation
+import ch.ffhs.esa.hereiam.util.getShortAddress
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest
@@ -36,6 +38,8 @@ class HomeViewModel : ViewModel() {
     lateinit var activity: ComponentActivity
     var context: Context? = null
     private lateinit var locationService: LocationService
+    val xyz = HereIAmApplication.currentLocation
+    val xxx = xyz.getShortAddress()
     val currentLocation = MutableLiveData<LatLng>()
 
     val locationName = Transformations.map(currentLocation) { latLng ->
@@ -137,7 +141,6 @@ class HomeViewModel : ViewModel() {
             )
         }
     }
-
 
     private fun isLocationEnabled(): Boolean {
         val locationManager = activity.getSystemService(Context.LOCATION_SERVICE) as LocationManager

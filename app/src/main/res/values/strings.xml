@@ -85,4 +85,5 @@
     <string name="ok">OK</string>
     <string name="username_successfully_saved">Username gespeichert!</string>
     <string name="please_activate_access_on_location">Bitte Zugriff auf Standort aktivieren!</string>
+    <string name="couldnt_get_location">Leider konnten wir deinen Standort nicht ausfindig machen.</string>
 </resources>

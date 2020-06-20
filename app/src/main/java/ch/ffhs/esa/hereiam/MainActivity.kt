@@ -17,14 +17,17 @@ import ch.ffhs.esa.hereiam.services.AuthenticationService
 import ch.ffhs.esa.hereiam.services.AuthenticationServiceFirebaseAuth
 import ch.ffhs.esa.hereiam.services.LocationService
 import ch.ffhs.esa.hereiam.services.LocationServiceImplementation
+import ch.ffhs.esa.hereiam.util.toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 const val REQUEST_CODE = 1111
 
@@ -100,6 +103,13 @@ class MainActivity : AppCompatActivity() {
     private fun loadCurrentLocation() {
         CoroutineScope(IO).launch {
             val location = fusedLocationClient.lastLocation.await()
+            if (location == null) {
+                loadDefaultAddress()
+                withContext(Main) {
+                    this@MainActivity.toast(getString(R.string.couldnt_get_location))
+                }
+                return@launch
+            }
             val address = locationService.getAddressFromCoordinates(
                 location.latitude,
                 location.longitude
