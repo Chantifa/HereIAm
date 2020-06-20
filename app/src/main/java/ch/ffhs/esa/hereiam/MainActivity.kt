@@ -11,8 +11,6 @@ import androidx.navigation.ui.setupWithNavController
 import ch.ffhs.esa.hereiam.services.AuthenticationService
 import ch.ffhs.esa.hereiam.services.AuthenticationServiceFirebaseAuth
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.firebase.BuildConfig
-import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
     private val authenticationService: AuthenticationService = AuthenticationServiceFirebaseAuth()
@@ -20,9 +18,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (BuildConfig.DEBUG) {
-            Timber.plant(Timber.DebugTree())
-        }
         setContentView(R.layout.activity_main)
         Connection(this)
     }
