@@ -17,14 +17,15 @@ class EntryFormViewModel : ViewModel() {
     val image = MutableLiveData<Bitmap>()
     private val folder = "entryImages"
     private var pathToImage: String? = null
-    val currentLocation = HereIAmApplication.currentLocation.getShortAddress()
+    private val author = HereIAmApplication.currentUser?.displayName
+    private val currentLocation = HereIAmApplication.currentLocation
+    val currentLocationString = HereIAmApplication.currentLocation.getShortAddress()
 
     suspend fun addEntry(
         heading: String,
         text: String
     ) {
-        val author = HereIAmApplication.currentUser?.displayName
-        val location = HereIAmApplication.currentLocation
+        val location = currentLocation
         val entry = Entry(
             heading,
             text,
