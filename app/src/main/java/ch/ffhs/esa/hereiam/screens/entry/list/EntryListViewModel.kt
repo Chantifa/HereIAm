@@ -5,31 +5,13 @@ import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.model.Entry
 import ch.ffhs.esa.hereiam.services.DatabaseService
 import ch.ffhs.esa.hereiam.services.DatabaseServiceFirestore
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class EntryListViewModel : ViewModel() {
 
     private val databaseService: DatabaseService = DatabaseServiceFirestore()
     val entries = MutableLiveData<List<Entry>>()
 
-    fun loadList() {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val list = databaseService.getAllEntries()
-                displayList(list)
-            } catch (e: Exception) {
-                Timber.e("Error while loading all Entries: ${e.message}")
-            }
-        }
-    }
-
-    private fun displayList(list: List<Entry>) {
-        CoroutineScope(Main).launch {
-            entries.value = list
-        }
+    suspend fun getList(): List<Entry> {
+        return databaseService.getAllEntries()
     }
 }

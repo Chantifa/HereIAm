@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 
 
 class EntryListFragment : Fragment() {
@@ -52,7 +53,18 @@ class EntryListFragment : Fragment() {
         super.onStart()
         binding.progressbar.show()
         CoroutineScope(IO).launch {
-            viewModel.loadList()
+            try {
+                val list = viewModel.getList()
+                withContext(Main) {
+                    viewModel.entries.value = list
+                }
+            } catch (e: Exception) {
+                val msg = "Error while loading all Entries. Reason: ${e.message}"
+                Timber.e(msg)
+                withContext(Main) {
+                    activity?.toast(msg)
+                }
+            }
             withContext(Main) {
                 binding.progressbar.hide()
             }
