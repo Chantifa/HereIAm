@@ -1,6 +1,5 @@
 package ch.ffhs.esa.hereiam
 
-import android.content.Context
 import android.location.Address
 import android.location.Location
 import ch.ffhs.esa.hereiam.screens.home.HomeViewModel
@@ -9,7 +8,6 @@ import com.google.android.gms.maps.model.LatLng
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 import java.util.*
 
@@ -17,9 +15,6 @@ import java.util.*
 class HomeViewModelTest {
 
     private lateinit var homeViewModel: HomeViewModel
-
-    @Mock
-    private lateinit var mockContext: Context
 
     @Before
     fun init() {
