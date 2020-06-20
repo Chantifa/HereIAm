@@ -132,6 +132,10 @@ class MainActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.option_menu, menu)
         val item = menu?.findItem(R.id.action_logout)
         item?.isVisible = HereIAmApplication.userLoggedIn()
+
+        HereIAmApplication.currentUser.observeForever {
+            item?.isVisible = HereIAmApplication.userLoggedIn()
+        }
         return true
     }
 

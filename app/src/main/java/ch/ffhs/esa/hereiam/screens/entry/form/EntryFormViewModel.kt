@@ -17,7 +17,7 @@ class EntryFormViewModel : ViewModel() {
     val image = MutableLiveData<Bitmap>()
     private val folder = "entryImages"
     private var pathToImage: String? = null
-    private val author = HereIAmApplication.currentUser?.displayName
+    private val author = HereIAmApplication.currentUser.value?.displayName
     private val currentLocation = HereIAmApplication.currentLocation
     val currentLocationString = HereIAmApplication.currentLocation.getShortAddress()
 

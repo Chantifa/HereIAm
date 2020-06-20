@@ -14,14 +14,14 @@ class ProfileViewModel : ViewModel() {
     private val folder = "profileImages"
 
     suspend fun uploadImage(bitmap: Bitmap) {
-        val userId = HereIAmApplication.currentUser?.uid
+        val userId = HereIAmApplication.currentUser.value?.uid
         val path = storageService.uploadImageAndSaveUri(bitmap, folder, userId ?: "")
         val changeRequest = UserProfileChangeRequest.Builder().setPhotoUri(path).build()
-        HereIAmApplication.currentUser?.updateProfile(changeRequest)?.await()
+        HereIAmApplication.currentUser.value?.updateProfile(changeRequest)?.await()
     }
 
     suspend fun saveUserName(name: String) {
         val changeRequest = UserProfileChangeRequest.Builder().setDisplayName(name).build()
-        HereIAmApplication.currentUser?.updateProfile(changeRequest)?.await()
+        HereIAmApplication.currentUser.value?.updateProfile(changeRequest)?.await()
     }
 }
