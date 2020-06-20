@@ -1,11 +1,13 @@
 package ch.ffhs.esa.hereiam.screens.entry.list
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.EntryListItemBinding
 import ch.ffhs.esa.hereiam.model.Entry
 import ch.ffhs.esa.hereiam.services.StorageService
@@ -50,7 +52,11 @@ class EntryListAdapter :
                             binding.entryPhoto.visibility = View.VISIBLE
                         }
                     } catch (e: Exception) {
-                        Timber.e("Was not possible to load image. Reason: ${e.message}")
+                        val msg =
+                            Activity().getString(R.string.error_while_loading_image) +
+                                    Activity().getString(R.string.error_reason) +
+                                    e.message
+                        Timber.e(msg)
                         withContext(Main) {
                             binding.entryPhoto.visibility = View.GONE
                         }

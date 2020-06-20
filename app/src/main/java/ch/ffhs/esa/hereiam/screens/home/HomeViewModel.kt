@@ -1,5 +1,6 @@
 package ch.ffhs.esa.hereiam.screens.home
 
+import android.app.Activity
 import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.MainActivity
@@ -34,7 +35,7 @@ class HomeViewModel : ViewModel() {
         query: String
     ) {
         val coordinates = locationService.getCoordinatesFromLocationName(query)
-            ?: throw Exception("Couldn't find location.")
+            ?: throw Exception(Activity().getString(R.string.error_missing_location))
         val address = locationService.getAddressFromCoordinates(coordinates)
         HereIAmApplication.currentLocation = address
         updateMarkerOnMap()

@@ -43,7 +43,7 @@ class EntryFormFragment : Fragment() {
         }
 
         binding.btnAddPhoto.setOnClickListener {
-            val intent: Intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+            val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(intent, IMAGE_CAPTURE_REQUEST_CODE)
         }
 
@@ -71,7 +71,8 @@ class EntryFormFragment : Fragment() {
                     activity?.toast(getString(R.string.entry_successfully_saved))
                 }
             } catch (e: Exception) {
-                val msg = "Error while saving the entry. Reason: ${e.message}";
+                val msg =
+                    getString(R.string.error_while_saving_entry) + getString(R.string.error_reason) + e.message
                 Timber.e(msg)
                 withContext(Main) {
                     activity?.toast(msg)

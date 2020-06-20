@@ -68,7 +68,8 @@ class ProfileFragment : Fragment() {
                     activity?.toast(getString(R.string.username_successfully_saved))
                 }
             } catch (e: Exception) {
-                val msg = "Error while resetting your account. Reason: ${e.message}"
+                val msg =
+                    getString(R.string.error_generic_msg) + getString(R.string.error_reason) + e.message
                 Timber.e(msg)
                 withContext(Main) {
                     activity?.toast(msg)
@@ -131,7 +132,8 @@ class ProfileFragment : Fragment() {
                     binding.profileAvatar.setImageBitmap(bitmap)
                 }
             } catch (e: Exception) {
-                val msg = "Error while uploading image. Reason: ${e.message}"
+                val msg =
+                    getString(R.string.error_while_uploading_image) + getString(R.string.error_reason) + e.message
                 Timber.e(msg)
                 withContext(Main) {
                     activity?.toast(msg)

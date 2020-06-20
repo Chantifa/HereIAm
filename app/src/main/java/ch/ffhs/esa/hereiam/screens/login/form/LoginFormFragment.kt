@@ -60,7 +60,8 @@ class LoginFormFragment : Fragment() {
                     findNavController().navigate(R.id.nav_profile)
                 }
             } catch (e: Exception) {
-                val msg = "Error while logging in. Reason: ${e.message}"
+                val msg =
+                    getString(R.string.error_while_logging_in) + getString(R.string.error_reason) + e.message
                 Timber.e(msg)
                 withContext(Main) {
                     activity?.toast(msg)

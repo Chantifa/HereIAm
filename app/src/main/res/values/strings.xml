@@ -87,4 +87,14 @@
     <string name="please_activate_access_on_location">Bitte Zugriff auf Standort aktivieren!</string>
     <string name="couldnt_get_location">Leider konnten wir deinen Standort nicht ausfindig machen.</string>
     <string name="reset_location">Standort zurücksetzen</string>
+    <string name="error_location_not_found">Standort nicht gefunden.</string>
+    <string name="error_reason">Grund:</string>
+    <string name="error_while_loading_recent_entries">Fehler beim Laden der letzten Beiträge.</string>
+    <string name="error_generic_msg">Leider ist ein Fehler aufgetreten.</string>
+    <string name="error_while_saving_entry">Leider konnte der Eintrag nicht gespeichert werden.</string>
+    <string name="error_while_register_user">Leider konnte die Registrierung nicht abgeschlossen werden.</string>
+    <string name="error_while_logging_in">Leider hat die Anmeldung fehlgeschlagen.</string>
+    <string name="error_while_uploading_image">Das Bild konnte nicht gespeichert werden.</string>
+    <string name="error_while_loading_image">Leider konnte das Bild nicht geladen werden.</string>
+    <string name="error_missing_location">Standort konnte nicht gefunden werden.</string>
 </resources>

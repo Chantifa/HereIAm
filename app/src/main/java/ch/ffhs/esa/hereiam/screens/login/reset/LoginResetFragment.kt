@@ -53,7 +53,8 @@ class LoginResetFragment : Fragment() {
                     findNavController().navigate(R.id.nav_profile)
                 }
             } catch (e: Exception) {
-                val msg = "Error while resetting your account. Reason: ${e.message}"
+                val msg =
+                    getString(R.string.error_generic_msg) + getString(R.string.error_reason) + e.message
                 Timber.e(msg)
                 withContext(Main) {
                     activity?.toast(msg)

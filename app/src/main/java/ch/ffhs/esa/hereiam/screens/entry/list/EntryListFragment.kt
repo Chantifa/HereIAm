@@ -59,7 +59,7 @@ class EntryListFragment : Fragment() {
                     viewModel.entries.value = list
                 }
             } catch (e: Exception) {
-                val msg = "Error while loading all Entries. Reason: ${e.message}"
+                val msg = getString(R.string.error_while_loading_recent_entries) + getString(R.string.error_reason) + e.message
                 Timber.e(msg)
                 withContext(Main) {
                     activity?.toast(msg)

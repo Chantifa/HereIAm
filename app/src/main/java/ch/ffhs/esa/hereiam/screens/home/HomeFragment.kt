@@ -61,7 +61,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     binding.yourLocation.text =
                         HereIAmApplication.currentLocation.getShortAddress()
                 } catch (e: Exception) {
-                    val msg = "Location not found. Reason: ${e.message}"
+                    val msg =
+                        getString(R.string.error_location_not_found) + getString(R.string.error_reason) + e.message
                     Timber.e(msg)
                     activity?.toast(msg)
                 }
@@ -82,7 +83,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     binding.btnResetPosition.visibility = View.VISIBLE
                     it.text.clear()
                 } catch (e: Exception) {
-                    val msg = "Location not found. Reason: ${e.message}"
+                    val msg =
+                        getString(R.string.error_location_not_found) + getString(R.string.error_reason) + e.message
                     Timber.e(msg)
                     activity?.toast(msg)
                 }
