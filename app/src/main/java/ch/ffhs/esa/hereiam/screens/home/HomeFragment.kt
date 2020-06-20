@@ -12,6 +12,7 @@ import androidx.navigation.Navigation
 import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.databinding.FragmentHomeBinding
 import ch.ffhs.esa.hereiam.util.toast
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import timber.log.Timber
@@ -32,7 +33,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel.initLocationService(Geocoder(activity))
+        activity?.let {
+            viewModel.initLocationService(
+                Geocoder(it),
+                LocationServices.getFusedLocationProviderClient(it)
+            )
+        }
         binding = FragmentHomeBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this

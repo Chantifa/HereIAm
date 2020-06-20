@@ -18,7 +18,6 @@ import ch.ffhs.esa.hereiam.services.AuthenticationServiceFirebaseAuth
 import ch.ffhs.esa.hereiam.services.LocationService
 import ch.ffhs.esa.hereiam.services.LocationServiceImplementation
 import ch.ffhs.esa.hereiam.util.toast
-import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -26,7 +25,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 
 const val REQUEST_CODE = 1111
@@ -36,7 +34,6 @@ val DEFAULT_COORDINATES = LatLng(46.948162, 7.436944)
 const val DEFAULT_LABEL = "FFHS Bern Welle 7"
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val authenticationService: AuthenticationService = AuthenticationServiceFirebaseAuth()
     private lateinit var locationService: LocationService
     private lateinit var navController: NavController
@@ -46,8 +43,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         Connection(this)
 
-        locationService = LocationServiceImplementation(Geocoder(this))
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        locationService = LocationServiceImplementation(
+            Geocoder(this),
+            LocationServices.getFusedLocationProviderClient(this)
+        )
         initiateCurrentLocation()
     }
 
@@ -102,7 +101,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("MissingPermission")
     private fun loadCurrentLocation() {
         CoroutineScope(IO).launch {
-            val location = fusedLocationClient.lastLocation.await()
+            val location = locationService.getCurrentLocation()
             if (location == null) {
                 loadDefaultAddress()
                 withContext(Main) {
