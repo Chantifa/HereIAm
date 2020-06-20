@@ -17,6 +17,7 @@ import ch.ffhs.esa.hereiam.services.AuthenticationService
 import ch.ffhs.esa.hereiam.services.AuthenticationServiceFirebaseAuth
 import ch.ffhs.esa.hereiam.services.LocationService
 import ch.ffhs.esa.hereiam.services.LocationServiceImplementation
+import ch.ffhs.esa.hereiam.util.Connection
 import ch.ffhs.esa.hereiam.util.toast
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.model.LatLng

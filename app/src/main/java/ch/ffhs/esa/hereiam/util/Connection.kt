@@ -1,4 +1,4 @@
-package ch.ffhs.esa.hereiam
+package ch.ffhs.esa.hereiam.util
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -6,6 +6,8 @@ import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import androidx.appcompat.app.AlertDialog
+import ch.ffhs.esa.hereiam.MainActivity
+import ch.ffhs.esa.hereiam.R
 
 class Connection(private val activity: MainActivity) : ConnectivityManager.NetworkCallback() {
     private val connectivityManager =
