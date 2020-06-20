@@ -10,6 +10,7 @@ import ch.ffhs.esa.hereiam.services.DatabaseService
 import ch.ffhs.esa.hereiam.services.DatabaseServiceFirestore
 import ch.ffhs.esa.hereiam.services.StorageService
 import ch.ffhs.esa.hereiam.services.StorageServiceFirebase
+import ch.ffhs.esa.hereiam.util.getShortAddress
 
 class EntryFormViewModel : ViewModel() {
     private val databaseService: DatabaseService = DatabaseServiceFirestore()
@@ -18,13 +19,23 @@ class EntryFormViewModel : ViewModel() {
     val locationName = HomeViewModel.locationName
     private val folder = "entryImages"
     private var pathToImage: String? = null
+    val xyz = HereIAmApplication.currentLocation.getShortAddress()
 
     suspend fun addEntry(
         heading: String,
         text: String
     ) {
         val author = HereIAmApplication.currentUser?.displayName
-        val entry = Entry(heading, text, "LocationName TODO", 0.0, 0.0, author, pathToImage)
+        val location = HereIAmApplication.currentLocation
+        val entry = Entry(
+            heading,
+            text,
+            location.getShortAddress(),
+            location?.latitude,
+            location?.longitude,
+            author,
+            pathToImage
+        )
         databaseService.addEntry(entry)
     }
 

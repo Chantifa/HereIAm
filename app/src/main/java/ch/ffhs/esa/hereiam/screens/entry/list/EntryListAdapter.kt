@@ -45,8 +45,6 @@ class EntryListAdapter :
                 CoroutineScope(IO).launch {
                     try {
                         val uri = storageService.getUriFromPath(path)
-                        Timber.e("Uri: $uri")
-                        Timber.e("Uri: $uri")
                         withContext(Main) {
                             Glide.with(binding.root).load(uri).into(binding.entryPhoto)
                             binding.entryPhoto.visibility = View.VISIBLE

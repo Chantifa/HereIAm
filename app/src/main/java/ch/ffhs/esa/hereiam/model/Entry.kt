@@ -9,9 +9,9 @@ const val pattern = "d. MMMM yyyy, kk.mm"
 data class Entry(
     val entryTitle: String,
     val entryContent: String,
-    val locationName: String,
-    val latitude: Double,
-    val longitude: Double,
+    val locationName: String?,
+    val latitude: Double?,
+    val longitude: Double?,
     val author: String?,
     val imagePath: String?,
     val entryLastModified: Timestamp = Timestamp.now(),
@@ -20,7 +20,7 @@ data class Entry(
     fun getMeta(): String {
         var str = ""
         author?.let {
-            str += "$author, "
+            str += "$author | "
         }
         str += SimpleDateFormat(pattern, Locale.GERMAN).format(entryLastModified.toDate()) + " Uhr"
         return str
