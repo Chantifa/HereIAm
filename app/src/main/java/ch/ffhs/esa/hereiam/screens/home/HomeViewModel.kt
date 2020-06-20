@@ -3,6 +3,8 @@ package ch.ffhs.esa.hereiam.screens.home
 import android.location.Geocoder
 import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.HereIAmApplication
+import ch.ffhs.esa.hereiam.MainActivity
+import ch.ffhs.esa.hereiam.R
 import ch.ffhs.esa.hereiam.services.LocationService
 import ch.ffhs.esa.hereiam.services.LocationServiceImplementation
 import ch.ffhs.esa.hereiam.util.getShortAddress
@@ -50,5 +52,16 @@ class HomeViewModel : ViewModel() {
 
     fun initLocationService(geocoder: Geocoder, fusedLocationClient: FusedLocationProviderClient) {
         locationService = LocationServiceImplementation(geocoder, fusedLocationClient)
+    }
+
+    suspend fun resetLocation() {
+        val location = locationService.getCurrentLocation()
+            ?: throw Exception(MainActivity().getString(R.string.couldnt_get_location))
+        val address = locationService.getAddressFromCoordinates(
+            location.latitude,
+            location.longitude
+        )
+        HereIAmApplication.currentLocation = address
+        updateMarkerOnMap()
     }
 }
