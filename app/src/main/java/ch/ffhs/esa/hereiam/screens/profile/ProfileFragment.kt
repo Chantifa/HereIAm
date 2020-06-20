@@ -3,7 +3,6 @@ package ch.ffhs.esa.hereiam.screens.profile
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -25,16 +24,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
+const val REQUEST_IMAGE_CAPTURE = 100
+
 class ProfileFragment : Fragment() {
 
     private val viewModel: ProfileViewModel by viewModels()
     private lateinit var binding: FragmentProfileBinding
-
-    private val defaultImageUrl = "@drawable/avatar"
-
-    private lateinit var imageUri: Uri
-    private val requestImageCapture = 100
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -108,14 +103,14 @@ class ProfileFragment : Fragment() {
     private fun takePictureIntent() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { pictureIntent ->
             pictureIntent.resolveActivity(activity?.packageManager!!)?.also {
-                startActivityForResult(pictureIntent, requestImageCapture)
+                startActivityForResult(pictureIntent, REQUEST_IMAGE_CAPTURE)
             }
         }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == requestImageCapture && resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             val imageBitmap = data?.extras?.get("data") as Bitmap
             uploadImageAndSaveUri(imageBitmap)
         }
