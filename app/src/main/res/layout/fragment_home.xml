@@ -2,10 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
             name="viewModel"
             type="ch.ffhs.esa.hereiam.screens.home.HomeViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/container"
@@ -54,12 +56,12 @@
 
             <TextView
                 android:id="@+id/yourlocation"
-                android:layout_row="1"
-                android:layout_column="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="@{viewModel.locationName}" />
+                android:layout_row="1"
+                android:layout_column="1"
+                android:text="@{viewModel.locationName}"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/location_edit_text"
@@ -73,18 +75,7 @@
                 android:maxLines="1"
                 android:textSize="24sp"
                 android:textStyle="bold" />
-            <TextView
-                android:id="@+id/wished_location"
-                android:layout_width="319dp"
-                android:layout_height="wrap_content"
-                android:layout_row="3"
-                android:layout_column="1"
-                android:autofillHints=""
-                android:visibility="visible"
-                android:maxLines="1"
-                android:textSize="24sp"
-                android:textColor="#FFF"
-                />
+
         </GridLayout>
 
         <Button

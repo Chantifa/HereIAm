@@ -41,11 +41,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        val btnViewList = binding.btnAllEntries
-        btnViewList.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_entryListFragment))
+        binding.btnAllEntries.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_entryListFragment))
 
         val locationText = binding.locationEditText
-        val wishedLocation = binding.wishedLocation
         // Current location isn't converting in Address right now
 
         locationText.setOnKeyListener { _, keyCode, event ->
@@ -54,7 +52,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                 keyCode == KeyEvent.KEYCODE_ENTER
             ) {
                 viewModel.changeMapBasedOnUserInput(locationText.text.toString())
-                wishedLocation.setText(locationText.text).toString()
             }
             false
         }
