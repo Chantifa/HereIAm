@@ -1,5 +1,6 @@
 package ch.ffhs.esa.hereiam.screens.home
 
+import android.location.Geocoder
 import android.os.Bundle
 import android.view.KeyEvent
 import android.view.LayoutInflater
@@ -31,7 +32,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewModel.initContext(context)
+        viewModel.initLocationService(Geocoder(activity))
         binding = FragmentHomeBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -49,14 +50,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback {
                     binding.yourLocation.text = locationText.text.toString()
                     locationText.text.clear()
                 } catch (e: Exception) {
-                    val msg = "Location not found. Reason: ${e.message}";
+                    val msg = "Location not found. Reason: ${e.message}"
                     Timber.e(msg)
                     activity?.toast(msg)
                 }
             }
             false
         }
-        viewModel.activity = requireActivity()
         return binding.root
     }
 

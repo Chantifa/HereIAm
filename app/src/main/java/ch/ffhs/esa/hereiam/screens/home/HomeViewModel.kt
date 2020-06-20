@@ -1,8 +1,6 @@
 package ch.ffhs.esa.hereiam.screens.home
 
-import android.content.Context
 import android.location.Geocoder
-import androidx.core.app.ComponentActivity
 import androidx.lifecycle.ViewModel
 import ch.ffhs.esa.hereiam.HereIAmApplication
 import ch.ffhs.esa.hereiam.services.LocationService
@@ -16,18 +14,12 @@ import com.google.android.gms.maps.model.MarkerOptions
 
 class HomeViewModel : ViewModel() {
 
-    lateinit var activity: ComponentActivity
-    var context: Context? = null
     private lateinit var locationService: LocationService
     var currentLocation = HereIAmApplication.currentLocation.getShortAddress()
 
     lateinit var googleMap: GoogleMap
     private lateinit var currentMarker: Marker
 
-    fun initContext(ctx: Context?) {
-        context = ctx
-        locationService = LocationServiceImplementation(Geocoder(ctx))
-    }
 
     private fun setLocationOnGoogleMaps(location: LatLng, title: String?) {
         if (this::currentMarker.isInitialized) {
@@ -53,5 +45,9 @@ class HomeViewModel : ViewModel() {
         currentLocation?.let { adr ->
             setLocationOnGoogleMaps(LatLng(adr.latitude, adr.longitude), adr.getShortAddress())
         }
+    }
+
+    fun initLocationService(geocoder: Geocoder) {
+        locationService = LocationServiceImplementation(geocoder)
     }
 }
