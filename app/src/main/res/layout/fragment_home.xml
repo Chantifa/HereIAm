@@ -69,6 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/gap_large"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_marginTop="@dimen/gap_default"
             android:text="@string/text_last_entries"
             app:layout_constraintEnd_toEndOf="parent"

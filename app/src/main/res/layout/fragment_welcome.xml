@@ -63,6 +63,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/gap_large"
             android:text="@string/welcome_start_btn"
+            style="@style/Widget.AppCompat.Button.Colored"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
